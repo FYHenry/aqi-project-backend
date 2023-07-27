@@ -1,4 +1,8 @@
 package fr.diginamic.aqiprojectbackend.entity.account;
 
-public class Credential {
+public enum Credential {
+    ADMIN,
+    USER,
+    INVITED,
+    MODERATOR,
 }
