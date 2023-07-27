@@ -1,12 +1,18 @@
 package fr.diginamic.aqiprojectbackend.entity.account;
 
 import fr.diginamic.aqiprojectbackend.entity.map.City;
+import jakarta.persistence.*;
 
+@Entity
 public class Address {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(nullable = false)
     private String addressLine1;
     private String addressLine2;
 
+    @ManyToOne
     private City city;
 
     public Address(){
