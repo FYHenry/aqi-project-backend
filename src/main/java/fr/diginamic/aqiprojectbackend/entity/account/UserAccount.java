@@ -15,16 +15,23 @@ public class UserAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(length = 50, nullable = false)
     private String firstName;
+    @Column(length = 50, nullable = false)
     private String lastName;
+    @Column(length = 50, unique = true, nullable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
     @ManyToOne
     private UserStatus userStatus;
     @ManyToOne
+    @Column(nullable = false)
     private Address address;
     @OneToMany
     private List<Bookmark> bookmarks;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Credential credential;
     @OneToMany
     private List<Topic> topics;

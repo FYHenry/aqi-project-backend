@@ -1,9 +1,6 @@
 package fr.diginamic.aqiprojectbackend.entity.account;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -13,17 +10,23 @@ public class UserStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(length = 50, nullable = false)
     private String label;
+    @Column(nullable = false)
+    private String explanation;
+    @Column(nullable = false)
     private String memo;
+    @Column(nullable = false)
     private LocalDateTime beginDate;
     private LocalDateTime endDate;
 
     public UserStatus(){
     }
 
-    public UserStatus(Integer id, String label, String memo, LocalDateTime beginDate, LocalDateTime endDate) {
+    public UserStatus(Integer id, String label,String explanation , String memo, LocalDateTime beginDate, LocalDateTime endDate) {
         this.id = id;
         this.label = label;
+        this.explanation = explanation;
         this.memo = memo;
         this.beginDate = beginDate;
         this.endDate = endDate;
@@ -43,6 +46,14 @@ public class UserStatus {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    public String getExplanation() {
+        return explanation;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
     }
 
     public String getMemo() {
