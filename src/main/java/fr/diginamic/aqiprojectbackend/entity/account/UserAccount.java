@@ -25,14 +25,17 @@ public class UserAccount {
     private String password;
     @ManyToOne
     private UserStatus userStatus;
+
+    //@Column(nullable = false)
     @ManyToOne
-    @Column(nullable = false)
     private Address address;
     @OneToMany
     private List<Bookmark> bookmarks;
+/*
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Credential credential;
+*/
     @OneToMany
     private List<Topic> topics;
     @OneToMany
@@ -45,8 +48,9 @@ public class UserAccount {
     public UserAccount(){
     }
 
-    public UserAccount(Integer id, String firstName, String lastName, String email, String password, UserStatus userStatus, Address address, List<Bookmark> bookmarks, Credential credential, List<Topic> topics, List<Thread> threads, List<Message> messages, List<Reaction> reactions) {
-        this.id = id;
+    //public UserAccount(Integer id, String firstName, String lastName, String email, String password, UserStatus userStatus, Address address, List<Bookmark> bookmarks, Credential credential, List<Topic> topics, List<Thread> threads, List<Message> messages, List<Reaction> reactions) {
+    public UserAccount(Integer id, String firstName, String lastName, String email, String password, UserStatus userStatus, Address address, List<Bookmark> bookmarks, List<Topic> topics, List<Thread> threads, List<Message> messages, List<Reaction> reactions) {
+       this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -54,12 +58,13 @@ public class UserAccount {
         this.userStatus = userStatus;
         this.address = address;
         this.bookmarks = bookmarks;
-        this.credential = credential;
+        //this.credential = credential;
         this.topics = topics;
         this.threads = threads;
         this.messages = messages;
         this.reactions = reactions;
     }
+
 
     public Integer getId() {
         return id;
@@ -124,7 +129,7 @@ public class UserAccount {
     public void setBookmarks(List<Bookmark> bookmarks) {
         this.bookmarks = bookmarks;
     }
-
+/*
     public Credential getCredential() {
         return credential;
     }
@@ -132,7 +137,7 @@ public class UserAccount {
     public void setCredential(Credential credential) {
         this.credential = credential;
     }
-
+*/
     public List<Topic> getTopics() {
         return topics;
     }

@@ -2,7 +2,7 @@ package fr.diginamic.aqiprojectbackend.controller;
 
 import fr.diginamic.aqiprojectbackend.entity.account.UserAccount;
 import fr.diginamic.aqiprojectbackend.repository.account.AddressRepository;
-import fr.diginamic.aqiprojectbackend.repository.account.CredentialRepository;
+//import fr.diginamic.aqiprojectbackend.repository.account.CredentialRepository;
 import fr.diginamic.aqiprojectbackend.repository.account.UserAccountRepository;
 import fr.diginamic.aqiprojectbackend.repository.account.UserStatusRepository;
 import fr.diginamic.aqiprojectbackend.repository.forum.MessageRepository;

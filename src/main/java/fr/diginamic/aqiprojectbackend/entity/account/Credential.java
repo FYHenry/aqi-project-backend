@@ -1,5 +1,5 @@
 package fr.diginamic.aqiprojectbackend.entity.account;
-
+/*
 public enum Credential {
     ADMIN("admin"), USER("user");
 
@@ -13,3 +13,4 @@ public enum Credential {
         return label;
     }
 }
+*/
