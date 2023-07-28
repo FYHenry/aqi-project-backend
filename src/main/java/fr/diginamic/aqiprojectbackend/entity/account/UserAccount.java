@@ -29,8 +29,7 @@ public class UserAccount {
     //@Column(nullable = false)
     @ManyToOne
     private Address address;
-    @OneToMany
-    private List<Bookmark> bookmarks;
+
 /*
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -57,7 +56,6 @@ public class UserAccount {
         this.password = password;
         this.userStatus = userStatus;
         this.address = address;
-        this.bookmarks = bookmarks;
         //this.credential = credential;
         this.topics = topics;
         this.threads = threads;
@@ -122,13 +120,6 @@ public class UserAccount {
         this.address = address;
     }
 
-    public List<Bookmark> getBookmarks() {
-        return bookmarks;
-    }
-
-    public void setBookmarks(List<Bookmark> bookmarks) {
-        this.bookmarks = bookmarks;
-    }
 /*
     public Credential getCredential() {
         return credential;
