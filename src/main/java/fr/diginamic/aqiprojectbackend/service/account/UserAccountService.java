@@ -59,7 +59,8 @@ public class UserAccountService {
         this.messageRepository = messageRepository;
         this.reactionRepository = reactionRepository;
     }
-    public ResponseEntity<HttpStatusDtoOut>  createUserAccount(UserAccountDtoIn body){
+    public ResponseEntity<HttpStatusDtoOut>
+    createUserAccount(UserAccountDtoIn body){
         HttpStatus httpStatus;
         try {
             userAccountRepository.save(buildUserAccountFrom(body));
@@ -78,57 +79,15 @@ public class UserAccountService {
                 userAccountRepository
                         .findById(id)
                         .orElseThrow(EntityNotFoundException::new);
-        final List<Integer> userStatusIdList = userAccount
-                .getUserStatusList()
-                .stream()
-                .map(UserStatus::getId)
-                .toList();
-        final List<Integer> bookmarkIdList = userAccount
-                .getBookmarks()
-                .stream()
-                .map(Bookmark::getId)
-                .toList();
-        final List<Integer> topicIdList = userAccount
-                .getTopics()
-                .stream()
-                .map(Topic::getId)
-                .toList();
-        final List<Integer> threadIdList = userAccount
-                .getThreads()
-                .stream()
-                .map(Thread::getId)
-                .toList();
-        final List<Integer> messageIdList = userAccount
-                .getMessages()
-                .stream()
-                .map(Message::getId)
-                .toList();
-        final List<Integer> reactionIdList = userAccount
-                .getReactions()
-                .stream()
-                .map(Reaction::getId)
-                .toList();
         UserAccountDtoOut userAccountDtoOut =
-                new UserAccountDtoOut(userAccount.getId(),
-                        userAccount.getFirstName(),
-                        userAccount.getLastName(),
-                        userAccount.getEmail(),
-                        userAccount.getPassword(),
-                        userStatusIdList,
-                        userAccount.getAddress().getId(),
-                        bookmarkIdList,
-                        userAccount.getRole().name(),
-                        topicIdList,
-                        threadIdList,
-                        messageIdList,
-                        reactionIdList);
+                buildUserAccountDtoOutFrom(userAccount);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(userAccountDtoOut);
     }
-    public ResponseEntity<HttpStatusDtoOut> updateUserAccount(int id,
-                                                                  UserAccountDtoIn body){
+    public ResponseEntity<HttpStatusDtoOut>
+    updateUserAccount(int id, UserAccountDtoIn body){
         final UserAccount userAccount = userAccountRepository
                 .findById(id)
                 .orElseThrow(EntityNotFoundException::new);
@@ -183,6 +142,18 @@ public class UserAccountService {
                 .body(new HttpStatusDtoOut(HttpStatus.OK.value(),
                         HttpStatus.OK.getReasonPhrase()));
     }
+    public ResponseEntity<List<UserAccountDtoOut>> listUserAccounts(){
+        final List<UserAccount> userAccounts =
+                userAccountRepository.findAll();
+        final List<UserAccountDtoOut> userAccountDtoOutList = userAccounts
+                .stream()
+                .map((this::buildUserAccountDtoOutFrom))
+                .toList();
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(userAccountDtoOutList);
+    }
     private UserAccount buildUserAccountFrom(UserAccountDtoIn body) {
         Role role;
         if(body.role().contentEquals("ADMIN")){
@@ -220,5 +191,51 @@ public class UserAccountService {
                 threads,
                 messages,
                 reactions);
+    }
+    private UserAccountDtoOut
+    buildUserAccountDtoOutFrom(UserAccount userAccount){
+        final List<Integer> userStatusIdList = userAccount
+                .getUserStatusList()
+                .stream()
+                .map(UserStatus::getId)
+                .toList();
+        final List<Integer> bookmarkIdList = userAccount
+                .getBookmarks()
+                .stream()
+                .map(Bookmark::getId)
+                .toList();
+        final List<Integer> topicIdList = userAccount
+                .getTopics()
+                .stream()
+                .map(Topic::getId)
+                .toList();
+        final List<Integer> threadIdList = userAccount
+                .getThreads()
+                .stream()
+                .map(Thread::getId)
+                .toList();
+        final List<Integer> messageIdList = userAccount
+                .getMessages()
+                .stream()
+                .map(Message::getId)
+                .toList();
+        final List<Integer> reactionIdList = userAccount
+                .getReactions()
+                .stream()
+                .map(Reaction::getId)
+                .toList();
+        return new UserAccountDtoOut(userAccount.getId(),
+                userAccount.getFirstName(),
+                userAccount.getLastName(),
+                userAccount.getEmail(),
+                userAccount.getPassword(),
+                userStatusIdList,
+                userAccount.getAddress().getId(),
+                bookmarkIdList,
+                userAccount.getRole().name(),
+                topicIdList,
+                threadIdList,
+                messageIdList,
+                reactionIdList);
     }
 }

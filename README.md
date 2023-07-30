@@ -2,7 +2,8 @@
 
 ## À propos des requêtes CRUD en HTTP
 
-J’exploite un client HTTP : cURL dans le Bourn Again SHell (Bash).
+J’exploite un client HTTP : cURL dans Bash.
+L’entité `UserAccount` est prise en exemple`.
 
 ### Lecture GET
 

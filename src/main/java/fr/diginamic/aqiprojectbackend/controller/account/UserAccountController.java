@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 /** User account CRUD controller */
 @RestController
 public class UserAccountController {
@@ -58,5 +60,10 @@ public class UserAccountController {
     public ResponseEntity<HttpStatusDtoOut> deleteUserAccount(@PathVariable int id) {
         return this.userAccountService.deleteUserAccount(id);
     }
-
+    /* Listeur GET */
+    /** GET lister */
+    @GetMapping(path = "/users")
+    public ResponseEntity<List<UserAccountDtoOut>> listUserAccounts(){
+        return this.userAccountService.listUserAccounts();
+    }
 }
