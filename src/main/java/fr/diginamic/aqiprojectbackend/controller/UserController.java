@@ -5,7 +5,13 @@ import fr.diginamic.aqiprojectbackend.dto.account.in.UserAccountDtoIn;
 import fr.diginamic.aqiprojectbackend.dto.account.out.UserAccountDtoOut;
 import fr.diginamic.aqiprojectbackend.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,14 +47,14 @@ public class UserController {
     }
     /* Actualiseur PUT */
     /** PUT updater */
-    @RequestMapping(path = "/user/{id}", method = RequestMethod.PUT)
+    @PutMapping(path = "/user/{id}")
     public ResponseEntity<HttpStatusDtoOut> updateUserAccount(@PathVariable int id,
                                     @RequestBody UserAccountDtoIn body) {
         return this.userService.updateUserAccount(id, body);
     }
     /* Suppresseur DELETE */
     /** DELETE deleter */
-    @RequestMapping(path = "/user/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(path = "/user/{id}")
     public ResponseEntity<HttpStatusDtoOut> deleteUserAccount(@PathVariable int id) {
         return this.userService.deleteUserAccount(id);
     }

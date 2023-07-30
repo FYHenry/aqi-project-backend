@@ -176,7 +176,7 @@ public class UserService {
         if(userAccountRepository.existsById(id)){
             userAccountRepository.deleteById(id);
         } else {
-            throw new RuntimeException();
+            throw new EntityNotFoundException();
         }
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -185,7 +185,6 @@ public class UserService {
                         HttpStatus.OK.getReasonPhrase()));
     }
     private UserAccount buildUserAccountFrom(UserAccountDtoIn body) {
-
         Role role;
         if(body.role().contentEquals("ADMIN")){
             role = Role.ADMIN;
