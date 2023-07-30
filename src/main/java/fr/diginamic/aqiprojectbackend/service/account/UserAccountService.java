@@ -1,4 +1,4 @@
-package fr.diginamic.aqiprojectbackend.service;
+package fr.diginamic.aqiprojectbackend.service.account;
 
 import fr.diginamic.aqiprojectbackend.dto.HttpStatusDtoOut;
 import fr.diginamic.aqiprojectbackend.dto.account.in.UserAccountDtoIn;
@@ -32,7 +32,7 @@ import java.util.List;
 
 @Service
 @Validated
-public class UserService {
+public class UserAccountService {
     private final UserAccountRepository userAccountRepository;
     private final UserStatusRepository userStatusRepository;
     private final AddressRepository addressRepository;
@@ -42,14 +42,14 @@ public class UserService {
     private final MessageRepository messageRepository;
     private final ReactionRepository reactionRepository;
 
-    public UserService(UserAccountRepository userAccountRepository,
-                       UserStatusRepository userStatusRepository,
-                       AddressRepository addressRepository,
-                       BookmarkRepository bookmarkRepository,
-                       TopicRepository topicRepository,
-                       ThreadRepository threadRepository,
-                       MessageRepository messageRepository,
-                       ReactionRepository reactionRepository){
+    public UserAccountService(UserAccountRepository userAccountRepository,
+                              UserStatusRepository userStatusRepository,
+                              AddressRepository addressRepository,
+                              BookmarkRepository bookmarkRepository,
+                              TopicRepository topicRepository,
+                              ThreadRepository threadRepository,
+                              MessageRepository messageRepository,
+                              ReactionRepository reactionRepository){
         this.userAccountRepository = userAccountRepository;
         this.userStatusRepository = userStatusRepository;
         this.addressRepository = addressRepository;

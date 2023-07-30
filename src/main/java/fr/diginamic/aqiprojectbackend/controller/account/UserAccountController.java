@@ -1,9 +1,9 @@
-package fr.diginamic.aqiprojectbackend.controller;
+package fr.diginamic.aqiprojectbackend.controller.account;
 
 import fr.diginamic.aqiprojectbackend.dto.HttpStatusDtoOut;
 import fr.diginamic.aqiprojectbackend.dto.account.in.UserAccountDtoIn;
 import fr.diginamic.aqiprojectbackend.dto.account.out.UserAccountDtoOut;
-import fr.diginamic.aqiprojectbackend.service.UserService;
+import fr.diginamic.aqiprojectbackend.service.account.UserAccountService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,14 +18,14 @@ import org.slf4j.LoggerFactory;
 
 /** User account CRUD controller */
 @RestController
-public class UserController {
+public class UserAccountController {
     private static final Logger logger =
-            LoggerFactory.getLogger(UserController.class);
+            LoggerFactory.getLogger(UserAccountController.class);
 
-    private final UserService userService;
+    private final UserAccountService userAccountService;
 
-    public UserController(UserService userService){
-        this.userService = userService;
+    public UserAccountController(UserAccountService userAccountService){
+        this.userAccountService = userAccountService;
     }
     /* Créateur POST */
     /** POST creator */
@@ -35,7 +35,7 @@ public class UserController {
                 POST creator called by : http://127.0.0.1:8080/user.
                 Body :
                  {}""", body);
-        return this.userService.createUserAccount(body);
+        return this.userAccountService.createUserAccount(body);
     }
     /* Lecteur GET */
     /** GET reader */
@@ -43,20 +43,20 @@ public class UserController {
     public ResponseEntity<UserAccountDtoOut> readUserAccount(@PathVariable int id) {
         logger.info("GET reader called by : http://127.0.0.1:8080/user/{}.\n",
                 id);
-        return this.userService.readUserAccount(id);
+        return this.userAccountService.readUserAccount(id);
     }
     /* Actualiseur PUT */
     /** PUT updater */
     @PutMapping(path = "/user/{id}")
     public ResponseEntity<HttpStatusDtoOut> updateUserAccount(@PathVariable int id,
                                     @RequestBody UserAccountDtoIn body) {
-        return this.userService.updateUserAccount(id, body);
+        return this.userAccountService.updateUserAccount(id, body);
     }
     /* Suppresseur DELETE */
     /** DELETE deleter */
     @DeleteMapping(path = "/user/{id}")
     public ResponseEntity<HttpStatusDtoOut> deleteUserAccount(@PathVariable int id) {
-        return this.userService.deleteUserAccount(id);
+        return this.userAccountService.deleteUserAccount(id);
     }
 
 }
