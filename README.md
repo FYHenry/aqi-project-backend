@@ -63,6 +63,13 @@ curl --verbose --data '''
 curl --verbose -H 'Content-Type: application/json' -X DELETE 'http://127.0.0.1:8080/user/1'
 ```
 
+### Listage GET
+
+```bash
+#!/bin/bash
+curl --verbose 'http://127.0.0.1:8080/users'
+```
+
 ### Code de retour OK
 
 ```json
