@@ -51,6 +51,7 @@ public class UserAccount {
      */
     /** Address */
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Address address;
     /* Rôle
      * Octroie certains privilèges à un utilisateur.

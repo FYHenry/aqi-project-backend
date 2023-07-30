@@ -7,9 +7,14 @@ import fr.diginamic.aqiprojectbackend.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /** User account CRUD controller */
 @RestController
 public class UserController {
+    private static final Logger logger =
+            LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
 
@@ -18,26 +23,32 @@ public class UserController {
     }
     /* Créateur POST */
     /** POST creator */
-    @PostMapping(path = "/user/create")
+    @PostMapping(path = "/user")
     public ResponseEntity<HttpStatusDtoOut> createUserAccount(@RequestBody UserAccountDtoIn body) {
+        logger.info("""
+                POST creator called by : http://127.0.0.1:8080/user.
+                Body :
+                 {}""", body);
         return this.userService.createUserAccount(body);
     }
     /* Lecteur GET */
     /** GET reader */
-    @GetMapping(path = "/user/read/{id}")
+    @GetMapping(path = "/user/{id}")
     public ResponseEntity<UserAccountDtoOut> readUserAccount(@PathVariable int id) {
+        logger.info("GET reader called by : http://127.0.0.1:8080/user/{}.\n",
+                id);
         return this.userService.readUserAccount(id);
     }
-    /* Actualiseur POST */
-    /** POST updater */
-    @PostMapping(path = "/user/update/{id}")
+    /* Actualiseur PUT */
+    /** PUT updater */
+    @RequestMapping(path = "/user/{id}", method = RequestMethod.PUT)
     public ResponseEntity<HttpStatusDtoOut> updateUserAccount(@PathVariable int id,
                                     @RequestBody UserAccountDtoIn body) {
         return this.userService.updateUserAccount(id, body);
     }
-    /* Suppresseur POST */
-    /** POST deleter */
-    @PostMapping(path = "/user/delete/{id}")
+    /* Suppresseur DELETE */
+    /** DELETE deleter */
+    @RequestMapping(path = "/user/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<HttpStatusDtoOut> deleteUserAccount(@PathVariable int id) {
         return this.userService.deleteUserAccount(id);
     }
