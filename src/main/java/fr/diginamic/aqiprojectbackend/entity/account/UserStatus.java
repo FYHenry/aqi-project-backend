@@ -3,13 +3,15 @@ package fr.diginamic.aqiprojectbackend.entity.account;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class UserStatus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "user_status_id")
+    private int id;
     @Column(length = 50, nullable = false)
     private String label;
     @Column(nullable = false)
@@ -19,11 +21,18 @@ public class UserStatus {
     @Column(nullable = false)
     private LocalDateTime beginDate;
     private LocalDateTime endDate;
+    @ManyToMany(mappedBy = "userStatusList")
+    private List<UserAccount> userAccounts;
 
     public UserStatus(){
     }
 
-    public UserStatus(Integer id, String label,String explanation , String memo, LocalDateTime beginDate, LocalDateTime endDate) {
+    public UserStatus(Integer id,
+                      String label,
+                      String explanation,
+                      String memo,
+                      LocalDateTime beginDate,
+                      LocalDateTime endDate) {
         this.id = id;
         this.label = label;
         this.explanation = explanation;

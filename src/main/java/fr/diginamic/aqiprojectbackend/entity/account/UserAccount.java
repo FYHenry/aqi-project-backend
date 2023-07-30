@@ -8,55 +8,131 @@ import fr.diginamic.aqiprojectbackend.entity.map.Bookmark;
 import jakarta.persistence.*;
 
 import java.util.List;
-
+/*  Profil utilisateur
+ *  Incarne l’utilisateur.
+ */
+/** User account */
 @Entity
 public class UserAccount {
-
+/** Identifier */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "user_account_id")
+    private int id;
+    /* Prénom */
+    /** First name */
     @Column(length = 50, nullable = false)
     private String firstName;
+    /* Nom */
+    /** Last name */
     @Column(length = 50, nullable = false)
     private String lastName;
+    /* Courriel */
+    /** E-mail */
     @Column(length = 50, unique = true, nullable = false)
     private String email;
+    /* Mot de passe */
+    /** Password */
     @Column(nullable = false)
     private String password;
-    @ManyToOne
-    private UserStatus userStatus;
-
-    //@Column(nullable = false)
+    /* Statut
+    *  Prédéfini par l’administrateur.
+    *  Pour étiqueter les membres.
+    */
+    /** User status */
+    @ManyToMany
+    @JoinTable(name = "between_account_and_status",
+            joinColumns = @JoinColumn(name = "user_account_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_status_id"))
+    private List<UserStatus> userStatusList;
+    /* Adresse
+     * Adresse principale de l’utilisateur.
+     * Prédéfinie et commune à quelques utilisateurs.
+     */
+    /** Address */
     @ManyToOne
     private Address address;
-
-/*
+    /* Rôle
+     * Octroie certains privilèges à un utilisateur.
+     */
+    /** Role */
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Credential credential;
-*/
-    @OneToMany
+    private Role role;
+    /*  Marque-page ou favori
+     *  Enregistre des paramètres.
+     */
+    /** Bookmark */
+    @OneToMany(mappedBy = "userAccount")
+    private List<Bookmark> bookmarks;
+    /*  Sujet ou rubrique
+     *  Regroupe ses fils de discussion.
+     *  Géré par un administrateur.
+     */
+    /** Topic */
+    @OneToMany(mappedBy = "userAccount")
     private List<Topic> topics;
-    @OneToMany
+    /*  Fil de discussion
+     *  Regroupe les messages.
+     *  Géré par un membre.
+     */
+    /** Thread */
+    @OneToMany(mappedBy = "userAccount")
     private List<Thread> threads;
-    @OneToMany
+    /* Message
+     * Géré par un membre.
+     */
+    /** Message */
+    @OneToMany(mappedBy = "userAccount")
     private List<Message> messages;
-    @OneToMany
+    /* Réaction
+     * Notation cumulative du membre au message.
+     */
+    /** Reaction */
+    @OneToMany(mappedBy = "userAccount")
     private List<Reaction> reactions;
 
+    /**
+     * Default constructor
+     */
     public UserAccount(){
     }
 
-    //public UserAccount(Integer id, String firstName, String lastName, String email, String password, UserStatus userStatus, Address address, List<Bookmark> bookmarks, Credential credential, List<Topic> topics, List<Thread> threads, List<Message> messages, List<Reaction> reactions) {
-    public UserAccount(Integer id, String firstName, String lastName, String email, String password, UserStatus userStatus, Address address, List<Bookmark> bookmarks, List<Topic> topics, List<Thread> threads, List<Message> messages, List<Reaction> reactions) {
-       this.id = id;
+    /**
+     * Other constructor
+     * @param firstName First name
+     * @param lastName Last name
+     * @param email E-Mail
+     * @param password Password
+     * @param userStatusList User status list
+     * @param role Role
+     * @param address Address
+     * @param bookmarks Bookmarks
+     * @param topics Topics
+     * @param threads Threads
+     * @param messages Messages
+     * @param reactions Reactions
+     */
+    public UserAccount(String firstName,
+                       String lastName,
+                       String email,
+                       String password,
+                       List<UserStatus> userStatusList,
+                       Role role,
+                       Address address,
+                       List<Bookmark> bookmarks,
+                       List<Topic> topics,
+                       List<Thread> threads,
+                       List<Message> messages,
+                       List<Reaction> reactions) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.userStatus = userStatus;
+        this.userStatusList = userStatusList;
+        this.role = role;
         this.address = address;
-        //this.credential = credential;
+        this.bookmarks = bookmarks;
         this.topics = topics;
         this.threads = threads;
         this.messages = messages;
@@ -104,12 +180,20 @@ public class UserAccount {
         this.password = password;
     }
 
-    public UserStatus getUserStatus() {
-        return userStatus;
+    public List<UserStatus> getUserStatusList() {
+        return userStatusList;
     }
 
-    public void setUserStatus(UserStatus userStatus) {
-        this.userStatus = userStatus;
+    public void setUserStatusList(List<UserStatus> userStatusList) {
+        this.userStatusList = userStatusList;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public Address getAddress() {
@@ -120,15 +204,14 @@ public class UserAccount {
         this.address = address;
     }
 
-/*
-    public Credential getCredential() {
-        return credential;
+    public List<Bookmark> getBookmarks() {
+        return bookmarks;
     }
 
-    public void setCredential(Credential credential) {
-        this.credential = credential;
+    public void setBookmarks(List<Bookmark> bookmarks) {
+        this.bookmarks = bookmarks;
     }
-*/
+
     public List<Topic> getTopics() {
         return topics;
     }
@@ -160,4 +243,5 @@ public class UserAccount {
     public void setReactions(List<Reaction> reactions) {
         this.reactions = reactions;
     }
+
 }
