@@ -173,11 +173,10 @@ public class UserService {
                         HttpStatus.OK.getReasonPhrase()));
     }
     public ResponseEntity<HttpStatusDtoOut> deleteUserAccount(int id){
-        if(userAccountRepository.existsById(id)){
-            userAccountRepository.deleteById(id);
-        } else {
-            throw new EntityNotFoundException();
-        }
+        final UserAccount userAccount = userAccountRepository
+                .findById(id)
+                .orElseThrow(EntityNotFoundException::new);
+        userAccountRepository.delete(userAccount);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
