@@ -78,3 +78,14 @@ curl --verbose 'http://127.0.0.1:8080/users'
   "message" : "OK"
 }
 ```
+## À faire plus tard
+
+Trouver comment créer :
+* Une classe entité générique ;
+* Une classe répertoire générique ;
+* Une classe service générique ;
+* Une classe controleur générique.
+
+« Dois-je vraiment répliquer tout pour chaque entité ? »
+
+Dessiner un logotype.
