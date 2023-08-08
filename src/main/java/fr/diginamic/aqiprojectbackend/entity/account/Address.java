@@ -18,14 +18,13 @@ public class Address {
     public Address(){
     }
 
-    public Address(Integer id, String addressLine1, String addressLine2, City city) {
-        this.id = id;
+    public Address(String addressLine1, String addressLine2, City city) {
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.city = city;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 

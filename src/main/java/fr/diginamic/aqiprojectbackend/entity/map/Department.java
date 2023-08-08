@@ -3,28 +3,28 @@ package fr.diginamic.aqiprojectbackend.entity.map;
 import jakarta.persistence.*;
 
 @Entity
-public class Departement {
+public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer code;
+    private int code;
     private String name;
     @ManyToOne
     private Region region;
 
-    public Departement() {
+    public Department() {
     }
 
-    public Departement(Integer code, String name, Region region) {
-        this.code = code;
+    public Department(String name,
+                      Region region) {
         this.name = name;
         this.region = region;
     }
 
-    public Integer getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(int code) {
         this.code = code;
     }
 

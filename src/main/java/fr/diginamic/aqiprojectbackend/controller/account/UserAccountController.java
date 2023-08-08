@@ -36,14 +36,18 @@ public class UserAccountController {
         logger.info("""
                 POST creator called by : http://127.0.0.1:8080/user.
                 Body :
-                 {}""", body);
+                 {}
+                """,
+                body);
         return this.userAccountService.createUserAccount(body);
     }
     /* Lecteur GET */
     /** GET reader */
     @GetMapping(path = "/user/{id}")
     public ResponseEntity<UserAccountDtoOut> readUserAccount(@PathVariable int id) {
-        logger.info("GET reader called by : http://127.0.0.1:8080/user/{}.\n",
+        logger.info("""
+                GET reader called by : http://127.0.0.1:8080/user/{}.
+                """,
                 id);
         return this.userAccountService.readUserAccount(id);
     }
@@ -52,18 +56,32 @@ public class UserAccountController {
     @PutMapping(path = "/user/{id}")
     public ResponseEntity<HttpStatusDtoOut> updateUserAccount(@PathVariable int id,
                                     @RequestBody UserAccountDtoIn body) {
+        logger.info("""
+                Put updater called by : http://127.0.0.1:8080/user/{}.
+                Body :
+                 {}
+                """,
+                id,
+                body);
         return this.userAccountService.updateUserAccount(id, body);
     }
     /* Suppresseur DELETE */
     /** DELETE deleter */
     @DeleteMapping(path = "/user/{id}")
     public ResponseEntity<HttpStatusDtoOut> deleteUserAccount(@PathVariable int id) {
+        logger.info("""
+                DELETE deleter called by : http://127.0.0.1:8080/user/{}.
+                """,
+                id);
         return this.userAccountService.deleteUserAccount(id);
     }
     /* Listeur GET */
     /** GET lister */
     @GetMapping(path = "/users")
     public ResponseEntity<List<UserAccountDtoOut>> listUserAccounts(){
+        logger.info("""
+                GET lister called by : http://127.0.0.1:8080/users.
+                """);
         return this.userAccountService.listUserAccounts();
     }
 }

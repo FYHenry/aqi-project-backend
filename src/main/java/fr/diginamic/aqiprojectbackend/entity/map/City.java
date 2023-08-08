@@ -6,31 +6,36 @@ import jakarta.persistence.*;
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer insee;
+    private int insee;
     private String name;
-    private Integer postcode;
-    private Double latitude;
-    private Double longitude;
+    private int postcode;
+    private double latitude;
+    private double longitude;
     @ManyToOne
-    private Departement departement;
+    private Department department;
 
     public City() {
     }
 
-    public City(Integer insee, String name, Integer postcode, Double latitude, Double longitude, Departement departement) {
+    public City(int insee,
+                String name,
+                int postcode,
+                double latitude,
+                double longitude,
+                Department department) {
         this.insee = insee;
         this.name = name;
         this.postcode = postcode;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.departement = departement;
+        this.department = department;
     }
 
-    public Integer getInsee() {
+    public int getInsee() {
         return insee;
     }
 
-    public void setInsee(Integer insee) {
+    public void setInsee(int insee) {
         this.insee = insee;
     }
 
@@ -42,35 +47,35 @@ public class City {
         this.name = name;
     }
 
-    public Integer getPostcode() {
+    public int getPostcode() {
         return postcode;
     }
 
-    public void setPostcode(Integer postcode) {
+    public void setPostcode(int postcode) {
         this.postcode = postcode;
     }
 
-    public Double getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public Double getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public Departement getDepartement() {
-        return departement;
+    public Department getDepartement() {
+        return department;
     }
 
-    public void setDepartement(Departement departement) {
-        this.departement = departement;
+    public void setDepartement(Department department) {
+        this.department = department;
     }
 }

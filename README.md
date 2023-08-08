@@ -1,8 +1,14 @@
 # aqi-project-backend
 
+## Profil Spring : `init`
+
+Une fois activé dans `src/resources/application.properties`, le profil `init`
+modifie le comportement du serveur.
+La base de donné est alors purgée au démarrage et à l’arrêt du serveur.
+
 ## À propos des requêtes CRUD en HTTP
 
-J’exploite un client HTTP : cURL dans Bash.
+Est exploité un client HTTP : cURL dans Bash.
 L’entité `UserAccount` est prise en exemple`.
 
 ### Lecture GET
@@ -70,7 +76,7 @@ curl --verbose -H 'Content-Type: application/json' -X DELETE 'http://127.0.0.1:8
 curl --verbose 'http://127.0.0.1:8080/users'
 ```
 
-### Code de retour OK
+### Code de retour `OK`
 
 ```json
 {
@@ -78,6 +84,23 @@ curl --verbose 'http://127.0.0.1:8080/users'
   "message" : "OK"
 }
 ```
+
+### Code de retour `NOT_FOUND`
+
+```json
+{
+  "code" : 404,
+  "message" : "NOT_FOUND"
+}
+```
+
+## Favicon
+
+![AQI logotype](src/main/resources/static/favicon.ico "favicon.ico")
+
+Une petite expérimentation est incluse par l’apparition d’une *favicon*,
+petite image présentant le logotype du projet.
+
 ## À faire plus tard
 
 Trouver comment créer :

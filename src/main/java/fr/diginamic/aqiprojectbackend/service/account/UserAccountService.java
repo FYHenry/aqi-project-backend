@@ -65,7 +65,7 @@ public class UserAccountService {
         try {
             userAccountRepository.save(buildUserAccountFrom(body));
             httpStatus = HttpStatus.OK;
-        } catch (Exception ex){
+        } catch (EntityNotFoundException ex){
             httpStatus = HttpStatus.NOT_FOUND;
         }
         return ResponseEntity
