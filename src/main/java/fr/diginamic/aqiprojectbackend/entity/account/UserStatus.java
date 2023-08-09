@@ -38,25 +38,25 @@ public class UserStatus {
 
     /**
      * Constructor with parameters.
-     * @param id Identifier
      * @param label Label
      * @param explanation Explanation
      * @param memo Memo
      * @param beginDate Begin date
      * @param endDate End date
+     * @param userAccounts User accounts
      */
-    public UserStatus(int id,
-                      String label,
+    public UserStatus(String label,
                       String explanation,
                       String memo,
                       LocalDateTime beginDate,
-                      LocalDateTime endDate) {
-        this.id = id;
+                      LocalDateTime endDate,
+                      List<UserAccount> userAccounts) {
         this.label = label;
         this.explanation = explanation;
         this.memo = memo;
         this.beginDate = beginDate;
         this.endDate = endDate;
+        this.userAccounts = userAccounts;
     }
     /** Identifier getter */
     public int getId() {
@@ -105,5 +105,13 @@ public class UserStatus {
     /** End date setter */
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
+    }
+    /** User account getter */
+    public List<UserAccount> getUserAccounts() {
+        return userAccounts;
+    }
+    /** User account setter */
+    public void setUserAccounts(List<UserAccount> userAccounts) {
+        this.userAccounts = userAccounts;
     }
 }
