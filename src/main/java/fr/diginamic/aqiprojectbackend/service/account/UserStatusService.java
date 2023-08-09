@@ -164,7 +164,7 @@ public class UserStatusService {
         return new UserStatusDtoOut(userStatus.getId(),
                 userStatus.getLabel(),
                 userStatus.getExplanation(),
-                userStatus.getExplanation(),
+                userStatus.getMemo(),
                 userStatus.getBeginDate(),
                 userStatus.getEndDate(),
                 userAccountIds);
