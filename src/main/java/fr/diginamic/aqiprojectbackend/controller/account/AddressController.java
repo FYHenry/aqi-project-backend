@@ -10,12 +10,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+/** Address controller */
 @RestController
 public class AddressController {
+    /** Logger */
     private static final Logger logger =
             LoggerFactory.getLogger(AddressController.class);
+    /** Address service */
     private final AddressService addressService;
+
+    /**
+     * Constructor with parameters.
+     * @param addressService Address service
+     */
     public AddressController(AddressService addressService){
         this.addressService = addressService;
     }

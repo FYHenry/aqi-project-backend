@@ -1,26 +1,49 @@
 package fr.diginamic.aqiprojectbackend.entity.map;
 
 import jakarta.persistence.*;
-
+/** Weather report */
 @Entity
 public class WeatherReport {
+    /** Identifier */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private Integer weatherCode;
-    private Double temperature;
-    private Double humidity;
-    private Double pressure;
+    private int id;
+    /** Weather code */
+    private int weatherCode;
+    /** Temperature */
+    private double temperature;
+    /** Humidity */
+    private double humidity;
+    /** Pressure */
+    private double pressure;
+    /** Weather station */
     @ManyToOne
     private WeatherStation weatherStation;
+    /** Report date */
     @ManyToOne
     private ReportDate reportDate;
 
+    /**
+     * Constructor.
+     */
     public WeatherReport() {
     }
 
-    public WeatherReport(Integer id, Integer weatherCode, Double temperature, Double humidity, Double pressure, WeatherStation weatherStation, ReportDate reportDate) {
-        this.id = id;
+    /**
+     * Constructor with parameters.
+     * @param weatherCode Weather code
+     * @param temperature Temperature
+     * @param humidity Humidity
+     * @param pressure Pressure
+     * @param weatherStation Weather station
+     * @param reportDate Report date
+     */
+    public WeatherReport(int weatherCode,
+                         double temperature,
+                         double humidity,
+                         double pressure,
+                         WeatherStation weatherStation,
+                         ReportDate reportDate) {
         this.weatherCode = weatherCode;
         this.temperature = temperature;
         this.humidity = humidity;
@@ -28,59 +51,59 @@ public class WeatherReport {
         this.weatherStation = weatherStation;
         this.reportDate = reportDate;
     }
-
-    public Integer getId() {
+    /** Identifier getter */
+    public int getId() {
         return id;
     }
-
-    public void setId(Integer id) {
+    /** Identifier setter */
+    public void setId(int id) {
         this.id = id;
     }
-
-    public Integer getWeatherCode() {
+    /** Weather code getter */
+    public int getWeatherCode() {
         return weatherCode;
     }
-
-    public void setWeatherCode(Integer weatherCode) {
+    /** Weather code setter */
+    public void setWeatherCode(int weatherCode) {
         this.weatherCode = weatherCode;
     }
-
-    public Double getTemperature() {
+    /** Temperature getter */
+    public double getTemperature() {
         return temperature;
     }
-
-    public void setTemperature(Double temperature) {
+    /** Temperature setter */
+    public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
-
-    public Double getHumidity() {
+    /** Humidity getter */
+    public double getHumidity() {
         return humidity;
     }
-
-    public void setHumidity(Double humidity) {
+    /** Humidity setter */
+    public void setHumidity(double humidity) {
         this.humidity = humidity;
     }
-
-    public Double getPressure() {
+    /** Pressure getter */
+    public double getPressure() {
         return pressure;
     }
-
-    public void setPressure(Double pressure) {
+    /** Pressure setter */
+    public void setPressure(double pressure) {
         this.pressure = pressure;
     }
-
+    /** Weather station getter */
     public WeatherStation getWeatherStation() {
         return weatherStation;
     }
-
+    /** Weather station setter */
     public void setWeatherStation(WeatherStation weatherStation) {
         this.weatherStation = weatherStation;
     }
-
+    /** Report date getter */
     public ReportDate getReportDate() {
         return reportDate;
     }
-
+    /** Report date setter */
     public void setReportDate(ReportDate reportDate) {
         this.reportDate = reportDate;
     }

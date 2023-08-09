@@ -2,38 +2,46 @@ package fr.diginamic.aqiprojectbackend.entity.map;
 
 import fr.diginamic.aqiprojectbackend.entity.account.UserAccount;
 import jakarta.persistence.*;
-
+/** Bookmark */
 @Entity
 public class Bookmark {
+    /** Identifier */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+    private int id;
+    /** Forecast type */
     @ManyToOne
     private ForecastType forecastType;
-
+    /** User account */
     @ManyToOne
     private UserAccount userAccount;
+
+    /**
+     * Constructor.
+     */
     public Bookmark(){
     }
 
-    public Bookmark(Integer id, ForecastType forecastType) {
-        this.id = id;
+    /**
+     * Constructor with parameters.
+     * @param forecastType Forecast type
+     */
+    public Bookmark(ForecastType forecastType) {
         this.forecastType = forecastType;
     }
-
-    public Integer getId() {
+    /** Identifier getter */
+    public int getId() {
         return id;
     }
-
-    public void setId(Integer id) {
+    /** Identifier setter */
+    public void setId(int id) {
         this.id = id;
     }
-
+    /** Forecast type getter */
     public ForecastType getForecastType() {
         return forecastType;
     }
-
+    /** Forecast type setter */
     public void setForecastType(ForecastType forecastType) {
         this.forecastType = forecastType;
     }

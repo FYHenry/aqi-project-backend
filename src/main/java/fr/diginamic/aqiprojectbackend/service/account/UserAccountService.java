@@ -29,19 +29,38 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
-
+/** User account service */
 @Service
 @Validated
 public class UserAccountService {
+    /** User account repository */
     private final UserAccountRepository userAccountRepository;
+    /** User status repository */
     private final UserStatusRepository userStatusRepository;
+    /** Address repository */
     private final AddressRepository addressRepository;
+    /** Bookmark repository */
     private final BookmarkRepository bookmarkRepository;
+    /** Topic repository */
     private final TopicRepository topicRepository;
+    /** Thread repository */
     private final ThreadRepository threadRepository;
+    /** Message repository */
     private final MessageRepository messageRepository;
+    /** Reaction repository */
     private final ReactionRepository reactionRepository;
 
+    /**
+     * Constructor with parameters.
+     * @param userAccountRepository User account repository
+     * @param userStatusRepository User status repository
+     * @param addressRepository Address repository
+     * @param bookmarkRepository Bookmark repository
+     * @param topicRepository Topic repository
+     * @param threadRepository Thread repository
+     * @param messageRepository Message repository
+     * @param reactionRepository Reaction repository
+     */
     public UserAccountService(UserAccountRepository userAccountRepository,
                               UserStatusRepository userStatusRepository,
                               AddressRepository addressRepository,
@@ -59,6 +78,12 @@ public class UserAccountService {
         this.messageRepository = messageRepository;
         this.reactionRepository = reactionRepository;
     }
+
+    /**
+     * Create user account
+     * @param body HTTP request body (user account)
+     * @return HTTP response (status)
+     */
     public ResponseEntity<HttpStatusDtoOut>
     createUserAccount(UserAccountDtoIn body){
         HttpStatus httpStatus;
@@ -74,6 +99,11 @@ public class UserAccountService {
                 .body(new HttpStatusDtoOut(httpStatus.value(),
                         httpStatus.getReasonPhrase()));
     }
+    /**
+     * Read user account
+     * @param id User account identifier
+     * @return HTTP response (user account)
+     */
     public ResponseEntity<UserAccountDtoOut> readUserAccount(int id){
         final UserAccount userAccount =
                 userAccountRepository
@@ -86,6 +116,12 @@ public class UserAccountService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(userAccountDtoOut);
     }
+    /**
+     * Update user account
+     * @param id User account identifier
+     * @param body HTTP request body (user account)
+     * @return HTTP response (status)
+     */
     public ResponseEntity<HttpStatusDtoOut>
     updateUserAccount(int id, UserAccountDtoIn body){
         final UserAccount userAccount = userAccountRepository
@@ -131,6 +167,11 @@ public class UserAccountService {
                 .body(new HttpStatusDtoOut(HttpStatus.OK.value(),
                         HttpStatus.OK.getReasonPhrase()));
     }
+    /**
+     * Delete user account
+     * @param id User account identifier
+     * @return HTTP response (status)
+     */
     public ResponseEntity<HttpStatusDtoOut> deleteUserAccount(int id){
         final UserAccount userAccount = userAccountRepository
                 .findById(id)
@@ -142,6 +183,10 @@ public class UserAccountService {
                 .body(new HttpStatusDtoOut(HttpStatus.OK.value(),
                         HttpStatus.OK.getReasonPhrase()));
     }
+    /**
+     * List user accounts
+     * @return HTTP response (user accounts)
+     */
     public ResponseEntity<List<UserAccountDtoOut>> listUserAccounts(){
         final List<UserAccount> userAccounts =
                 userAccountRepository.findAll();
@@ -154,6 +199,11 @@ public class UserAccountService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(userAccountDtoOutList);
     }
+    /**
+     * Build user account from HTTP request body (user account)
+     * @param body HTTP request body (user account)
+     * @return User account
+     */
     private UserAccount buildUserAccountFrom(UserAccountDtoIn body) {
         Role role;
         if(body.role().contentEquals("ADMIN")){
@@ -192,6 +242,11 @@ public class UserAccountService {
                 messages,
                 reactions);
     }
+    /**
+     * Build user account as HTTP response from user account
+     * @param userAccount User account
+     * @return HTTP response (user account)
+     */
     private UserAccountDtoOut
     buildUserAccountDtoOutFrom(UserAccount userAccount){
         final List<Integer> userStatusIdList = userAccount

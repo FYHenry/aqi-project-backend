@@ -15,17 +15,30 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
-
+/** Address service */
 @Service
 @Validated
 public class AddressService {
+    /** Address repository */
     private final AddressRepository addressRepository;
+    /** City repository */
     private final CityRepository cityRepository;
 
+    /**
+     * Constructor with parameters.
+     * @param addressRepository Address repository
+     * @param cityRepository City repository
+     */
     public AddressService(AddressRepository addressRepository, CityRepository cityRepository) {
         this.addressRepository = addressRepository;
         this.cityRepository = cityRepository;
     }
+
+    /**
+     * Create address
+     * @param body HTTP request body (address)
+     * @return HTTP response (status)
+     */
     public ResponseEntity<HttpStatusDtoOut> createAddress(AddressDtoIn body){
         HttpStatus httpStatus;
         try {
@@ -40,6 +53,12 @@ public class AddressService {
                 .body(new HttpStatusDtoOut(httpStatus.value(),
                         httpStatus.getReasonPhrase()));
     }
+
+    /**
+     * Read address
+     * @param id Address identifier
+     * @return HTTP response (address)
+     */
     public ResponseEntity<AddressDtoOut> readAddress(int id){
         final Address address =
                 addressRepository
@@ -52,6 +71,13 @@ public class AddressService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(addressDtoOut);
     }
+
+    /**
+     * Update address
+     * @param id Address identifier
+     * @param body HTTP request body (address)
+     * @return HTTP response (status)
+     */
     public ResponseEntity<HttpStatusDtoOut>
     updateAddress(int id, AddressDtoIn body){
         final Address address = addressRepository
@@ -69,6 +95,12 @@ public class AddressService {
                 .body(new HttpStatusDtoOut(HttpStatus.OK.value(),
                         HttpStatus.OK.getReasonPhrase()));
     }
+
+    /**
+     * Delete address
+     * @param id Address identifier
+     * @return HTTP response (status)
+     */
     public ResponseEntity<HttpStatusDtoOut> deleteAddress(int id){
         final Address address = addressRepository
                 .findById(id)
@@ -80,6 +112,11 @@ public class AddressService {
                 .body(new HttpStatusDtoOut(HttpStatus.OK.value(),
                         HttpStatus.OK.getReasonPhrase()));
     }
+
+    /**
+     * List addresses
+     * @return HTTP response (addresses)
+     */
     public ResponseEntity<List<AddressDtoOut>> listAddresses(){
         final List<Address> userAccounts =
                 addressRepository.findAll();
@@ -92,6 +129,12 @@ public class AddressService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(userAccountDtoOutList);
     }
+
+    /**
+     * Build address from HTTP request body (address)
+     * @param body HTTP request body (address)
+     * @return Address
+     */
     private Address buildAddressFrom(AddressDtoIn body){
         City city = cityRepository
                 .findById(body.cityId())
@@ -100,6 +143,12 @@ public class AddressService {
                 body.addressLine2(),
                 city);
     }
+
+    /**
+     * Build address as HTTP response from address
+     * @param address Address
+     * @return HTTP response (address)
+     */
     private AddressDtoOut buildAddressDtoOutFrom(Address address){
         return new AddressDtoOut(address.getId(),
                 address.getAddressLine1(),

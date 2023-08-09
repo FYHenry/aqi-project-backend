@@ -10,20 +10,23 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
-
+/** Topic */
 @Data
 @Entity
 public class Topic {
+    /** Identifier */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    /** Title */
     private String title;
-
+    /** Threads */
     @OneToMany(mappedBy = "topic")
     private List<Thread> threads;
+    /** User account */
     @ManyToOne
     private UserAccount userAccount;
-
+    /** Identifier getter */
     public int getId() {
         return id;
     }

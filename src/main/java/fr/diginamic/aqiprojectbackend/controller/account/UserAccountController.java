@@ -18,14 +18,19 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-/** User account CRUD controller */
+/** User account controller */
 @RestController
 public class UserAccountController {
+    /** Logger */
     private static final Logger logger =
             LoggerFactory.getLogger(UserAccountController.class);
-
+    /** User account service */
     private final UserAccountService userAccountService;
 
+    /**
+     * Constructor with parameters.
+     * @param userAccountService User account service
+     */
     public UserAccountController(UserAccountService userAccountService){
         this.userAccountService = userAccountService;
     }

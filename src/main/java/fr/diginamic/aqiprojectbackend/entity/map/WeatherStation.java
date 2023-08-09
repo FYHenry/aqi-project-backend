@@ -1,11 +1,7 @@
 package fr.diginamic.aqiprojectbackend.entity.map;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+/** Weather station */
 @Entity
 public class WeatherStation extends Station{
-
 }

@@ -9,11 +9,14 @@ import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import java.util.Collections;
 import java.util.List;
-
+/** Favicon configuration */
 @Configuration
 public class FaviconConfiguration {
+    /** Resource directory */
     private final String resourceDir = "static/";
+    /** Favicon file */
     private final String imageFile = "favicon.ico";
+    /** Request Handler */
     @Bean
     protected ResourceHttpRequestHandler getFaviconRequestHandler() {
         final ResourceHttpRequestHandler requestHandler =
@@ -23,6 +26,7 @@ public class FaviconConfiguration {
         requestHandler.setLocations(locations);
         return requestHandler;
     }
+    /** Handler mapping */
     @Bean
     public SimpleUrlHandlerMapping customFaviconHandlerMapping() {
         final SimpleUrlHandlerMapping mapping =

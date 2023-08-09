@@ -1,6 +1,9 @@
 package fr.diginamic.aqiprojectbackend.entity.account;
-
+/** User role */
 public enum Role {
-    ADMIN, USER
+    /** Administrator */
+    USER,
+    /** Member */
+    ADMIN
 }
 

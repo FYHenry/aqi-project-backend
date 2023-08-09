@@ -14,7 +14,7 @@ import java.util.List;
 /** User account */
 @Entity
 public class UserAccount {
-/** Identifier */
+    /** Identifier */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_account_id")
@@ -100,7 +100,7 @@ public class UserAccount {
     }
 
     /**
-     * Other constructor
+     * Constructor with parameters.
      * @param firstName First name
      * @param lastName Last name
      * @param email E-Mail
@@ -139,20 +139,19 @@ public class UserAccount {
         this.messages = messages;
         this.reactions = reactions;
     }
-
-
+    /** Identifier getter */
     public Integer getId() {
         return id;
     }
-
+    /** Identifier setter */
     public void setId(Integer id) {
         this.id = id;
     }
-
+    /** First name getter */
     public String getFirstName() {
         return firstName;
     }
-
+    /** First name setter */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }

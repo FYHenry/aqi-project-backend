@@ -8,14 +8,46 @@
 		<version>3.1.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>fr.diginamic</groupId>
-	<artifactId>aqi-project-backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>aqi-project-backend</name>
-	<description>Backend repository for group 3</description>
 	<properties>
 		<java.version>17</java.version>
+		<group.name>Diginamic promotion 2023 M03 group 3</group.name>
+		<group.url>https://github.com/Diginamic-promotion-2023-M03-groupe-3</group.url>
 	</properties>
+	<groupId>fr.diginamic</groupId>
+	<artifactId>aqi-project-backend</artifactId>
+	<version>0.1.1-SNAPSHOT</version>
+	<name>aqi-project-backend</name>
+	<description>Backend repository for group 3</description>
+	<organization>
+		<name>${group.name}</name>
+		<url>${group.url}</url>
+	</organization>
+	<developers>
+		<developer>
+			<name>FHenry</name>
+			<url>https://github.com/FYHenry</url>
+			<organization>${group.name}</organization>
+			<organizationUrl>${group.url}</organizationUrl>
+		</developer>
+		<developer>
+			<name>HassAllali</name>
+			<url>https://github.com/HassAllali</url>
+			<organization>${group.name}</organization>
+			<organizationUrl>${group.url}</organizationUrl>
+		</developer>
+		<developer>
+			<name>NicolasSoulay</name>
+			<url>https://github.com/NicolasSoulay</url>
+			<organization>${group.name}</organization>
+			<organizationUrl>${group.url}</organizationUrl>
+		</developer>
+		<developer>
+			<name>melinasim</name>
+			<url>https://github.com/melinasim</url>
+			<organization>${group.name}</organization>
+			<organizationUrl>${group.url}</organizationUrl>
+		</developer>
+	</developers>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
