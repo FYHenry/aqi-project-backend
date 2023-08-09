@@ -64,7 +64,7 @@ public class AddressService {
                 addressRepository
                         .findById(id)
                         .orElseThrow(EntityNotFoundException::new);
-        AddressDtoOut addressDtoOut =
+        final AddressDtoOut addressDtoOut =
                 buildAddressDtoOutFrom(address);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -118,16 +118,16 @@ public class AddressService {
      * @return HTTP response (addresses)
      */
     public ResponseEntity<List<AddressDtoOut>> listAddresses(){
-        final List<Address> userAccounts =
+        final List<Address> addresses =
                 addressRepository.findAll();
-        final List<AddressDtoOut> userAccountDtoOutList = userAccounts
+        final List<AddressDtoOut> addressDtoOutList = addresses
                 .stream()
-                .map((this::buildAddressDtoOutFrom))
+                .map(this::buildAddressDtoOutFrom)
                 .toList();
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(userAccountDtoOutList);
+                .body(addressDtoOutList);
     }
 
     /**

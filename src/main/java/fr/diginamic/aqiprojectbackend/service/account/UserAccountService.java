@@ -109,7 +109,7 @@ public class UserAccountService {
                 userAccountRepository
                         .findById(id)
                         .orElseThrow(EntityNotFoundException::new);
-        UserAccountDtoOut userAccountDtoOut =
+        final UserAccountDtoOut userAccountDtoOut =
                 buildUserAccountDtoOutFrom(userAccount);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -132,14 +132,14 @@ public class UserAccountService {
         userAccount.setEmail(body.email());
         userAccount.setPassword(body.password());
         final List<UserStatus> userStatusList =
-                userStatusRepository.findAllById(body.userStatusIdList());
+                userStatusRepository.findAllById(body.userStatusIds());
         userAccount.setUserStatusList(userStatusList);
         final Address address = addressRepository
                 .findById(body.addressId())
                 .orElseThrow(EntityNotFoundException::new);
         userAccount.setAddress(address);
         final List<Bookmark> bookmarks =
-                bookmarkRepository.findAllById(body.bookmarkIdList());
+                bookmarkRepository.findAllById(body.bookmarkIds());
         userAccount.setBookmarks(bookmarks);
         if(body.role().contentEquals("ADMIN")){
             userAccount.setRole(Role.ADMIN);
@@ -149,16 +149,16 @@ public class UserAccountService {
             throw new BadRequestException();
         }
         final List<Topic> topics =
-                topicRepository.findAllById(body.topicIdList());
+                topicRepository.findAllById(body.topicIds());
         userAccount.setTopics(topics);
         final List<Thread> threads =
-                threadRepository.findAllById(body.threadIdList());
+                threadRepository.findAllById(body.threadIds());
         userAccount.setThreads(threads);
         final List<Message> messages =
-                messageRepository.findAllById(body.messageIdList());
+                messageRepository.findAllById(body.messageIds());
         userAccount.setMessages(messages);
         final List<Reaction> reactions =
-                reactionRepository.findAllById(body.reactionIdList());
+                reactionRepository.findAllById(body.reactionIds());
         userAccount.setReactions(reactions);
         userAccountRepository.save(userAccount);
         return ResponseEntity
@@ -192,7 +192,7 @@ public class UserAccountService {
                 userAccountRepository.findAll();
         final List<UserAccountDtoOut> userAccountDtoOutList = userAccounts
                 .stream()
-                .map((this::buildUserAccountDtoOutFrom))
+                .map(this::buildUserAccountDtoOutFrom)
                 .toList();
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -214,21 +214,21 @@ public class UserAccountService {
             throw new BadRequestException();
         }
         final List<UserStatus> userStatusList =
-                userStatusRepository.findAllById(body.userStatusIdList());
+                userStatusRepository.findAllById(body.userStatusIds());
         final Address address =
                 addressRepository
                         .findById(body.addressId())
                         .orElseThrow(EntityNotFoundException::new);
         final List<Bookmark> bookmarks =
-                bookmarkRepository.findAllById(body.bookmarkIdList());
+                bookmarkRepository.findAllById(body.bookmarkIds());
         final List<Topic> topics =
-                topicRepository.findAllById(body.topicIdList());
+                topicRepository.findAllById(body.topicIds());
         final List<Thread> threads =
-                threadRepository.findAllById(body.threadIdList());
+                threadRepository.findAllById(body.threadIds());
         final List<Message> messages =
-                messageRepository.findAllById(body.messageIdList());
+                messageRepository.findAllById(body.messageIds());
         final List<Reaction> reactions =
-                reactionRepository.findAllById(body.reactionIdList());
+                reactionRepository.findAllById(body.reactionIds());
         return new UserAccount(body.firstName(),
                 body.lastName(),
                 body.email(),
@@ -249,32 +249,32 @@ public class UserAccountService {
      */
     private UserAccountDtoOut
     buildUserAccountDtoOutFrom(UserAccount userAccount){
-        final List<Integer> userStatusIdList = userAccount
+        final List<Integer> userStatusIds = userAccount
                 .getUserStatusList()
                 .stream()
                 .map(UserStatus::getId)
                 .toList();
-        final List<Integer> bookmarkIdList = userAccount
+        final List<Integer> bookmarkIds = userAccount
                 .getBookmarks()
                 .stream()
                 .map(Bookmark::getId)
                 .toList();
-        final List<Integer> topicIdList = userAccount
+        final List<Integer> topicIds = userAccount
                 .getTopics()
                 .stream()
                 .map(Topic::getId)
                 .toList();
-        final List<Integer> threadIdList = userAccount
+        final List<Integer> threadIds = userAccount
                 .getThreads()
                 .stream()
                 .map(Thread::getId)
                 .toList();
-        final List<Integer> messageIdList = userAccount
+        final List<Integer> messageIds = userAccount
                 .getMessages()
                 .stream()
                 .map(Message::getId)
                 .toList();
-        final List<Integer> reactionIdList = userAccount
+        final List<Integer> reactionIds = userAccount
                 .getReactions()
                 .stream()
                 .map(Reaction::getId)
@@ -284,13 +284,13 @@ public class UserAccountService {
                 userAccount.getLastName(),
                 userAccount.getEmail(),
                 userAccount.getPassword(),
-                userStatusIdList,
+                userStatusIds,
                 userAccount.getAddress().getId(),
-                bookmarkIdList,
+                bookmarkIds,
                 userAccount.getRole().name(),
-                topicIdList,
-                threadIdList,
-                messageIdList,
-                reactionIdList);
+                topicIds,
+                threadIds,
+                messageIds,
+                reactionIds);
     }
 }
