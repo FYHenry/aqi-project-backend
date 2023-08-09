@@ -111,4 +111,6 @@ Trouver comment créer :
 
 « Dois-je vraiment répliquer tout pour chaque entité ? »
 
-Dessiner un logotype.
+~~Dessiner un logotype.~~
+
+Ajouter des classes pour la phase *test*.
