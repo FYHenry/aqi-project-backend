@@ -1,5 +1,5 @@
 /**
- * Main package
+ * Main package.
  * REST API server and backend part of the AQI Project.
  * @author FYHenry
  * @author HassAllali

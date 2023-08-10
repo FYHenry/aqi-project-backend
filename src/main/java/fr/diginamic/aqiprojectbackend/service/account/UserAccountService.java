@@ -102,6 +102,7 @@ public class UserAccountService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(buildHttpStatusDtoOut(httpStatus, path));
     }
+
     /**
      * Read user account
      * @param id User account identifier
@@ -119,6 +120,7 @@ public class UserAccountService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(userAccountDtoOut);
     }
+
     /**
      * Update user account
      * @param id User account identifier
@@ -171,6 +173,7 @@ public class UserAccountService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(buildHttpStatusDtoOut(httpStatus, path));
     }
+
     /**
      * Delete user account
      * @param id User account identifier
@@ -188,6 +191,7 @@ public class UserAccountService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(buildHttpStatusDtoOut(httpStatus, path));
     }
+
     /**
      * List user accounts
      * @return HTTP response (user accounts)
@@ -204,6 +208,7 @@ public class UserAccountService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(userAccountDtoOutList);
     }
+
     /**
      * Build user account from HTTP request body (user account)
      * @param body HTTP request body (user account)
@@ -247,6 +252,7 @@ public class UserAccountService {
                 messages,
                 reactions);
     }
+
     /**
      * Build user account as HTTP response from user account
      * @param userAccount User account

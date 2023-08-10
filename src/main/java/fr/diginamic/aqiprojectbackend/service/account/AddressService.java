@@ -43,7 +43,8 @@ public class AddressService {
      * @param path HTTP request path
      * @return HTTP response (status)
      */
-    public ResponseEntity<HttpStatusDtoOut> createAddress(AddressDtoIn body, String path){
+    public ResponseEntity<HttpStatusDtoOut>
+    createAddress(AddressDtoIn body, String path){
         HttpStatus httpStatus;
         try {
             addressRepository.save(buildAddressFrom(body));

@@ -87,7 +87,6 @@ public class CityService {
         final City city = cityRepository
                 .findById(id)
                 .orElseThrow(EntityNotFoundException::new);
-        city.setInsee(body.insee());
         city.setName(body.name());
         city.setPostcode(body.postcode());
         city.setLatitude(body.latitude());

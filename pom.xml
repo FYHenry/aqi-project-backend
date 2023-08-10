@@ -18,7 +18,7 @@
 	<artifactId>aqi-project-backend</artifactId>
 	<version>0.1.1-SNAPSHOT</version>
 	<name>aqi-project-backend</name>
-	<description>Backend repository for group 3</description>
+	<description>REST API server and backend part of the AQI Project</description>
 	<organization>
 		<name>${group.name}</name>
 		<url>${group.url}</url>
