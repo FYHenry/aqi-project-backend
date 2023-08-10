@@ -22,7 +22,6 @@ public class Region {
 
     /**
      * Constructor with parameters.
-     * @param id Identifier
      * @param name Name
      */
     public Region(String name) {
