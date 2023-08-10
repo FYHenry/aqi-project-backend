@@ -16,7 +16,7 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
-import static fr.diginamic.aqiprojectbackend.utils.Dtos.buildHttpStatusDtoOut;
+import static fr.diginamic.aqiprojectbackend.utils.Dtos.buildHttpStatusResponse;
 
 /** City service */
 @Service
@@ -53,10 +53,7 @@ public class CityService {
         } catch (EntityNotFoundException ex){
             httpStatus = HttpStatus.NOT_FOUND;
         }
-        return ResponseEntity
-                .status(httpStatus)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(buildHttpStatusDtoOut(httpStatus, path));
+        return buildHttpStatusResponse(httpStatus, path);
     }
 
     /**
@@ -96,11 +93,7 @@ public class CityService {
                 .orElseThrow(EntityNotFoundException::new);
         city.setDepartement(department);
         cityRepository.save(city);
-        final HttpStatus httpStatus = HttpStatus.OK;
-        return ResponseEntity
-                .status(httpStatus)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(buildHttpStatusDtoOut(httpStatus, path));
+        return buildHttpStatusResponse(HttpStatus.OK, path);
     }
 
     /**
@@ -114,11 +107,7 @@ public class CityService {
                 .findById(id)
                 .orElseThrow(EntityNotFoundException::new);
         cityRepository.delete(city);
-        final HttpStatus httpStatus = HttpStatus.OK;
-        return ResponseEntity
-                .status(httpStatus)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(buildHttpStatusDtoOut(httpStatus, path));
+        return buildHttpStatusResponse(HttpStatus.OK, path);
     }
 
     /**

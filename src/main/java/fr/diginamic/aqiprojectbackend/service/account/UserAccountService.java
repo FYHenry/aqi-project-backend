@@ -30,7 +30,7 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
-import static fr.diginamic.aqiprojectbackend.utils.Dtos.buildHttpStatusDtoOut;
+import static fr.diginamic.aqiprojectbackend.utils.Dtos.buildHttpStatusResponse;
 
 /** User account service */
 @Service
@@ -97,10 +97,7 @@ public class UserAccountService {
         } catch (EntityNotFoundException ex){
             httpStatus = HttpStatus.NOT_FOUND;
         }
-        return ResponseEntity
-                .status(httpStatus)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(buildHttpStatusDtoOut(httpStatus, path));
+        return buildHttpStatusResponse(httpStatus, path);
     }
 
     /**
@@ -167,11 +164,7 @@ public class UserAccountService {
                 reactionRepository.findAllById(body.reactionIds());
         userAccount.setReactions(reactions);
         userAccountRepository.save(userAccount);
-        final HttpStatus httpStatus = HttpStatus.OK;
-        return ResponseEntity
-                .status(httpStatus)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(buildHttpStatusDtoOut(httpStatus, path));
+        return buildHttpStatusResponse(HttpStatus.OK, path);
     }
 
     /**
@@ -185,11 +178,7 @@ public class UserAccountService {
                 .findById(id)
                 .orElseThrow(EntityNotFoundException::new);
         userAccountRepository.delete(userAccount);
-        final HttpStatus httpStatus = HttpStatus.OK;
-        return ResponseEntity
-                .status(httpStatus)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(buildHttpStatusDtoOut(httpStatus, path));
+        return buildHttpStatusResponse(HttpStatus.OK, path);
     }
 
     /**
