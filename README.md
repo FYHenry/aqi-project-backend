@@ -135,3 +135,49 @@ Trouver comment créer :
 Ajouter des classes pour la phase *test*.
 
 Ajouter une licence.
+
+## Liste des entités à implémenter
+
+[x] `entities` :
+
+[x]  `account` :
+
+[x]   `Address`,
+
+[x]   `UserAccount`,
+
+[x]   `UserStatus` ;
+
+[ ]  `forum` :
+
+[ ]   `Message`,
+
+[ ]   `Reaction`,
+
+[ ]   `Thead`,
+
+[ ]   `Topic` ;
+
+[ ]  `map` :
+
+[ ]   `AirQualityReport`,
+
+[ ]   `AirQualityStation`,
+
+[ ]   `Bookmark`,
+
+[x]   `City`,
+
+[x]   `Department`,
+
+[ ]   `ForecastType`,
+
+[ ]   `Population`,
+
+[x]   `Region`,
+
+[ ]   `ReportDate`,
+
+[ ]   `WeatherReport`,
+
+[ ]   `WeatherStation`.
