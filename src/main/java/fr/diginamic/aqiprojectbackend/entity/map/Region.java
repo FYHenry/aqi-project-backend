@@ -25,8 +25,7 @@ public class Region {
      * @param id Identifier
      * @param name Name
      */
-    public Region(int id, String name) {
-        this.id = id;
+    public Region(String name) {
         this.name = name;
     }
     /** Identifier getter */
