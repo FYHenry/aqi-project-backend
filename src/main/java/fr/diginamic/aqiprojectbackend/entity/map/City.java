@@ -24,12 +24,6 @@ public class City {
     private Department department;
 
     /**
-     * Constructor
-     */
-    public City() {
-    }
-
-    /**
      * Constructor with parameters.
      * @param insee INSEE
      * @param name Name

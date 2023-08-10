@@ -165,7 +165,7 @@ public class CityService {
                 city.getName(),
                 city.getPostcode(),
                 city.getLatitude(),
-                city.getLatitude(),
+                city.getLongitude(),
                 city.getDepartement().getCode());
     }
 }
