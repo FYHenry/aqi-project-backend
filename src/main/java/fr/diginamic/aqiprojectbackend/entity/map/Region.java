@@ -15,12 +15,6 @@ public class Region {
     private String name;
 
     /**
-     * Constructor.
-     */
-    public Region() {
-    }
-
-    /**
      * Constructor with parameters.
      * @param name Name
      */
