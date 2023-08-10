@@ -133,3 +133,5 @@ Trouver comment créer :
 ~~Dessiner un logotype.~~
 
 Ajouter des classes pour la phase *test*.
+
+Ajouter une licence.
