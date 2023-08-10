@@ -40,6 +40,7 @@ public class AddressService {
     /**
      * Create address
      * @param body HTTP request body (address)
+     * @param path HTTP request path
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut> createAddress(AddressDtoIn body, String path){
@@ -78,6 +79,7 @@ public class AddressService {
      * Update address
      * @param id Address identifier
      * @param body HTTP request body (address)
+     * @param path HTTP request path
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut>
@@ -101,6 +103,7 @@ public class AddressService {
     /**
      * Delete address
      * @param id Address identifier
+     * @param path HTTP request path
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut> deleteAddress(int id, String path){

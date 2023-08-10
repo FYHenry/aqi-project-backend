@@ -85,6 +85,7 @@ public class UserAccountService {
     /**
      * Create user account
      * @param body HTTP request body (user account)
+     * @param path HTTP request path
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut>
@@ -122,6 +123,7 @@ public class UserAccountService {
      * Update user account
      * @param id User account identifier
      * @param body HTTP request body (user account)
+     * @param path HTTP request path
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut>
@@ -172,6 +174,7 @@ public class UserAccountService {
     /**
      * Delete user account
      * @param id User account identifier
+     * @param path HTTP request path
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut> deleteUserAccount(int id, String path){

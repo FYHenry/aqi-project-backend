@@ -30,7 +30,8 @@ public class AddressController {
     /* Créateur POST */
     /** POST creator */
     @PostMapping(path = "/address")
-    public ResponseEntity<HttpStatusDtoOut> createAddress(@RequestBody AddressDtoIn body) {
+    public ResponseEntity<HttpStatusDtoOut>
+    createAddress(@RequestBody AddressDtoIn body) {
         logger.info("""
                 POST creator called by : http://127.0.0.1:8080/address.
                 Body :

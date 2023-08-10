@@ -40,6 +40,7 @@ public class UserStatusService {
     /**
      * Create user status
      * @param body HTTP request body (user status)
+     * @param path HTTP request path
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut>
@@ -79,6 +80,7 @@ public class UserStatusService {
      * Update user status
      * @param id User status identifier
      * @param body HTTP request body (user status)
+     * @param path HTTP request path
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut>
@@ -104,6 +106,7 @@ public class UserStatusService {
     /**
      * Delete user status
      * @param id User status identifier
+     * @param path HTTP request path
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut>

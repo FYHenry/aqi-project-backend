@@ -38,7 +38,8 @@ public class UserAccountController {
     /* Créateur POST */
     /** POST creator */
     @PostMapping(path = "/user")
-    public ResponseEntity<HttpStatusDtoOut> createUserAccount(@RequestBody UserAccountDtoIn body) {
+    public ResponseEntity<HttpStatusDtoOut>
+    createUserAccount(@RequestBody UserAccountDtoIn body) {
         logger.info("""
                 POST creator called by : http://127.0.0.1:8080/user.
                 Body :
@@ -51,7 +52,8 @@ public class UserAccountController {
     /* Lecteur GET */
     /** GET reader */
     @GetMapping(path = "/user/{id}")
-    public ResponseEntity<UserAccountDtoOut> readUserAccount(@PathVariable int id) {
+    public ResponseEntity<UserAccountDtoOut>
+    readUserAccount(@PathVariable int id) {
         logger.info("""
                 GET reader called by : http://127.0.0.1:8080/user/{}.
                 """,
@@ -62,8 +64,9 @@ public class UserAccountController {
     /* Actualiseur PUT */
     /** PUT updater */
     @PutMapping(path = "/user/{id}")
-    public ResponseEntity<HttpStatusDtoOut> updateUserAccount(@PathVariable int id,
-                                    @RequestBody UserAccountDtoIn body) {
+    public ResponseEntity<HttpStatusDtoOut>
+    updateUserAccount(@PathVariable int id,
+                      @RequestBody UserAccountDtoIn body) {
         logger.info("""
                 Put updater called by : http://127.0.0.1:8080/user/{}.
                 Body :
@@ -79,7 +82,8 @@ public class UserAccountController {
     /* Suppresseur DELETE */
     /** DELETE deleter */
     @DeleteMapping(path = "/user/{id}")
-    public ResponseEntity<HttpStatusDtoOut> deleteUserAccount(@PathVariable int id) {
+    public ResponseEntity<HttpStatusDtoOut>
+    deleteUserAccount(@PathVariable int id) {
         logger.info("""
                 DELETE deleter called by : http://127.0.0.1:8080/user/{}.
                 """,
