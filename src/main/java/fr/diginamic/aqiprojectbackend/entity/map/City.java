@@ -1,6 +1,10 @@
 package fr.diginamic.aqiprojectbackend.entity.map;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
 /** City */
 @Entity
 public class City {
