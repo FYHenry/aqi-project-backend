@@ -1,4 +1,4 @@
 /**
- * Utils package
+ * Utilities package
  */
 package fr.diginamic.aqiprojectbackend.utils;
