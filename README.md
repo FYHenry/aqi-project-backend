@@ -1,5 +1,24 @@
 # aqi-project-backend
 
+## Architecture
+
+```
+                       ________________________________
+                      |  ________________              |
+ ________     ________|_|_     _____    _V_________   _V_____ 
+| Config |   | Controller |   | DTO |  | Exception | | Utils |
+|________|   |____________|-->|     |  |           | |       |
+               |              |     |  |           | |       |
+ ________     _V_______       |     |  |           | |       |
+| Entity |   | Service |----->|     |  |           | |       |
+|        |<--|_________|      |_____|  |___________| |_______|
+|        |     |   | |___________________A             A
+|        |     |   |___________________________________|
+|        |    _V__________
+|        |   | Repository |
+|________|<--|____________|
+```
+
 ## Profil Spring : `init`
 
 Une fois activé dans `src/resources/application.properties`, le profil `init`
