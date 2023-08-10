@@ -26,6 +26,7 @@ public class AddressController {
     public AddressController(AddressService addressService){
         this.addressService = addressService;
     }
+
     /* Créateur POST */
     /** POST creator */
     @PostMapping(path = "/address")
@@ -36,8 +37,9 @@ public class AddressController {
                  {}
                 """,
                 body);
-        return this.addressService.createAddress(body);
+        return this.addressService.createAddress(body, "/address");
     }
+
     /* Lecteur GET */
     /** GET reader */
     @GetMapping(path = "/address/{id}")
@@ -48,11 +50,12 @@ public class AddressController {
                 id);
         return this.addressService.readAddress(id);
     }
+
     /* Actualiseur PUT */
     /** PUT updater */
     @PutMapping(path = "/address/{id}")
-    public ResponseEntity<HttpStatusDtoOut> updateAddress(@PathVariable int id,
-                                                              @RequestBody AddressDtoIn body) {
+    public ResponseEntity<HttpStatusDtoOut>
+    updateAddress(@PathVariable int id, @RequestBody AddressDtoIn body) {
         logger.info("""
                 Put updater called by : http://127.0.0.1:8080/address/{}.
                 Body :
@@ -60,18 +63,24 @@ public class AddressController {
                 """,
                 id,
                 body);
-        return this.addressService.updateAddress(id, body);
+        return this.addressService.updateAddress(id,
+                body,
+                String.format("/address/%d", id));
     }
+
     /* Suppresseur DELETE */
     /** DELETE deleter */
     @DeleteMapping(path = "/address/{id}")
-    public ResponseEntity<HttpStatusDtoOut> deleteAddress(@PathVariable int id) {
+    public ResponseEntity<HttpStatusDtoOut>
+    deleteAddress(@PathVariable int id) {
         logger.info("""
                 DELETE deleter called by : http://127.0.0.1:8080/address/{}.
                 """,
                 id);
-        return this.addressService.deleteAddress(id);
+        return this.addressService.deleteAddress(id,
+                String.format("/address/%d", id));
     }
+
     /* Listeur GET */
     /** GET lister */
     @GetMapping(path = "/addresses")

@@ -16,6 +16,8 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
+import static fr.diginamic.aqiprojectbackend.utils.Dtos.buildHttpStatusDtoOut;
+
 /** User status service */
 @Service
 @Validated
@@ -41,7 +43,7 @@ public class UserStatusService {
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut>
-    createUserStatus(UserStatusDtoIn body){
+    createUserStatus(UserStatusDtoIn body, String path){
         HttpStatus httpStatus;
         try {
             userStatusRepository.save(buildUserStatusFrom(body));
@@ -52,8 +54,7 @@ public class UserStatusService {
         return ResponseEntity
                 .status(httpStatus)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new HttpStatusDtoOut(httpStatus.value(),
-                        httpStatus.getReasonPhrase()));
+                .body(buildHttpStatusDtoOut(httpStatus, path));
     }
 
     /**
@@ -81,7 +82,7 @@ public class UserStatusService {
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut>
-    updateUserStatus(int id, UserStatusDtoIn body){
+    updateUserStatus(int id, UserStatusDtoIn body, String path){
         final UserStatus userStatus = userStatusRepository
                 .findById(id)
                 .orElseThrow(EntityNotFoundException::new);
@@ -93,11 +94,11 @@ public class UserStatusService {
         final List<UserAccount> userAccounts =
                 userAccountRepository.findAllById(body.userAccountIds());
         userStatus.setUserAccounts(userAccounts);
+        HttpStatus httpStatus = HttpStatus.OK;
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(httpStatus)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new HttpStatusDtoOut(HttpStatus.OK.value(),
-                        HttpStatus.OK.getReasonPhrase()));
+                .body(buildHttpStatusDtoOut(httpStatus, path));
     }
 
     /**
@@ -105,16 +106,17 @@ public class UserStatusService {
      * @param id User status identifier
      * @return HTTP response (status)
      */
-    public ResponseEntity<HttpStatusDtoOut> deleteUserStatus(int id){
+    public ResponseEntity<HttpStatusDtoOut>
+    deleteUserStatus(int id, String path){
         final UserStatus userStatus = userStatusRepository
                 .findById(id)
                 .orElseThrow(EntityNotFoundException::new);
         userStatusRepository.delete(userStatus);
+        HttpStatus httpStatus = HttpStatus.OK;
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(httpStatus)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new HttpStatusDtoOut(HttpStatus.OK.value(),
-                        HttpStatus.OK.getReasonPhrase()));
+                .body(buildHttpStatusDtoOut(httpStatus, path));
     }
 
     /**

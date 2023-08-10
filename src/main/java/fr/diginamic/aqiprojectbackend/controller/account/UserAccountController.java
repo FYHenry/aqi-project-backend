@@ -34,6 +34,7 @@ public class UserAccountController {
     public UserAccountController(UserAccountService userAccountService){
         this.userAccountService = userAccountService;
     }
+
     /* Créateur POST */
     /** POST creator */
     @PostMapping(path = "/user")
@@ -44,8 +45,9 @@ public class UserAccountController {
                  {}
                 """,
                 body);
-        return this.userAccountService.createUserAccount(body);
+        return this.userAccountService.createUserAccount(body, "/user");
     }
+
     /* Lecteur GET */
     /** GET reader */
     @GetMapping(path = "/user/{id}")
@@ -56,6 +58,7 @@ public class UserAccountController {
                 id);
         return this.userAccountService.readUserAccount(id);
     }
+
     /* Actualiseur PUT */
     /** PUT updater */
     @PutMapping(path = "/user/{id}")
@@ -68,8 +71,11 @@ public class UserAccountController {
                 """,
                 id,
                 body);
-        return this.userAccountService.updateUserAccount(id, body);
+        return this.userAccountService.updateUserAccount(id,
+                body,
+                String.format("/user/%d", id));
     }
+
     /* Suppresseur DELETE */
     /** DELETE deleter */
     @DeleteMapping(path = "/user/{id}")
@@ -78,8 +84,10 @@ public class UserAccountController {
                 DELETE deleter called by : http://127.0.0.1:8080/user/{}.
                 """,
                 id);
-        return this.userAccountService.deleteUserAccount(id);
+        return this.userAccountService.deleteUserAccount(id,
+                String.format("/user/%d", id));
     }
+
     /* Listeur GET */
     /** GET lister */
     @GetMapping(path = "/users")

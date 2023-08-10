@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
+
+import static fr.diginamic.aqiprojectbackend.utils.Dtos.buildHttpStatusDtoOut;
+
 /** Address service */
 @Service
 @Validated
@@ -39,7 +42,7 @@ public class AddressService {
      * @param body HTTP request body (address)
      * @return HTTP response (status)
      */
-    public ResponseEntity<HttpStatusDtoOut> createAddress(AddressDtoIn body){
+    public ResponseEntity<HttpStatusDtoOut> createAddress(AddressDtoIn body, String path){
         HttpStatus httpStatus;
         try {
             addressRepository.save(buildAddressFrom(body));
@@ -50,8 +53,7 @@ public class AddressService {
         return ResponseEntity
                 .status(httpStatus)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new HttpStatusDtoOut(httpStatus.value(),
-                        httpStatus.getReasonPhrase()));
+                .body(buildHttpStatusDtoOut(httpStatus, path));
     }
 
     /**
@@ -79,7 +81,7 @@ public class AddressService {
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut>
-    updateAddress(int id, AddressDtoIn body){
+    updateAddress(int id, AddressDtoIn body, String path){
         final Address address = addressRepository
                 .findById(id)
                 .orElseThrow(EntityNotFoundException::new);
@@ -89,11 +91,11 @@ public class AddressService {
                 .findById(body.cityId())
                 .orElseThrow(EntityNotFoundException::new);
         address.setCity(city);
+        final HttpStatus httpStatus = HttpStatus.OK;
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(httpStatus)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new HttpStatusDtoOut(HttpStatus.OK.value(),
-                        HttpStatus.OK.getReasonPhrase()));
+                .body(buildHttpStatusDtoOut(httpStatus, path));
     }
 
     /**
@@ -101,16 +103,16 @@ public class AddressService {
      * @param id Address identifier
      * @return HTTP response (status)
      */
-    public ResponseEntity<HttpStatusDtoOut> deleteAddress(int id){
+    public ResponseEntity<HttpStatusDtoOut> deleteAddress(int id, String path){
         final Address address = addressRepository
                 .findById(id)
                 .orElseThrow(EntityNotFoundException::new);
         addressRepository.delete(address);
+        final HttpStatus httpStatus = HttpStatus.OK;
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(httpStatus)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new HttpStatusDtoOut(HttpStatus.OK.value(),
-                        HttpStatus.OK.getReasonPhrase()));
+                .body(buildHttpStatusDtoOut(httpStatus, path));
     }
 
     /**

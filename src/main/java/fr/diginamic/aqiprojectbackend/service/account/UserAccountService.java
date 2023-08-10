@@ -29,6 +29,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
+
+import static fr.diginamic.aqiprojectbackend.utils.Dtos.buildHttpStatusDtoOut;
+
 /** User account service */
 @Service
 @Validated
@@ -85,7 +88,7 @@ public class UserAccountService {
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut>
-    createUserAccount(UserAccountDtoIn body){
+    createUserAccount(UserAccountDtoIn body, String path){
         HttpStatus httpStatus;
         try {
             userAccountRepository.save(buildUserAccountFrom(body));
@@ -96,8 +99,7 @@ public class UserAccountService {
         return ResponseEntity
                 .status(httpStatus)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new HttpStatusDtoOut(httpStatus.value(),
-                        httpStatus.getReasonPhrase()));
+                .body(buildHttpStatusDtoOut(httpStatus, path));
     }
     /**
      * Read user account
@@ -123,7 +125,7 @@ public class UserAccountService {
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut>
-    updateUserAccount(int id, UserAccountDtoIn body){
+    updateUserAccount(int id, UserAccountDtoIn body, String path){
         final UserAccount userAccount = userAccountRepository
                 .findById(id)
                 .orElseThrow(EntityNotFoundException::new);
@@ -161,27 +163,27 @@ public class UserAccountService {
                 reactionRepository.findAllById(body.reactionIds());
         userAccount.setReactions(reactions);
         userAccountRepository.save(userAccount);
+        final HttpStatus httpStatus = HttpStatus.OK;
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(httpStatus)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new HttpStatusDtoOut(HttpStatus.OK.value(),
-                        HttpStatus.OK.getReasonPhrase()));
+                .body(buildHttpStatusDtoOut(httpStatus, path));
     }
     /**
      * Delete user account
      * @param id User account identifier
      * @return HTTP response (status)
      */
-    public ResponseEntity<HttpStatusDtoOut> deleteUserAccount(int id){
+    public ResponseEntity<HttpStatusDtoOut> deleteUserAccount(int id, String path){
         final UserAccount userAccount = userAccountRepository
                 .findById(id)
                 .orElseThrow(EntityNotFoundException::new);
         userAccountRepository.delete(userAccount);
+        final HttpStatus httpStatus = HttpStatus.OK;
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(httpStatus)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new HttpStatusDtoOut(HttpStatus.OK.value(),
-                        HttpStatus.OK.getReasonPhrase()));
+                .body(buildHttpStatusDtoOut(httpStatus, path));
     }
     /**
      * List user accounts

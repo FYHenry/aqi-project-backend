@@ -30,22 +30,25 @@ public class UserStatusController {
     /* Créateur POST */
     /** POST creator */
     @PostMapping(path = "/user-status")
-    public ResponseEntity<HttpStatusDtoOut> createUserStatus(@RequestBody UserStatusDtoIn body) {
+    public ResponseEntity<HttpStatusDtoOut>
+    createUserStatus(@RequestBody UserStatusDtoIn body) {
         logger.info("""
-                POST creator called by : http://127.0.0.1:8080/userstatus.
+                POST creator called by : http://127.0.0.1:8080/user-status.
                 Body :
                  {}
                 """,
                 body);
-        return this.userStatusService.createUserStatus(body);
+        return this.userStatusService.createUserStatus(body,
+                "/user-status");
     }
 
     /* Lecteur GET */
     /** GET reader */
     @GetMapping(path = "/user-status/{id}")
-    public ResponseEntity<UserStatusDtoOut> readUserStatus(@PathVariable int id) {
+    public ResponseEntity<UserStatusDtoOut>
+    readUserStatus(@PathVariable int id) {
         logger.info("""
-                GET reader called by : http://127.0.0.1:8080/userstatus/{}.
+                GET reader called by : http://127.0.0.1:8080/user-status/{}.
                 """,
                 id);
         return this.userStatusService.readUserStatus(id);
@@ -54,27 +57,31 @@ public class UserStatusController {
     /* Actualiseur PUT */
     /** PUT updater */
     @PutMapping(path = "/user-status/{id}")
-    public ResponseEntity<HttpStatusDtoOut> updateUserStatus(@PathVariable int id,
-                                                          @RequestBody UserStatusDtoIn body) {
+    public ResponseEntity<HttpStatusDtoOut>
+    updateUserStatus(@PathVariable int id, @RequestBody UserStatusDtoIn body) {
         logger.info("""
-                Put updater called by : http://127.0.0.1:8080/userstatus/{}.
+                Put updater called by : http://127.0.0.1:8080/user-status/{}.
                 Body :
                  {}
                 """,
                 id,
                 body);
-        return this.userStatusService.updateUserStatus(id, body);
+        return this.userStatusService.updateUserStatus(id,
+                body,
+                String.format("/user-status/%d", id));
     }
     
     /* Suppresseur DELETE */
     /** DELETE deleter */
     @DeleteMapping(path = "/user-status/{id}")
-    public ResponseEntity<HttpStatusDtoOut> deleteUserStatus(@PathVariable int id) {
+    public ResponseEntity<HttpStatusDtoOut>
+    deleteUserStatus(@PathVariable int id) {
         logger.info("""
-                DELETE deleter called by : http://127.0.0.1:8080/userstatus/{}.
+                DELETE deleter called by : http://127.0.0.1:8080/user-status/{}.
                 """,
                 id);
-        return this.userStatusService.deleteUserStatus(id);
+        return this.userStatusService.deleteUserStatus(id,
+                String.format("/user/%d", id));
     }
     
     /* Listeur GET */
@@ -82,7 +89,7 @@ public class UserStatusController {
     @GetMapping(path = "/user-statuses")
     public ResponseEntity<List<UserStatusDtoOut>> listUserStatuses(){
         logger.info("""
-                GET lister called by : http://127.0.0.1:8080/userstatuses.
+                GET lister called by : http://127.0.0.1:8080/user-statuses.
                 """);
         return this.userStatusService.listUserStatuses();
     }
