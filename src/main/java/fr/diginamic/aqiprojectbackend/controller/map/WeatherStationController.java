@@ -1,4 +1,4 @@
-package fr.diginamic.aqiprojectbackend.controller.account;
+package fr.diginamic.aqiprojectbackend.controller.map;
 
 import fr.diginamic.aqiprojectbackend.dto.HttpStatusDtoOut;
 import fr.diginamic.aqiprojectbackend.dto.map.in.WeatherStationDtoIn;
