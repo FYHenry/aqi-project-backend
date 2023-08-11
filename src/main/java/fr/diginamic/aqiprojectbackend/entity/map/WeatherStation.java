@@ -7,6 +7,11 @@ import jakarta.persistence.Entity;
 public class WeatherStation extends Station {
 
     /**
+     * Default constructor.
+     */
+    public WeatherStation() {}
+
+    /**
      * Constructor with parameters.
      * @param latitude Latitude
      * @param longitude Longitude

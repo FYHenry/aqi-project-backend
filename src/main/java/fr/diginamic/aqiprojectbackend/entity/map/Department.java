@@ -14,10 +14,9 @@ public class Department {
     private Region region;
 
     /**
-     * Constructor.
+     * Default constructor.
      */
-    public Department() {
-    }
+    public Department() {}
 
     /**
      * Constructor with parameters.

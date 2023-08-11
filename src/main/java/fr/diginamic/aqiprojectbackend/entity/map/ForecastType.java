@@ -15,10 +15,9 @@ public class ForecastType {
     private String label;
 
     /**
-     * Constructor.
+     * Default constructor.
      */
-    public ForecastType() {
-    }
+    public ForecastType() {}
 
     /**
      * Constructor with parameters.

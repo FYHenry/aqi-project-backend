@@ -24,6 +24,11 @@ public class WeatherReport {
     private ReportDate reportDate;
 
     /**
+     * Default constructor.
+     */
+    public WeatherReport() {}
+
+    /**
      * Constructor with parameters.
      * @param weatherCode Weather code
      * @param temperature Temperature

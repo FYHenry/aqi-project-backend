@@ -15,6 +15,11 @@ public class Region {
     private String name;
 
     /**
+     * Default constructor.
+     */
+    public Region() {}
+
+    /**
      * Constructor with parameters.
      * @param name Name
      */

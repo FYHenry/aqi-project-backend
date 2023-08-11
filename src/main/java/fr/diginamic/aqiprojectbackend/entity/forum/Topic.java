@@ -26,6 +26,27 @@ public class Topic {
     /** User account */
     @ManyToOne
     private UserAccount userAccount;
+
+    /**
+     * Default constructor.
+     */
+    public Topic() {
+    }
+
+    /**
+     * Constructor with parameters.
+     * @param title Title
+     * @param threads Threads
+     * @param userAccount User account
+     */
+    public Topic(String title,
+                 List<Thread> threads,
+                 UserAccount userAccount) {
+        this.title = title;
+        this.threads = threads;
+        this.userAccount = userAccount;
+    }
+
     /** Identifier getter */
     public int getId() {
         return id;

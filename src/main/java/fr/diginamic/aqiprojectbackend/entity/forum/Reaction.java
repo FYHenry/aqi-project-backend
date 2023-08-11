@@ -5,8 +5,9 @@ import jakarta.persistence.*;
 /** Reaction */
 @Entity
 public class Reaction {
+
     /** Reaction type */
-    private enum ReactionType {
+    public enum ReactionType {
         /** +1 */
         PLUS_ONE(1),
         /** -1 */
@@ -42,6 +43,26 @@ public class Reaction {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ReactionType reactionType;
+
+    /**
+     * Default constructor
+     */
+    public Reaction() {}
+
+    /**
+     * Constructor with parameters.
+     * @param message Message
+     * @param userAccount User account
+     * @param reactionType Reaction type
+     */
+    public Reaction(Message message,
+                    UserAccount userAccount,
+                    ReactionType reactionType) {
+        this.message = message;
+        this.userAccount = userAccount;
+        this.reactionType = reactionType;
+    }
+
     /** Identifier getter */
     public int getId() {
         return id;

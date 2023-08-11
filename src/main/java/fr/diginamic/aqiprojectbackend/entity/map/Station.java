@@ -17,6 +17,11 @@ public abstract class Station {
     private City city;
 
     /**
+     * Default constructor.
+     */
+    public Station() {}
+
+    /**
      * Constructor with parameters.
      * @param latitude Latitude
      * @param longitude Longitude

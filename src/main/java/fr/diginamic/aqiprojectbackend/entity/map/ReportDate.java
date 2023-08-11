@@ -17,6 +17,11 @@ public class ReportDate {
     private LocalDateTime date;
 
     /**
+     * Default constructor.
+     */
+    public ReportDate() {}
+
+    /**
      * Constructor with parameters.
      * @param id Identifier
      * @param date Date

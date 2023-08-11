@@ -26,7 +26,7 @@ public class Message {
     private List<Reaction> userAccountScore;
 
     /**
-     * Constructor.
+     * Default constructor.
      */
     public Message() {
     }

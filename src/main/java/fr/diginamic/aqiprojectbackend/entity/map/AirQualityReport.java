@@ -24,9 +24,11 @@ public class AirQualityReport {
     /** Report date */
     @ManyToOne
     private ReportDate reportDate;
-    /** Air quality Report */
-    public AirQualityReport() {
-    }
+
+    /**
+     * Default constructor.
+     */
+    public AirQualityReport() {}
 
     /**
      * Constructor with parameters.

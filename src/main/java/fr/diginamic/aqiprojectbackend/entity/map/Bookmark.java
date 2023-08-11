@@ -17,7 +17,7 @@ public class Bookmark {
     private UserAccount userAccount;
 
     /**
-     * Constructor.
+     * Default constructor.
      */
     public Bookmark(){
     }

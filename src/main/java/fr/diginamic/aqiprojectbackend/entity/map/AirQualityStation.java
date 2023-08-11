@@ -7,6 +7,11 @@ import jakarta.persistence.Entity;
 public class AirQualityStation extends Station {
 
     /**
+     * Default constructor.
+     */
+    public AirQualityStation() {}
+
+    /**
      * Constructor with parameters.
      * @param latitude Latitude
      * @param longitude Longitude

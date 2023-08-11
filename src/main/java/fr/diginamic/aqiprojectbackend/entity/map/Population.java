@@ -21,6 +21,11 @@ public class Population {
     private City city;
 
     /**
+     * Default constructor.
+     */
+    public Population() {}
+
+    /**
      * Constructor with parameter.
      * @param date Date
      * @param label Label
