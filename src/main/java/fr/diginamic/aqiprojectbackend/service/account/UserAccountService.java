@@ -173,7 +173,8 @@ public class UserAccountService {
      * @param path HTTP request path
      * @return HTTP response (status)
      */
-    public ResponseEntity<HttpStatusDtoOut> deleteUserAccount(int id, String path){
+    public ResponseEntity<HttpStatusDtoOut>
+    deleteUserAccount(int id, String path){
         final UserAccount userAccount = userAccountRepository
                 .findById(id)
                 .orElseThrow(EntityNotFoundException::new);

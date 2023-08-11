@@ -16,4 +16,30 @@ public class ReportDate {
     /** Date */
     private LocalDateTime date;
 
+    /**
+     * Constructor with parameters.
+     * @param id Identifier
+     * @param date Date
+     */
+    public ReportDate(int id, LocalDateTime date) {
+        this.id = id;
+        this.date = date;
+    }
+
+    /** Identifier getter */
+    public int getId() {
+        return id;
+    }
+    /** Identifier setter */
+    public void setId(int id) {
+        this.id = id;
+    }
+    /** Date getter */
+    public LocalDateTime getDate() {
+        return date;
+    }
+    /** Date setter */
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
 }
