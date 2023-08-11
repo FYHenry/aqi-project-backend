@@ -155,7 +155,7 @@ Ajouter une licence.
     - [x]   `City`,
     - [x]   `Department`,
     - [ ]   `ForecastType`,
-    - [ ]   `Population`,
+    - [x]   `Population`,
     - [x]   `Region`,
     - [ ]   `ReportDate`,
     - [ ]   `WeatherReport`,
