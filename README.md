@@ -6,17 +6,17 @@
                        ________________________________
                       |  ________________              |
  ________     ________|_|_     _____    _V_________   _V_____ 
-| Config |   | Controller |   | DTO |  | Exception | | Utils |
-|________|   |____________|-->|     |  |           | |       |
+| Config |   | Controller |-->| DTO |  | Exception | | Utils |
+|________|   |____________|   |     |  |           | |       |
                |              |     |  |           | |       |
  ________     _V_______       |     |  |           | |       |
-| Entity |   | Service |----->|     |  |           | |       |
-|        |<--|_________|      |_____|  |___________| |_______|
+| Entity |<--| Service |----->|     |  |           | |       |
+|        |   |_________|      |_____|  |___________| |_______|
 |        |     |   | |___________________A             A
 |        |     |   |___________________________________|
 |        |    _V__________
-|        |   | Repository |
-|________|<--|____________|
+|        |<--| Repository |
+|________|   |____________|
 ```
 
 ## Profil Spring : `init`
@@ -34,7 +34,7 @@ L’entité `UserAccount` est prise en exemple`.
 
 ```bash
 #!/bin/bash
-curl --verbose 'http://127.0.0.1:8080/user/1'
+curl --verbose 'http://127.0.0.1:8080/user-account/1'
 ```
 
 ### Création POST
@@ -56,7 +56,7 @@ curl --verbose --data '''
   "messageIdList" : [],
   "reactionIdList" : []
 }
-''' -H 'Content-Type: application/json' 'http://127.0.0.1:8080/user'
+''' -H 'Content-Type: application/json' 'http://127.0.0.1:8080/user-account'
 ```
 
 ### Actualisation PUT
@@ -78,21 +78,21 @@ curl --verbose --data '''
   "messageIdList" : [],
   "reactionIdList" : []
 }
-''' -H 'Content-Type: application/json' -X PUT 'http://127.0.0.1:8080/user/1'
+''' -H 'Content-Type: application/json' -X PUT 'http://127.0.0.1:8080/user-account/1'
 ```
 
 ### Suppression DELETE
 
 ```bash
 #!/bin/bash
-curl --verbose -H 'Content-Type: application/json' -X DELETE 'http://127.0.0.1:8080/user/1'
+curl --verbose -H 'Content-Type: application/json' -X DELETE 'http://127.0.0.1:8080/user-account/1'
 ```
 
 ### Listage GET
 
 ```bash
 #!/bin/bash
-curl --verbose 'http://127.0.0.1:8080/users'
+curl --verbose 'http://127.0.0.1:8080/user-accounts'
 ```
 
 ### Code de retour `OK`
@@ -150,7 +150,7 @@ Ajouter une licence.
     - [ ]   `Topic` ;
   - [ ]  `map` :
     - [ ]   `AirQualityReport`,
-    - [ ]   `AirQualityStation`,
+    - [x]   `AirQualityStation`,
     - [ ]   `Bookmark`,
     - [x]   `City`,
     - [x]   `Department`,
@@ -159,4 +159,4 @@ Ajouter une licence.
     - [x]   `Region`,
     - [ ]   `ReportDate`,
     - [ ]   `WeatherReport`,
-    - [ ]   `WeatherStation`.
+    - [x]   `WeatherStation`.
