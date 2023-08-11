@@ -150,6 +150,8 @@ Rendre les listeurs paginables.
 Gérer les suppressions de données dépendantes : nouvelle exception ou
 suppressions en cascade.
 
+Implémenter la couche de sécurité via Spring Security.
+
 ## Liste des entités à implémenter
 
 - [ ] `entities` :
