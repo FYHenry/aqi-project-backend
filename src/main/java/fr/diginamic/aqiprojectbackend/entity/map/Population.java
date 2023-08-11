@@ -15,16 +15,10 @@ public class Population {
     /** Label */
     private String label;
     /** Population number */
-    private int populationNumber;
+    private long populationNumber;
     /** City */
     @ManyToOne
     private City city;
-
-    /**
-     * Constructor.
-     */
-    public Population() {
-    }
 
     /**
      * Constructor with parameter.
@@ -33,7 +27,10 @@ public class Population {
      * @param populationNumber Population number
      * @param city City
      */
-    public Population(LocalDate date, String label, int populationNumber, City city) {
+    public Population(LocalDate date,
+                      String label,
+                      long populationNumber,
+                      City city) {
         this.date = date;
         this.label = label;
         this.populationNumber = populationNumber;
@@ -64,11 +61,11 @@ public class Population {
         this.label = label;
     }
     /** Population number getter */
-    public int getPopulationNumber() {
+    public long getPopulationNumber() {
         return populationNumber;
     }
     /** Population number setter */
-    public void setPopulationNumber(int populationNumber) {
+    public void setPopulationNumber(long populationNumber) {
         this.populationNumber = populationNumber;
     }
     /** City getter */
