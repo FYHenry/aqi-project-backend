@@ -1,5 +1,14 @@
 # aqi-project-backend
 
+## Glossaire
+
+* INSEE : Institut National de la Statistique et des Études Économiques ;
+* Code INSEE communal (`insee`) : code à 5 chiffres décimaux dont les deux
+premiers correspondent au code INSEE de la région circonscrite.
+* Code INSEE départemental : code à 3 chiffres hexadécimaux.
+
+NB: Le code INSEE communal n’est pas le code postal !
+
 ## Architecture
 
 ```
@@ -135,6 +144,11 @@ Trouver comment créer :
 Ajouter des classes pour la phase *test*.
 
 Ajouter une licence.
+
+Rendre les listeurs paginables.
+
+Gérer les suppressions de données dépendantes : nouvelle exception ou
+suppressions en cascade.
 
 ## Liste des entités à implémenter
 
