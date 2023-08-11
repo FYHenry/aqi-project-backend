@@ -158,5 +158,5 @@ Ajouter une licence.
     - [x]   `Population`,
     - [x]   `Region`,
     - [ ]   `ReportDate`,
-    - [ ]   `WeatherReport`,
+    - [x]   `WeatherReport`,
     - [x]   `WeatherStation`.
