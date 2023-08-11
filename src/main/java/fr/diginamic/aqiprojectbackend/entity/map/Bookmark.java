@@ -19,15 +19,17 @@ public class Bookmark {
     /**
      * Default constructor.
      */
-    public Bookmark(){
-    }
+    public Bookmark(){}
 
     /**
      * Constructor with parameters.
      * @param forecastType Forecast type
+     * @param userAccount User account
      */
-    public Bookmark(ForecastType forecastType) {
+    public Bookmark(ForecastType forecastType,
+                    UserAccount userAccount) {
         this.forecastType = forecastType;
+        this.userAccount = userAccount;
     }
     /** Identifier getter */
     public int getId() {
