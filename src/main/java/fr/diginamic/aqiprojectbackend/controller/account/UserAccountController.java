@@ -37,25 +37,25 @@ public class UserAccountController {
 
     /* Créateur POST */
     /** POST creator */
-    @PostMapping(path = "/user")
+    @PostMapping(path = "/user-account")
     public ResponseEntity<HttpStatusDtoOut>
     createUserAccount(@RequestBody UserAccountDtoIn body) {
         logger.info("""
-                POST creator called by : http://127.0.0.1:8080/user.
+                POST creator called by : http://127.0.0.1:8080/user-account.
                 Body :
                  {}
                 """,
                 body);
-        return this.userAccountService.createUserAccount(body, "/user");
+        return this.userAccountService.createUserAccount(body, "/user-account");
     }
 
     /* Lecteur GET */
     /** GET reader */
-    @GetMapping(path = "/user/{id}")
+    @GetMapping(path = "/user-account/{id}")
     public ResponseEntity<UserAccountDtoOut>
     readUserAccount(@PathVariable int id) {
         logger.info("""
-                GET reader called by : http://127.0.0.1:8080/user/{}.
+                GET reader called by : http://127.0.0.1:8080/user-account/{}.
                 """,
                 id);
         return this.userAccountService.readUserAccount(id);
@@ -63,12 +63,12 @@ public class UserAccountController {
 
     /* Actualiseur PUT */
     /** PUT updater */
-    @PutMapping(path = "/user/{id}")
+    @PutMapping(path = "/user-account/{id}")
     public ResponseEntity<HttpStatusDtoOut>
     updateUserAccount(@PathVariable int id,
                       @RequestBody UserAccountDtoIn body) {
         logger.info("""
-                Put updater called by : http://127.0.0.1:8080/user/{}.
+                Put updater called by : http://127.0.0.1:8080/user-account/{}.
                 Body :
                  {}
                 """,
@@ -76,28 +76,28 @@ public class UserAccountController {
                 body);
         return this.userAccountService.updateUserAccount(id,
                 body,
-                String.format("/user/%d", id));
+                String.format("/user-account/%d", id));
     }
 
     /* Suppresseur DELETE */
     /** DELETE deleter */
-    @DeleteMapping(path = "/user/{id}")
+    @DeleteMapping(path = "/user-account/{id}")
     public ResponseEntity<HttpStatusDtoOut>
     deleteUserAccount(@PathVariable int id) {
         logger.info("""
-                DELETE deleter called by : http://127.0.0.1:8080/user/{}.
+                DELETE deleter called by : http://127.0.0.1:8080/user-account/{}.
                 """,
                 id);
         return this.userAccountService.deleteUserAccount(id,
-                String.format("/user/%d", id));
+                String.format("/user-account/%d", id));
     }
 
     /* Listeur GET */
     /** GET lister */
-    @GetMapping(path = "/users")
+    @GetMapping(path = "/user-accounts")
     public ResponseEntity<List<UserAccountDtoOut>> listUserAccounts(){
         logger.info("""
-                GET lister called by : http://127.0.0.1:8080/users.
+                GET lister called by : http://127.0.0.1:8080/user-accounts.
                 """);
         return this.userAccountService.listUserAccounts();
     }
