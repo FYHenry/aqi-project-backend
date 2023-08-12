@@ -16,7 +16,7 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
-import static fr.diginamic.aqiprojectbackend.utils.Dtos.buildHttpStatusResponse;
+import static fr.diginamic.aqiprojectbackend.util.Dtos.buildHttpStatusResponse;
 
 /** Air quality station service */
 @Service

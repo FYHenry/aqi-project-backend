@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
-import static fr.diginamic.aqiprojectbackend.utils.Dtos.buildHttpStatusResponse;
+import static fr.diginamic.aqiprojectbackend.util.Dtos.buildHttpStatusResponse;
 
 /** Report date service */
 @Service

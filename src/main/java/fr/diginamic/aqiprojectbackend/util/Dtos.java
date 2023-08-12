@@ -1,4 +1,4 @@
-package fr.diginamic.aqiprojectbackend.utils;
+package fr.diginamic.aqiprojectbackend.util;
 
 import fr.diginamic.aqiprojectbackend.dto.HttpStatusDtoOut;
 import org.springframework.http.HttpStatus;
