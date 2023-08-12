@@ -14,7 +14,7 @@ NB: Le code INSEE communal n’est pas le code postal !
 ```
                        ________________________________
                       |  ________________              |
- ________     ________|_|_     _____    _V_________   _V____ 
+ ________     ________|_|_     _____    _V_________   _V____
 | Config |   | Controller |-->| DTO |  | Exception | | Util |
 |________|   |____________|   |     |  |           | |      |
                |              |     |  |           | |      |
@@ -163,7 +163,7 @@ Implémenter la couche de sécurité via Spring Security.
     - [x]   `Message`,
     - [ ]   `Reaction`,
     - [x]   `Thread`,
-    - [ ]   `Topic` ;
+    - [x]   `Topic` ;
   - [x]  `map` :
     - [x]   `AirQualityReport`,
     - [x]   `AirQualityStation`,
