@@ -30,8 +30,7 @@ public class Topic {
     /**
      * Default constructor.
      */
-    public Topic() {
-    }
+    public Topic() {}
 
     /**
      * Constructor with parameters.
@@ -50,5 +49,33 @@ public class Topic {
     /** Identifier getter */
     public int getId() {
         return id;
+    }
+    /** Identifier setter */
+    public void setId(int id) {
+        this.id = id;
+    }
+    /** Title getter */
+    public String getTitle() {
+        return title;
+    }
+    /** Title setter */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    /** Threads getter */
+    public List<Thread> getThreads() {
+        return threads;
+    }
+    /** Threads setter */
+    public void setThreads(List<Thread> threads) {
+        this.threads = threads;
+    }
+    /** User account getter */
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+    /** User account setter */
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
     }
 }

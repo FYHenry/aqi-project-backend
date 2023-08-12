@@ -9,10 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import lombok.Data;
 
 /** Thread */
-@Data
 @Entity
 public class Thread {
     /** Identifier */
@@ -34,14 +32,13 @@ public class Thread {
     /**
      * Default constructor.
      */
-    public Thread() {
-    }
+    public Thread() {}
 
     /**
      * Constructor with parameters.
      * @param title Title
      * @param topic Topic
-     * @param messages Message
+     * @param messages Messages
      * @param userAccount User account
      */
     public Thread(String title,
@@ -53,8 +50,44 @@ public class Thread {
         this.messages = messages;
         this.userAccount = userAccount;
     }
-    /** Identifier */
+    /** Identifier getter */
     public int getId() {
         return id;
+    }
+    /** Identifier setter */
+    public void setId(int id) {
+        this.id = id;
+    }
+    /** Title getter */
+    public String getTitle() {
+        return title;
+    }
+    /** Title setter */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    /** Topic getter */
+    public Topic getTopic() {
+        return topic;
+    }
+    /** Topic setter */
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+    /** Messages getter */
+    public List<Message> getMessages() {
+        return messages;
+    }
+    /** Messages setter */
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+    /** User account getter */
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+    /** User account setter */
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
     }
 }

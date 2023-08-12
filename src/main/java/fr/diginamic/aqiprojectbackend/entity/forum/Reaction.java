@@ -2,6 +2,7 @@ package fr.diginamic.aqiprojectbackend.entity.forum;
 
 import fr.diginamic.aqiprojectbackend.entity.account.UserAccount;
 import jakarta.persistence.*;
+
 /** Reaction */
 @Entity
 public class Reaction {
@@ -66,5 +67,33 @@ public class Reaction {
     /** Identifier getter */
     public int getId() {
         return id;
+    }
+    /** Identifier setter */
+    public void setId(int id) {
+        this.id = id;
+    }
+    /** Message getter */
+    public Message getMessage() {
+        return message;
+    }
+    /** Message setter */
+    public void setMessage(Message message) {
+        this.message = message;
+    }
+    /** User account getter */
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+    /** User account setter */
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
+    }
+    /** Reaction type getter */
+    public ReactionType getReactionType() {
+        return reactionType;
+    }
+    /** Reaction type setter */
+    public void setReactionType(ReactionType reactionType) {
+        this.reactionType = reactionType;
     }
 }
