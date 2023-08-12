@@ -162,7 +162,7 @@ Implémenter la couche de sécurité via Spring Security.
   - [ ]  `forum` :
     - [x]   `Message`,
     - [ ]   `Reaction`,
-    - [ ]   `Thead`,
+    - [x]   `Thread`,
     - [ ]   `Topic` ;
   - [x]  `map` :
     - [x]   `AirQualityReport`,
