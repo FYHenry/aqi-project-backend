@@ -23,11 +23,9 @@ public class ReportDate {
 
     /**
      * Constructor with parameters.
-     * @param id Identifier
      * @param date Date
      */
-    public ReportDate(int id, LocalDateTime date) {
-        this.id = id;
+    public ReportDate(LocalDateTime date) {
         this.date = date;
     }
 

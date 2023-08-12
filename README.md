@@ -173,6 +173,6 @@ Implémenter la couche de sécurité via Spring Security.
     - [ ]   `ForecastType`,
     - [x]   `Population`,
     - [x]   `Region`,
-    - [ ]   `ReportDate`,
+    - [x]   `ReportDate`,
     - [x]   `WeatherReport`,
     - [x]   `WeatherStation`.
