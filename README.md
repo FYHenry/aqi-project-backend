@@ -154,14 +154,14 @@ Implémenter la couche de sécurité via Spring Security.
 
 ## Liste des entités à implémenter
 
-- [ ] `entities` :
+- [x] `entities` :
   - [x]  `account` :
     - [x]   `Address`,
     - [x]   `UserAccount`,
     - [x]   `UserStatus` ;
-  - [ ]  `forum` :
+  - [x]  `forum` :
     - [x]   `Message`,
-    - [ ]   `Reaction`,
+    - [x]   `Reaction`,
     - [x]   `Thread`,
     - [x]   `Topic` ;
   - [x]  `map` :
