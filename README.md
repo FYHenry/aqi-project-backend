@@ -170,7 +170,7 @@ Implémenter la couche de sécurité via Spring Security.
     - [ ]   `Bookmark`,
     - [x]   `City`,
     - [x]   `Department`,
-    - [ ]   `ForecastType`,
+    - [x]   `ForecastType`,
     - [x]   `Population`,
     - [x]   `Region`,
     - [x]   `ReportDate`,
