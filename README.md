@@ -160,7 +160,7 @@ Implémenter la couche de sécurité via Spring Security.
     - [x]   `UserAccount`,
     - [x]   `UserStatus` ;
   - [ ]  `forum` :
-    - [ ]   `Message`,
+    - [x]   `Message`,
     - [ ]   `Reaction`,
     - [ ]   `Thead`,
     - [ ]   `Topic` ;
