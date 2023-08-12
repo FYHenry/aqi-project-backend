@@ -47,4 +47,12 @@ public class Bookmark {
     public void setForecastType(ForecastType forecastType) {
         this.forecastType = forecastType;
     }
+    /** User account getter */
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+    /** User account setter */
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
+    }
 }

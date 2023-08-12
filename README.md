@@ -164,10 +164,10 @@ Implémenter la couche de sécurité via Spring Security.
     - [ ]   `Reaction`,
     - [ ]   `Thead`,
     - [ ]   `Topic` ;
-  - [ ]  `map` :
+  - [x]  `map` :
     - [x]   `AirQualityReport`,
     - [x]   `AirQualityStation`,
-    - [ ]   `Bookmark`,
+    - [x]   `Bookmark`,
     - [x]   `City`,
     - [x]   `Department`,
     - [x]   `ForecastType`,
