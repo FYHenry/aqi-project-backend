@@ -104,8 +104,13 @@ public class MessageService {
                 .findById(body.threadId())
                 .orElseThrow(EntityNotFoundException::new);
         message.setThread(thread);
+        final UserAccount userAccount = userAccountRepository
+                .findById(body.userAccountId())
+                .orElseThrow(EntityNotFoundException::new);
+        message.setUserAccount(userAccount);
         final List<Reaction> reactions =
                 reactionRepository.findAllById(body.reactionIds());
+        message.setReactions(reactions);
         messageRepository.save(message);
         return buildHttpStatusResponse(HttpStatus.OK, path);
     }
