@@ -71,7 +71,7 @@ curl --verbose --data '''
   "userStatusIds" : [1],
   "addressId" : 1,
   "bookmarkIds" : [],
-  "role" : "USER",
+  "role" : "ADMIN",
   "topicIds" : [],
   "threadIds" : [],
   "messageIds" : [],
