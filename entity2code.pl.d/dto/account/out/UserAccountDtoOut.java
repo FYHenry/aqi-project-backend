@@ -1,9 +1,10 @@
-package fr.diginamic.aqiprojectbackend.dto.account.in;
+package fr.diginamic.aqiprojectbackend.dto.account.out;
 
 import java.util.List;
 
 /**
- * User account DTO input
+ * User account DTO output
+ * @param id Id
  * @param firstName First name
  * @param lastName Last name
  * @param email Email
@@ -17,7 +18,8 @@ import java.util.List;
  * @param messagesIds Messages idenfifiers
  * @param reactionsIds Reactions idenfifiers
  */
-public record UserAccountDtoIn(String firstName,
+public record UserAccountDtoOut(int id,
+String firstName,
         String lastName,
         String email,
         String password,

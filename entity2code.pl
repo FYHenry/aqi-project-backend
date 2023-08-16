@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 use constant ROOT => 'src/main/java/fr/diginamic/aqiprojectbackend';
-use constant TARGETDIR => 'essai.pl.d';
+use constant TARGETDIR => 'entity2code.pl.d';
 
 if(! defined($ARGV[0])) {
   die("Undefined argument!\n");
@@ -47,13 +47,18 @@ print("\n");
 my %std;
 my %one;
 my %many;
+my %enum;
 my ($idname, $idtype);
 my @params;
 my @paramtypes;
 my $isid = 0;
+my $isenum = 0;
 foreach (<$in>) {
   if((! $isid) && (! defined($idname)) && $_ =~ m/\@Id/){
     $isid = 1;
+  }
+  if((! $isenum) && $_ =~ m/\@Enumerated\(EnumType\.STRING\)/){
+    $isenum = 1;
   }
   if($_ =~ m/^\s*private\s+(int|double|float|String|LocalDate(Time)?)\s+([a-z][0-9a-zA-Z]*)(?=\s*;)/){
 #    print("\{${1} ${3}\}");
@@ -74,7 +79,15 @@ foreach (<$in>) {
   }
   elsif($_ =~ m/^\s*private\s+([A-Z][0-9a-zA-Z]*)\s+([a-z][0-9a-zA-Z]*)(?=\s*;)/){
 #    print("\{${1} ${2}\}");
-    $one{$2} = "${1}";
+    if(defined($enum{$2})){
+      $isenum = 0;
+    }
+    if($isenum){
+      $enum{$2} = "$1";
+      $isenum = 0;
+    } else {
+      $one{$2} = "${1}";
+    }
     push(@paramtypes, "$1");
     push(@params, "$2");
   }
@@ -84,6 +97,10 @@ close($in);
 
 print("\nIdentifier :\n");
 print("${idtype} ${idname}\n");
+print("\nEnumerations : \n");
+foreach (keys(%enum)){
+  print("${enum{$_}} ${_}\n");
+}
 print("\nStandards :\n");
 foreach (keys(%std)){
   print("${std{$_}} ${_}\n");
@@ -121,6 +138,8 @@ sub testandinsert{
     $result = "List<Integer> ${params[$i]}Ids";
   } elsif(defined($one{"${params[$i]}"})){
     $result = "int ${params[$i]}Id";
+  } elsif(defined($enum{"${params[$i]}"})){
+    $result = "String ${params[$i]}";
   } else {
     $result = "${paramtypes[$i]} ${params[$i]}";
   }
@@ -147,24 +166,50 @@ sub testandcomment{
 }
 
 # To write DTO class file.
+# Parameters :
+#   DTO type :
+#     'i' Input
+#     'o' Output
 sub writedtoclass{
+  my $iotype = $_[0];
+  my %iopkg;
+  if($iotype eq 'i'){
+    %iopkg = ('pkg' => 'in',
+      'sfx' => 'In',
+      'cmt' => 'input');
+  } elsif($iotype eq 'o'){
+    %iopkg = ('pkg' => 'out',
+      'sfx' => 'Out',
+      'cmt' => 'output');
+  } else {
+    die("Bad DTO type");
+  }
   my $out;
-  open($out, ">".TARGETDIR."/dto/${subpkg}/in/${arg}DtoIn.java")
+  open($out, ">".TARGETDIR."/dto/${subpkg}/${iopkg{'pkg'}}/${arg}Dto${iopkg{'sfx'}}.java")
     or die("open: $!");
   print($out "");
   close($out);
-  open($out, ">>".TARGETDIR."/dto/${subpkg}/in/${arg}DtoIn.java")
+  open($out, ">>".TARGETDIR."/dto/${subpkg}/${iopkg{'pkg'}}/${arg}Dto${iopkg{'sfx'}}.java")
     or die("open: $!");
-  print($out "package fr.diginamic.aqiprojectbackend.dto.${subpkg}.in;\n\n");
+  print($out "package fr.diginamic.aqiprojectbackend.dto.${subpkg}.${iopkg{'pkg'}};\n\n");
   my $manysize = keys(%many);
   if($manysize != 0){
     print($out "import java.util.List;\n\n");
   }
-  print($out "/**\n * ${formats{'Uppercase-comment'}} DTO input\n");
-    foreach (0..$#params){
-      print($out testandcomment($_));
-    }
-  print($out " */\npublic record ${formats{'Class'}}DtoIn(");
+  print($out "/**\n * ${formats{'Uppercase-comment'}} DTO ${iopkg{'cmt'}}\n");
+  if($iotype eq 'o'){
+    my $ucidname = $idname;
+    $ucidname =~ s/([A-Z])/ \l$1/g;
+    $ucidname =~ s/^([a-z])/\u$1/g;
+    print($out " * \@param ${idname} ${ucidname}\n");
+  }
+  foreach (0..$#params){
+    print($out testandcomment($_));
+  }
+  print($out " */\npublic record ${formats{'Class'}}Dto${iopkg{'sfx'}}(");
+  if($iotype eq 'o'){
+    print($out "${idtype} ${idname},\n");
+  }
   my $paramsize = @params;
   if($paramsize == 0){
     print($out ") {}\n");
@@ -217,4 +262,5 @@ sub writeclass{
 
 writeclass('repository');
 writeclass('controller');
-writedtoclass();
+writedtoclass('i');
+writedtoclass('o');

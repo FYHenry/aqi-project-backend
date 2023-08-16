@@ -141,6 +141,8 @@ Trouver comment créer :
 
 ~~Dessiner un logotype.~~
 
+Préciser le titre officiel du projet.
+
 Ajouter des classes pour la phase *test*.
 
 Compléter les essais d’intégration par plus de requêtes HTTP.
@@ -189,4 +191,14 @@ Faute de mieux le script en Perl `entity2code.pl` doit permettre la
 rédaction rapide des classes répertoire, contrôleur, service et dto
 pour une classe entité donnée.
 
+Il peut être utile d’inclure aussi leur classes d’essai unitaire.
+
 /!\ Encore expérimental.
+
+Classes à écrire :
+- [x] `dto` ;
+- [x] `controller` (`main`);
+- [ ] `service` (`main`);
+- [x] `directory` ;
+- [ ] `controler` (`test`) ;
+- [ ] `service` (`test`)
