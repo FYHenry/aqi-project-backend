@@ -143,9 +143,17 @@ Trouver comment créer :
 
 Ajouter des classes pour la phase *test*.
 
+Compléter les essais d’intégration par plus de requêtes HTTP.
+
 Ajouter une licence.
 
 Rendre les listeurs paginables.
+
+Corriger une erreur de litéral d’énumération lors des écritures de donnée.
+
+Externaliser les énumérations des classes entité.
+
+Donner la main à `ExceptionController` pour les différentes exceptions.
 
 Gérer les suppressions de données dépendantes : nouvelle exception ou
 suppressions en cascade.
