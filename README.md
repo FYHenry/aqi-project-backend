@@ -151,7 +151,7 @@ Rendre les listeurs paginables.
 
 Corriger une erreur de litéral d’énumération lors des écritures de donnée.
 
-Externaliser les énumérations des classes entité.
+~~Externaliser les énumérations des classes entité.~~
 
 Donner la main à `ExceptionController` pour les différentes exceptions.
 

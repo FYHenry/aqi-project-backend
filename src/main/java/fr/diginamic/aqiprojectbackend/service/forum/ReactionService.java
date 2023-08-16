@@ -6,6 +6,7 @@ import fr.diginamic.aqiprojectbackend.dto.forum.out.ReactionDtoOut;
 import fr.diginamic.aqiprojectbackend.entity.account.UserAccount;
 import fr.diginamic.aqiprojectbackend.entity.forum.Message;
 import fr.diginamic.aqiprojectbackend.entity.forum.Reaction;
+import fr.diginamic.aqiprojectbackend.entity.forum.ReactionType;
 import fr.diginamic.aqiprojectbackend.exception.BadRequestException;
 import fr.diginamic.aqiprojectbackend.exception.EntityNotFoundException;
 import fr.diginamic.aqiprojectbackend.repository.account.UserAccountRepository;
@@ -101,13 +102,13 @@ public class ReactionService {
                 .findById(body.userAccount())
                 .orElseThrow(EntityNotFoundException::new);
         reaction.setUserAccount(userAccount);
-        Reaction.ReactionType reactionType;
+        ReactionType reactionType;
         if(body.reactionType().contentEquals("ZERO")){
-            reactionType = Reaction.ReactionType.ZERO;
+            reactionType = ReactionType.ZERO;
         } else if (body.reactionType().contentEquals("MINUS_ONE")) {
-            reactionType = Reaction.ReactionType.MINUS_ONE;
+            reactionType = ReactionType.MINUS_ONE;
         } else if (body.reactionType().contentEquals("PLUS_ONE")) {
-            reactionType = Reaction.ReactionType.PLUS_ONE;
+            reactionType = ReactionType.PLUS_ONE;
         } else {
             throw new BadRequestException();
         }
@@ -160,13 +161,13 @@ public class ReactionService {
         final UserAccount userAccount = userAccountRepository
                 .findById(body.userAccount())
                 .orElseThrow(EntityNotFoundException::new);
-        Reaction.ReactionType reactionType;
+        ReactionType reactionType;
         if(body.reactionType().contentEquals("ZERO")){
-            reactionType = Reaction.ReactionType.ZERO;
+            reactionType = ReactionType.ZERO;
         } else if (body.reactionType().contentEquals("MINUS_ONE")) {
-            reactionType = Reaction.ReactionType.MINUS_ONE;
+            reactionType = ReactionType.MINUS_ONE;
         } else if (body.reactionType().contentEquals("PLUS_ONE")) {
-            reactionType = Reaction.ReactionType.PLUS_ONE;
+            reactionType = ReactionType.PLUS_ONE;
         } else {
             throw new BadRequestException();
         }
