@@ -176,3 +176,11 @@ Implémenter la couche de sécurité via Spring Security.
     - [x]   `ReportDate`,
     - [x]   `WeatherReport`,
     - [x]   `WeatherStation`.
+
+## Outil de rédaction automatique
+
+Faute de mieux le script en Perl `entity2code.pl` doit permettre la
+rédaction rapide des classes répertoire, contrôleur, service et dto
+pour une classe entité donnée.
+
+/!\ Encore expérimental.
