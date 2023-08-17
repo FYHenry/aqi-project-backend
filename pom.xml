@@ -6,33 +6,78 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.1.2</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
+	<!-- lookup parent from repository -->
 	</parent>
-	<groupId>fr.diginamic</groupId>
-	<artifactId>aqi-project-backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>aqi-project-backend</name>
-	<description>Backend repository for group 3</description>
 	<properties>
 		<java.version>17</java.version>
+		<group.name>Diginamic promotion 2023 M03 group 3</group.name>
+		<group.url>https://github.com/Diginamic-promotion-2023-M03-groupe-3</group.url>
 	</properties>
+	<groupId>fr.diginamic</groupId>
+	<artifactId>aqi-project-backend</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>aqi-project-backend</name>
+	<description>REST API server and backend part of the AQI Project</description>
+	<organization>
+		<name>${group.name}</name>
+		<url>${group.url}</url>
+	</organization>
+	<developers>
+		<developer>
+			<name>FHenry</name>
+			<url>https://github.com/FYHenry</url>
+			<organization>${group.name}</organization>
+			<organizationUrl>${group.url}</organizationUrl>
+		</developer>
+		<developer>
+			<name>HassAllali</name>
+			<url>https://github.com/HassAllali</url>
+			<organization>${group.name}</organization>
+			<organizationUrl>${group.url}</organizationUrl>
+		</developer>
+		<developer>
+			<name>NicolasSoulay</name>
+			<url>https://github.com/NicolasSoulay</url>
+			<organization>${group.name}</organization>
+			<organizationUrl>${group.url}</organizationUrl>
+		</developer>
+		<developer>
+			<name>melinasim</name>
+			<url>https://github.com/melinasim</url>
+			<organization>${group.name}</organization>
+			<organizationUrl>${group.url}</organizationUrl>
+		</developer>
+	</developers>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<dependency>
+		<!--dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency-->
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.yaml</groupId>
+					<artifactId>snakeyaml</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -43,7 +88,9 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
+			<version>2.2.220</version>
+			<optional>true</optional>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -55,11 +102,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+		<!--dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
-		</dependency>
+		</dependency-->
 	</dependencies>
 
 	<build>

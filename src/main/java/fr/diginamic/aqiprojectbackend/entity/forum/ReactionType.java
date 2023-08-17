@@ -1,13 +1,26 @@
 package fr.diginamic.aqiprojectbackend.entity.forum;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+/** Reaction type */
+public enum ReactionType {
+    /** +1 */
+    PLUS_ONE(1),
+    /** -1 */
+    MINUS_ONE(-1),
+    /** 0 */
+    ZERO(0);
+    /** Value */
+    private final int VALUE;
 
-@Entity
-public class ReactionType {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    /**
+     * Constructor with parameters.
+     * @param VALUE Value
+     */
+    ReactionType(int VALUE) {
+        this.VALUE = VALUE;
+    }
+
+    /** Value getter */
+    public int getValue() {
+        return this.VALUE;
+    }
 }

@@ -4,34 +4,41 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+/** Region */
 @Entity
 public class Region {
+    /** Identifier */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
+    /** Name */
     private String name;
 
-    public Region() {
-    }
+    /**
+     * Default constructor.
+     */
+    public Region() {}
 
-    public Region(Integer id, String name) {
-        this.id = id;
+    /**
+     * Constructor with parameters.
+     * @param name Name
+     */
+    public Region(String name) {
         this.name = name;
     }
-
-    public Integer getId() {
+    /** Identifier getter */
+    public int getId() {
         return id;
     }
-
-    public void setId(Integer id) {
+    /** Identifier setter */
+    public void setId(int id) {
         this.id = id;
     }
-
+    /** Name getter */
     public String getName() {
         return name;
     }
-
+    /** Name setter */
     public void setName(String name) {
         this.name = name;
     }

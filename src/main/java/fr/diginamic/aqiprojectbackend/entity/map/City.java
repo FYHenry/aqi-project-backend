@@ -1,76 +1,101 @@
 package fr.diginamic.aqiprojectbackend.entity.map;
 
-import jakarta.persistence.*;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
+/** City */
 @Entity
 public class City {
+    /** INSEE (identifier) */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer insee;
+    private int insee;
+    /** Name */
     private String name;
-    private Integer postcode;
-    private Double latitude;
-    private Double longitude;
+    /** Postcode */
+    private int postcode;
+    /** Latitude */
+    private double latitude;
+    /** Longitude */
+    private double longitude;
+    /** Department */
     @ManyToOne
-    private Departement departement;
+    private Department department;
 
-    public City() {
-    }
+    /**
+     * Default constructor.
+     */
+    public City() {}
 
-    public City(Integer insee, String name, Integer postcode, Double latitude, Double longitude, Departement departement) {
+    /**
+     * Constructor with parameters.
+     * @param insee INSEE
+     * @param name Name
+     * @param postcode Postcode
+     * @param latitude Latitude
+     * @param longitude Longitude
+     * @param department Department
+     */
+    public City(int insee,
+                String name,
+                int postcode,
+                double latitude,
+                double longitude,
+                Department department) {
         this.insee = insee;
         this.name = name;
         this.postcode = postcode;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.departement = departement;
+        this.department = department;
     }
-
-    public Integer getInsee() {
+    /** INSEE getter */
+    public int getInsee() {
         return insee;
     }
-
-    public void setInsee(Integer insee) {
+    /** INSEE setter */
+    public void setInsee(int insee) {
         this.insee = insee;
     }
-
+    /** Name getter */
     public String getName() {
         return name;
     }
-
+    /** Name setter */
     public void setName(String name) {
         this.name = name;
     }
-
-    public Integer getPostcode() {
+    /** Postcode getter */
+    public int getPostcode() {
         return postcode;
     }
-
-    public void setPostcode(Integer postcode) {
+    /** Postcode setter */
+    public void setPostcode(int postcode) {
         this.postcode = postcode;
     }
-
-    public Double getLatitude() {
+    /** Latitude getter */
+    public double getLatitude() {
         return latitude;
     }
-
-    public void setLatitude(Double latitude) {
+    /** Latitude setter */
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
-
-    public Double getLongitude() {
+    /** Longitude getter */
+    public double getLongitude() {
         return longitude;
     }
-
-    public void setLongitude(Double longitude) {
+    /** Longitude setter */
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
-
-    public Departement getDepartement() {
-        return departement;
+    /** Department getter */
+    public Department getDepartement() {
+        return department;
     }
-
-    public void setDepartement(Departement departement) {
-        this.departement = departement;
+    /** Department setter */
+    public void setDepartement(Department department) {
+        this.department = department;
     }
 }

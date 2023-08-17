@@ -4,35 +4,41 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+/** Forecast Type */
 @Entity
 public class ForecastType {
+    /** Identifier */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+    private int id;
+    /** Label */
     private String label;
 
-    public ForecastType() {
-    }
+    /**
+     * Default constructor.
+     */
+    public ForecastType() {}
 
-    public ForecastType(Integer id, String label) {
-        this.id = id;
+    /**
+     * Constructor with parameters.
+     * @param label Label
+     */
+    public ForecastType(String label) {
         this.label = label;
     }
-
-    public Integer getId() {
+    /** Identifier getter */
+    public int getId() {
         return id;
     }
-
-    public void setId(Integer id) {
+    /** Identifier setter */
+    public void setId(int id) {
         this.id = id;
     }
-
+    /** Label getter */
     public String getLabel() {
         return label;
     }
-
+    /** Label setter */
     public void setLabel(String label) {
         this.label = label;
     }
