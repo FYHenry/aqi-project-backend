@@ -1,4 +1,25 @@
 package fr.diginamic.aqiprojectbackend.entity.map;
 
-public class WeatherStation {
+import jakarta.persistence.Entity;
+
+/** Weather station */
+@Entity
+public class WeatherStation extends Station {
+
+    /**
+     * Default constructor.
+     */
+    public WeatherStation() {}
+
+    /**
+     * Constructor with parameters.
+     * @param latitude Latitude
+     * @param longitude Longitude
+     * @param city City
+     */
+    public WeatherStation(double latitude,
+                          double longitude,
+                          City city) {
+        super(latitude, longitude, city);
+    }
 }
