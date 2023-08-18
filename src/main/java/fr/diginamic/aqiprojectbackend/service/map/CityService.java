@@ -85,7 +85,7 @@ public class CityService {
                 .findById(id)
                 .orElseThrow(EntityNotFoundException::new);
         city.setName(body.name());
-        city.setPostcode(body.postcode());
+        city.setPostcodes(body.postcodes());
         city.setLatitude(body.latitude());
         city.setLongitude(body.longitude());
         final Department department = departmentRepository
@@ -137,7 +137,7 @@ public class CityService {
                 .orElseThrow(EntityNotFoundException::new);
         return new City(body.insee(),
                 body.name(),
-                body.postcode(),
+                body.postcodes(),
                 body.latitude(),
                 body.longitude(),
                 department);
@@ -152,9 +152,9 @@ public class CityService {
     buildCityDtoOutFrom(City city){
         return new CityDtoOut(city.getInsee(),
                 city.getName(),
-                city.getPostcode(),
+                city.getPostcodes(),
                 city.getLatitude(),
                 city.getLongitude(),
-                city.getDepartement().getCode());
+                city.getDepartement().getInsee());
     }
 }

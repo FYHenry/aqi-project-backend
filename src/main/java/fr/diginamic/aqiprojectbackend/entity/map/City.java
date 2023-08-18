@@ -1,20 +1,24 @@
 package fr.diginamic.aqiprojectbackend.entity.map;
 
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+
+import java.util.List;
 
 /** City */
 @Entity
 public class City {
     /** INSEE (identifier) */
     @Id
-    private int insee;
+    private String insee;
     /** Name */
     private String name;
-    /** Postcode */
-    private int postcode;
+    /** Postcodes */
+    @ElementCollection
+    private List<Integer> postcodes;
     /** Latitude */
     private double latitude;
     /** Longitude */
@@ -26,36 +30,37 @@ public class City {
     /**
      * Default constructor.
      */
-    public City() {}
+    public City() {
+    }
 
     /**
      * Constructor with parameters.
      * @param insee INSEE
      * @param name Name
-     * @param postcode Postcode
+     * @param postcodes Postcode
      * @param latitude Latitude
      * @param longitude Longitude
      * @param department Department
      */
-    public City(int insee,
+    public City(String insee,
                 String name,
-                int postcode,
+                List<Integer> postcodes,
                 double latitude,
                 double longitude,
                 Department department) {
         this.insee = insee;
         this.name = name;
-        this.postcode = postcode;
+        this.postcodes = postcodes;
         this.latitude = latitude;
         this.longitude = longitude;
         this.department = department;
     }
     /** INSEE getter */
-    public int getInsee() {
+    public String getInsee() {
         return insee;
     }
     /** INSEE setter */
-    public void setInsee(int insee) {
+    public void setInsee(String insee) {
         this.insee = insee;
     }
     /** Name getter */
@@ -67,12 +72,12 @@ public class City {
         this.name = name;
     }
     /** Postcode getter */
-    public int getPostcode() {
-        return postcode;
+    public List<Integer> getPostcodes() {
+        return postcodes;
     }
     /** Postcode setter */
-    public void setPostcode(int postcode) {
-        this.postcode = postcode;
+    public void setPostcodes(List<Integer> postcodes) {
+        this.postcodes = postcodes;
     }
     /** Latitude getter */
     public double getLatitude() {

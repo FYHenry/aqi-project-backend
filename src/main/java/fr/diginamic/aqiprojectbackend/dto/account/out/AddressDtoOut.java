@@ -10,4 +10,4 @@ package fr.diginamic.aqiprojectbackend.dto.account.out;
 public record AddressDtoOut(int id,
                             String addressLine1,
                             String addressLine2,
-                            int cityId) {}
+                            String cityId) {}

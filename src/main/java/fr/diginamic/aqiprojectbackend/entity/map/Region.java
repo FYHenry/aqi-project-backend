@@ -9,8 +9,7 @@ import jakarta.persistence.Id;
 public class Region {
     /** Identifier */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String insee;
     /** Name */
     private String name;
 
@@ -21,18 +20,24 @@ public class Region {
 
     /**
      * Constructor with parameters.
+     * @param insee Insee
      * @param name Name
      */
+    public Region(String insee, String name) {
+        this.insee = insee;
+        this.name = name;
+    }
+
     public Region(String name) {
         this.name = name;
     }
     /** Identifier getter */
-    public int getId() {
-        return id;
+    public String getInsee() {
+        return insee;
     }
     /** Identifier setter */
-    public void setId(int id) {
-        this.id = id;
+    public void setInsee(String insee) {
+        this.insee = insee;
     }
     /** Name getter */
     public String getName() {

@@ -9,9 +9,9 @@ package fr.diginamic.aqiprojectbackend.dto.map.out;
  * @param longitude Longitude
  * @param departmentId Department identifier
  */
-public record CityDtoOut(int insee,
+public record CityDtoOut(String insee,
                          String name,
-                         int postcode,
+                         java.util.List<Integer> postcode,
                          double latitude,
                          double longitude,
-                         int departmentId) {}
+                         String departmentId) {}

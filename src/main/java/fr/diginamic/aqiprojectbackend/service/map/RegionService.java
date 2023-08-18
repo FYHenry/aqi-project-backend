@@ -131,6 +131,6 @@ public class RegionService {
      */
     private RegionDtoOut
     buildRegionDtoOutFrom(Region region){
-        return new RegionDtoOut(region.getId(), region.getName());
+        return new RegionDtoOut(region.getInsee(), region.getName());
     }
 }

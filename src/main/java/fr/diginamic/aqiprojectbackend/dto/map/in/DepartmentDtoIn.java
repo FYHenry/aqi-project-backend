@@ -6,5 +6,5 @@ package fr.diginamic.aqiprojectbackend.dto.map.in;
  * @param name Name
  * @param regionId Region identifier
  */
-public record DepartmentDtoIn(int code, String name, int regionId) {
+public record DepartmentDtoIn(String insee, String name, int regionId) {
 }
