@@ -156,7 +156,7 @@ public class UserAccountService {
         if(body.role().contentEquals("ADMIN")){
             userAccount.setRole(Role.ADMIN);
         } else if(body.role().contentEquals("USER")){
-            userAccount.setRole(Role.ADMIN);
+            userAccount.setRole(Role.USER);
         } else {
             throw new BadRequestException();
         }
