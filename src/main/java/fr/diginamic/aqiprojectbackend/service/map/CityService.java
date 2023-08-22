@@ -58,12 +58,12 @@ public class CityService {
 
     /**
      * Read city
-     * @param id City identifier
+     * @param insee City identifier
      * @return HTTP response (city)
      */
-    public ResponseEntity<CityDtoOut> readCity(int id){
+    public ResponseEntity<CityDtoOut> readCity(String insee){
         final City city = cityRepository
-                .findById(id)
+                .findCityByInsee(insee)
                 .orElseThrow(EntityNotFoundException::new);
         final CityDtoOut cityDtoOut = buildCityDtoOutFrom(city);
         return ResponseEntity
@@ -85,7 +85,7 @@ public class CityService {
                 .findById(id)
                 .orElseThrow(EntityNotFoundException::new);
         city.setName(body.name());
-        city.setPostcode(body.postcode());
+        city.setPostcodes(body.postcodes());
         city.setLatitude(body.latitude());
         city.setLongitude(body.longitude());
         final Department department = departmentRepository
@@ -137,7 +137,7 @@ public class CityService {
                 .orElseThrow(EntityNotFoundException::new);
         return new City(body.insee(),
                 body.name(),
-                body.postcode(),
+                body.postcodes(),
                 body.latitude(),
                 body.longitude(),
                 department);
@@ -152,9 +152,9 @@ public class CityService {
     buildCityDtoOutFrom(City city){
         return new CityDtoOut(city.getInsee(),
                 city.getName(),
-                city.getPostcode(),
+                city.getPostcodes(),
                 city.getLatitude(),
                 city.getLongitude(),
-                city.getDepartement().getCode());
+                city.getDepartement().getInsee());
     }
 }

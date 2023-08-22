@@ -13,8 +13,8 @@ package fr.diginamic.aqiprojectbackend.dto.map.in;
 public record AirQualityReportDtoIn(int aqi,
                                     int pm25,
                                     int pm10,
-                                    int o3,
-                                    int no2,
+                                    Double o3,
+                                    Double no2,
                                     int airQualityStationId,
                                     int reportDateId) {
 }

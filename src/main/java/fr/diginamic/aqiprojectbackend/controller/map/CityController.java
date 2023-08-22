@@ -46,16 +46,16 @@ public class CityController {
 
     /* Lecteur GET */
     /** GET reader */
-    @GetMapping(path = "/city/{id}")
-    public ResponseEntity<CityDtoOut> readCity(@PathVariable int id) {
+    @GetMapping(path = "/city/{insee}")
+    public ResponseEntity<CityDtoOut> readCity(@PathVariable String insee) {
         logger.info("""
                 GET reader called by : http://127.0.0.1:8080/city/{}.
                 """,
-                id);
-        return this.cityService.readCity(id);
+                insee);
+        return this.cityService.readCity(insee);
     }
 
-    /* Actualiseur PUT */
+      /* Actualiseur PUT */
     /** PUT updater */
     @Secured("ADMIN")
     @PutMapping(path = "/city/{id}")

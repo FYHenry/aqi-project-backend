@@ -5,11 +5,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<!-- MS change 19.08: version changed from 3.1.2 to 3.1.0 to correct error "This method cannot decide whether these patterns are Spring MVC patterns or not after having added H2."
-		<version>3.1.2</version> -->
-		<version>3.1.0</version>
+		<version>3.1.2</version>
 		<relativePath/>
-	<!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
@@ -62,20 +59,20 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.yaml</groupId>
 			<artifactId>snakeyaml</artifactId>
 			<version>2.0</version>
-		</dependency>  -->
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<!-- 	<exclusions>
+			<exclusions>
                     <exclusion>
                         <groupId>org.yaml</groupId>
                         <artifactId>snakeyaml</artifactId>
                     </exclusion>
-                </exclusions>  -->
+      </exclusions>
 		</dependency>
 		<!--https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
 		<dependency>
@@ -128,14 +125,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+    </dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
 		</dependency>
-		<!--dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency-->
-
-		<!--AJOUT MS 19/08 -->
 		<dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
@@ -150,6 +145,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
+
 
 
 	</dependencies>
