@@ -121,7 +121,7 @@ public class RegionService {
      * @return Region
      */
     private Region buildRegionFrom(RegionDtoIn body) {
-        return new Region(body.name());
+        return new Region(body.insee(), body.name());
     }
 
     /**
