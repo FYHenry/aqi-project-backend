@@ -5,6 +5,7 @@ import fr.diginamic.aqiprojectbackend.dto.map.in.ForecastTypeDtoIn;
 import fr.diginamic.aqiprojectbackend.dto.map.out.ForecastTypeDtoOut;
 import fr.diginamic.aqiprojectbackend.service.map.ForecastTypeService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -37,6 +38,7 @@ public class ForecastTypeController {
 
     /* Créateur POST */
     /** POST creator */
+    @Secured("ADMIN")
     @PostMapping(path = "/forecast-type")
     public ResponseEntity<HttpStatusDtoOut>
     createForecastType(@RequestBody ForecastTypeDtoIn body) {
@@ -63,6 +65,7 @@ public class ForecastTypeController {
 
     /* Actualiseur PUT */
     /** PUT updater */
+    @Secured("ADMIN")
     @PutMapping(path = "/forecast-type/{id}")
     public ResponseEntity<HttpStatusDtoOut>
     updateForecastType(@PathVariable int id,
@@ -81,6 +84,7 @@ public class ForecastTypeController {
 
     /* Suppresseur DELETE */
     /** DELETE deleter */
+    @Secured("ADMIN")
     @DeleteMapping(path = "/forecast-type/{id}")
     public ResponseEntity<HttpStatusDtoOut>
     deleteForecastType(@PathVariable int id) {

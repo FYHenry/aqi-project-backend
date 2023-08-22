@@ -5,6 +5,7 @@ import fr.diginamic.aqiprojectbackend.dto.map.in.ReportDateDtoIn;
 import fr.diginamic.aqiprojectbackend.dto.map.out.ReportDateDtoOut;
 import fr.diginamic.aqiprojectbackend.service.map.ReportDateService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -37,6 +38,7 @@ public class ReportDateController {
 
     /* Créateur POST */
     /** POST creator */
+    @Secured("ADMIN")
     @PostMapping(path = "/report-date")
     public ResponseEntity<HttpStatusDtoOut>
     createReportDate(@RequestBody ReportDateDtoIn body) {
@@ -63,6 +65,7 @@ public class ReportDateController {
 
     /* Actualiseur PUT */
     /** PUT updater */
+    @Secured("ADMIN")
     @PutMapping(path = "/report-date/{id}")
     public ResponseEntity<HttpStatusDtoOut>
     updateReportDate(@PathVariable int id,
@@ -81,6 +84,7 @@ public class ReportDateController {
 
     /* Suppresseur DELETE */
     /** DELETE deleter */
+    @Secured("ADMIN")
     @DeleteMapping(path = "/report-date/{id}")
     public ResponseEntity<HttpStatusDtoOut>
     deleteReportDate(@PathVariable int id) {

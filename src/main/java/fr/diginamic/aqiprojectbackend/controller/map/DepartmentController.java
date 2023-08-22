@@ -7,6 +7,7 @@ import fr.diginamic.aqiprojectbackend.service.map.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class DepartmentController {
 
     /* Créateur POST */
     /** POST creator */
+    @Secured("ADMIN")
     @PostMapping(path = "/department")
     public ResponseEntity<HttpStatusDtoOut>
     createDepartment(@RequestBody DepartmentDtoIn body) {
@@ -57,6 +59,7 @@ public class DepartmentController {
 
     /* Actualiseur PUT */
     /** PUT updater */
+    @Secured("ADMIN")
     @PutMapping(path = "/department/{id}")
     public ResponseEntity<HttpStatusDtoOut>
     updateDepartment(@PathVariable int id,
@@ -75,6 +78,7 @@ public class DepartmentController {
 
     /* Suppresseur DELETE */
     /** DELETE deleter */
+    @Secured("ADMIN")
     @DeleteMapping(path = "/department/{id}")
     public ResponseEntity<HttpStatusDtoOut>
     deleteDepartment(@PathVariable int id) {
