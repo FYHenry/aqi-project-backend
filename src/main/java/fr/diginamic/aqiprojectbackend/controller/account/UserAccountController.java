@@ -5,6 +5,7 @@ import fr.diginamic.aqiprojectbackend.dto.account.in.UserAccountDtoIn;
 import fr.diginamic.aqiprojectbackend.dto.account.out.UserAccountDtoOut;
 import fr.diginamic.aqiprojectbackend.service.account.UserAccountService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -35,7 +36,6 @@ public class UserAccountController {
         this.userAccountService = userAccountService;
     }
 
-    /* Créateur POST */
     /** POST creator */
     @PostMapping(path = "/user-account")
     public ResponseEntity<HttpStatusDtoOut>
@@ -49,7 +49,6 @@ public class UserAccountController {
         return this.userAccountService.createUserAccount(body, "/user-account");
     }
 
-    /* Lecteur GET */
     /** GET reader */
     @GetMapping(path = "/user-account/{id}")
     public ResponseEntity<UserAccountDtoOut>
@@ -92,8 +91,9 @@ public class UserAccountController {
                 String.format("/user-account/%d", id));
     }
 
-    /* Listeur GET */
     /** GET lister */
+    // activation de la sécurisation des méthodes - via annotation '@EnableMethodSecurity(securedEnabled = true)' dans fichier WebSecurityConfig
+    @Secured("ADMIN")
     @GetMapping(path = "/user-accounts")
     public ResponseEntity<List<UserAccountDtoOut>> listUserAccounts(){
         logger.info("""

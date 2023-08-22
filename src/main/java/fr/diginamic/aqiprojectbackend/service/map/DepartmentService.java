@@ -126,7 +126,7 @@ public class DepartmentService {
         final Region region = regionRepository
                 .findById(body.regionId())
                 .orElseThrow(EntityNotFoundException::new);
-        return new Department(body.code(), body.name(), region);
+        return new Department(body.insee(), body.name(), region);
     }
 
     /**
@@ -136,8 +136,8 @@ public class DepartmentService {
      */
     private DepartmentDtoOut
     buildDepartmentDtoOutFrom(Department department){
-        return new DepartmentDtoOut(department.getCode(),
+        return new DepartmentDtoOut(department.getInsee(),
                 department.getName(),
-                department.getRegion().getId());
+                department.getRegion().getInsee());
     }
 }

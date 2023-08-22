@@ -7,6 +7,7 @@ import fr.diginamic.aqiprojectbackend.service.map.RegionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -36,6 +37,7 @@ public class RegionController {
 
     /* Créateur POST */
     /** POST creator */
+    @Secured("ADMIN")
     @PostMapping(path = "/region")
     public ResponseEntity<HttpStatusDtoOut>
     createRegion(@RequestBody RegionDtoIn body) {
@@ -62,6 +64,7 @@ public class RegionController {
 
     /* Actualiseur PUT */
     /** PUT updater */
+    @Secured("ADMIN")
     @PutMapping(path = "/region/{id}")
     public ResponseEntity<HttpStatusDtoOut>
     updateRegion(@PathVariable int id,
@@ -80,6 +83,7 @@ public class RegionController {
 
     /* Suppresseur DELETE */
     /** DELETE deleter */
+    @Secured("ADMIN")
     @DeleteMapping(path = "/region/{id}")
     public ResponseEntity<HttpStatusDtoOut>
     deleteRegion(@PathVariable int id) {

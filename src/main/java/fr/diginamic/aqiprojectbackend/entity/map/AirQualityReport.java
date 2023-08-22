@@ -15,9 +15,9 @@ public class AirQualityReport {
     /** PM10 */
     private int pm10;
     /** Ozone */
-    private int o3;
+    private Double o3;
     /** Nitrogen dioxide */
-    private int no2;
+    private Double no2;
     /** Air quality station */
     @ManyToOne
     private AirQualityStation airQualityStation;
@@ -43,8 +43,8 @@ public class AirQualityReport {
     public AirQualityReport(int aqi,
                             int pm25,
                             int pm10,
-                            int o3,
-                            int no2,
+                            Double o3,
+                            Double no2,
                             AirQualityStation airQualityStation,
                             ReportDate reportDate) {
         this.aqi = aqi;
@@ -88,19 +88,19 @@ public class AirQualityReport {
         this.pm10 = pm10;
     }
     /** Ozone getter */
-    public int getO3() {
+    public Double getO3() {
         return o3;
     }
     /** Ozone setter */
-    public void setO3(int o3) {
+    public void setO3(Double o3) {
         this.o3 = o3;
     }
     /** Nitrogen dioxide getter */
-    public int getNo2() {
+    public Double getNo2() {
         return no2;
     }
     /** Nitrogen dioxide setter */
-    public void setNo2(int no2) {
+    public void setNo2(Double no2) {
         this.no2 = no2;
     }
     /** Air quality station getter */

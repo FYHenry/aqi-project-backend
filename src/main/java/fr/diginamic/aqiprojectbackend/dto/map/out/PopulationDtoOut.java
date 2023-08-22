@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * @param cityId City identifier
  */
 public record PopulationDtoOut(int id,
-                              LocalDate date,
-                              String label,
-                              long populationNumber,
-                              int cityId) {}
+                               LocalDate date,
+                               String label,
+                               long populationNumber,
+                               String cityId) {}

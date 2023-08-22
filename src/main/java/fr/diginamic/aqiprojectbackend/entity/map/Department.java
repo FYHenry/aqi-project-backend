@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class Department {
     /** Departmental code (identifier) */
     @Id
-    private int code;
+    private String insee;
     /** Name */
     private String name;
     /** Region */
@@ -20,24 +20,24 @@ public class Department {
 
     /**
      * Constructor with parameters.
-     * @param code Departmental code
+     * @param insee Departmental code
      * @param name Name
      * @param region Region
      */
-    public Department(int code,
+    public Department(String insee,
                       String name,
                       Region region) {
-        this.code = code;
+        this.insee = insee;
         this.name = name;
         this.region = region;
     }
     /** Departmental code getter */
-    public int getCode() {
-        return code;
+    public String getInsee() {
+        return insee;
     }
     /** Departmental code setter */
-    public void setCode(int code) {
-        this.code = code;
+    public void setInsee(String insee) {
+        this.insee = insee;
     }
     /** Name getter */
     public String getName() {

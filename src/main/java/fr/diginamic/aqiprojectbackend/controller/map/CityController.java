@@ -7,6 +7,7 @@ import fr.diginamic.aqiprojectbackend.service.map.CityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class CityController {
 
     /* Créateur POST */
     /** POST creator */
+    @Secured("ADMIN")
     @PostMapping(path = "/city")
     public ResponseEntity<HttpStatusDtoOut>
     createCity(@RequestBody CityDtoIn body) {
@@ -44,17 +46,18 @@ public class CityController {
 
     /* Lecteur GET */
     /** GET reader */
-    @GetMapping(path = "/city/{id}")
-    public ResponseEntity<CityDtoOut> readCity(@PathVariable int id) {
+    @GetMapping(path = "/city/{insee}")
+    public ResponseEntity<CityDtoOut> readCity(@PathVariable String insee) {
         logger.info("""
                 GET reader called by : http://127.0.0.1:8080/city/{}.
                 """,
-                id);
-        return this.cityService.readCity(id);
+                insee);
+        return this.cityService.readCity(insee);
     }
 
-    /* Actualiseur PUT */
+      /* Actualiseur PUT */
     /** PUT updater */
+    @Secured("ADMIN")
     @PutMapping(path = "/city/{id}")
     public ResponseEntity<HttpStatusDtoOut>
     updateCity(@PathVariable int id, @RequestBody CityDtoIn body) {
@@ -72,6 +75,7 @@ public class CityController {
 
     /* Suppresseur DELETE */
     /** DELETE deleter */
+    @Secured("ADMIN")
     @DeleteMapping(path = "/city/{id}")
     public ResponseEntity<HttpStatusDtoOut> deleteCity(@PathVariable int id) {
         logger.info("""
