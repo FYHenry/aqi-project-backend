@@ -1,4 +1,4 @@
-package fr.diginamic.aqiprojectbackend.scripts;
+package fr.diginamic.aqiprojectbackend.scripts.deptGouv;
 
 public class JsonLatLong {
    String code;

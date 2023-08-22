@@ -58,12 +58,12 @@ public class CityService {
 
     /**
      * Read city
-     * @param id City identifier
+     * @param insee City identifier
      * @return HTTP response (city)
      */
-    public ResponseEntity<CityDtoOut> readCity(int id){
+    public ResponseEntity<CityDtoOut> readCity(String insee){
         final City city = cityRepository
-                .findById(id)
+                .findCityByInsee(insee)
                 .orElseThrow(EntityNotFoundException::new);
         final CityDtoOut cityDtoOut = buildCityDtoOutFrom(city);
         return ResponseEntity

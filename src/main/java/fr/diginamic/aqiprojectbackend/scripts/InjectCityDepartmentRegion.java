@@ -3,6 +3,9 @@ package fr.diginamic.aqiprojectbackend.scripts;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.diginamic.aqiprojectbackend.entity.map.Region;
+import fr.diginamic.aqiprojectbackend.scripts.deptGouv.JsonCity;
+import fr.diginamic.aqiprojectbackend.scripts.deptGouv.JsonDepartment;
+import fr.diginamic.aqiprojectbackend.scripts.deptGouv.JsonLatLong;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -84,8 +87,8 @@ public class InjectCityDepartmentRegion {
         List<JsonLatLong> latLongs = objectMapper.readValue(response3.toString(), new TypeReference<List<JsonLatLong>>() {});
 
         for (JsonLatLong latLong : latLongs){
-          Double latitude = latLong.getCentre().coordinates[0];
-          Double longitude = latLong.getCentre().coordinates[1];
+          Double latitude = latLong.getCentre().getCoordinates()[1];
+          Double longitude = latLong.getCentre().getCoordinates()[0];
           String name = city.getNom();
           if (name.contains("'")){
             name = name.replace("'", "\\'");
