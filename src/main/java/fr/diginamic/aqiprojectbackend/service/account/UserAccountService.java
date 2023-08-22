@@ -27,6 +27,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -36,10 +37,14 @@ import static fr.diginamic.aqiprojectbackend.util.Dtos.buildHttpStatusResponse;
 @Service
 @Validated
 public class UserAccountService {
+    /** PasswordEncoder to crypt password before saving it inside the database */
+    private PasswordEncoder passwordEncoder;
+
     /** User account repository */
     private final UserAccountRepository userAccountRepository;
     /** User status repository */
     private final UserStatusRepository userStatusRepository;
+
     /** Address repository */
     private final AddressRepository addressRepository;
     /** Bookmark repository */
@@ -53,8 +58,10 @@ public class UserAccountService {
     /** Reaction repository */
     private final ReactionRepository reactionRepository;
 
+
     /**
      * Constructor with parameters.
+     * @param passwordEncoder PasswordEncoder used to encrypt password before saving it inside the database
      * @param userAccountRepository User account repository
      * @param userStatusRepository User status repository
      * @param addressRepository Address repository
@@ -64,7 +71,8 @@ public class UserAccountService {
      * @param messageRepository Message repository
      * @param reactionRepository Reaction repository
      */
-    public UserAccountService(UserAccountRepository userAccountRepository,
+    public UserAccountService(PasswordEncoder passwordEncoder,
+                              UserAccountRepository userAccountRepository,
                               UserStatusRepository userStatusRepository,
                               AddressRepository addressRepository,
                               BookmarkRepository bookmarkRepository,
@@ -72,6 +80,7 @@ public class UserAccountService {
                               ThreadRepository threadRepository,
                               MessageRepository messageRepository,
                               ReactionRepository reactionRepository){
+        this.passwordEncoder= passwordEncoder;
         this.userAccountRepository = userAccountRepository;
         this.userStatusRepository = userStatusRepository;
         this.addressRepository = addressRepository;
@@ -133,7 +142,7 @@ public class UserAccountService {
         userAccount.setFirstName(body.firstName());
         userAccount.setLastName(body.lastName());
         userAccount.setEmail(body.email());
-        userAccount.setPassword(body.password());
+        userAccount.setPassword(passwordEncoder.encode(body.password()));
         final List<UserStatus> userStatusList =
                 userStatusRepository.findAllById(body.userStatusIds());
         userAccount.setUserStatusList(userStatusList);
@@ -205,6 +214,8 @@ public class UserAccountService {
      * @return User account
      */
     private UserAccount buildUserAccountFrom(UserAccountDtoIn body) {
+        String passwordEncoded = passwordEncoder.encode(body.password());
+        System.out.println("passwordEncoded"+passwordEncoded);
         Role role;
         if(body.role().contentEquals("ADMIN")){
             role = Role.ADMIN;
@@ -232,7 +243,8 @@ public class UserAccountService {
         return new UserAccount(body.firstName(),
                 body.lastName(),
                 body.email(),
-                body.password(),
+                //MS 21.08
+                passwordEncoded,
                 userStatusList,
                 role,
                 address,

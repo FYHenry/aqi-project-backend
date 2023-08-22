@@ -5,6 +5,7 @@ import fr.diginamic.aqiprojectbackend.dto.map.in.AirQualityStationDtoIn;
 import fr.diginamic.aqiprojectbackend.dto.map.out.AirQualityStationDtoOut;
 import fr.diginamic.aqiprojectbackend.service.map.AirQualityStationService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -37,6 +38,7 @@ public class AirQualityStationController {
 
     /* Créateur POST */
     /** POST creator */
+    @Secured("ADMIN")
     @PostMapping(path = "/air-quality-station")
     public ResponseEntity<HttpStatusDtoOut>
     createAirQualityStation(@RequestBody AirQualityStationDtoIn body) {
@@ -63,6 +65,7 @@ public class AirQualityStationController {
 
     /* Actualiseur PUT */
     /** PUT updater */
+    @Secured("ADMIN")
     @PutMapping(path = "/air-quality-station/{id}")
     public ResponseEntity<HttpStatusDtoOut>
     updateAirQualityStation(@PathVariable int id,
@@ -81,6 +84,7 @@ public class AirQualityStationController {
 
     /* Suppresseur DELETE */
     /** DELETE deleter */
+    @Secured("ADMIN")
     @DeleteMapping(path = "/air-quality-station/{id}")
     public ResponseEntity<HttpStatusDtoOut>
     deleteAirQualityStation(@PathVariable int id) {
