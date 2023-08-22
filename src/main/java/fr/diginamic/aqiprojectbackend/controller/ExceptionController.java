@@ -44,8 +44,8 @@ public class ExceptionController {
     public ResponseEntity<HttpStatusDtoOut>
     unattended(HttpServletRequest request){
         final String path = request.getRequestURI();
-        logger.info("Exception returned : {}",
-                EntityNotFoundException.class);
+        logger.info("Exception returned unattended: {}",
+                Exception.class);
         return buildHttpStatusResponse(HttpStatus.INTERNAL_SERVER_ERROR, path);
     }
 }

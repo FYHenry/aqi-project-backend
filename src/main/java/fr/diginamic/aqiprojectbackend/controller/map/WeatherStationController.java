@@ -5,6 +5,7 @@ import fr.diginamic.aqiprojectbackend.dto.map.in.WeatherStationDtoIn;
 import fr.diginamic.aqiprojectbackend.dto.map.out.WeatherStationDtoOut;
 import fr.diginamic.aqiprojectbackend.service.map.WeatherStationService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -37,6 +38,7 @@ public class WeatherStationController {
 
     /* Créateur POST */
     /** POST creator */
+    @Secured("ADMIN")
     @PostMapping(path = "/weather-station")
     public ResponseEntity<HttpStatusDtoOut>
     createWeatherStation(@RequestBody WeatherStationDtoIn body) {
@@ -63,6 +65,7 @@ public class WeatherStationController {
 
     /* Actualiseur PUT */
     /** PUT updater */
+    @Secured("ADMIN")
     @PutMapping(path = "/weather-station/{id}")
     public ResponseEntity<HttpStatusDtoOut>
     updateWeatherStation(@PathVariable int id,
@@ -81,6 +84,7 @@ public class WeatherStationController {
 
     /* Suppresseur DELETE */
     /** DELETE deleter */
+    @Secured("ADMIN")
     @DeleteMapping(path = "/weather-station/{id}")
     public ResponseEntity<HttpStatusDtoOut>
     deleteWeatherStation(@PathVariable int id) {
