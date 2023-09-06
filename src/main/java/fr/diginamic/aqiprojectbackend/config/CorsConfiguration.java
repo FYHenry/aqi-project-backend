@@ -10,8 +10,52 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CorsConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowCredentials(true);
+        final String[] postUrls = {
+                "/sessions"
+        };
+        final String[] anyUrls = {
+                "/address", "address/**", "/addresses",
+                "/user-account", "/user-account/**",
+                "/bookmark", "/bookmark/**", "/bookmarks"
+        };
+        final String[] getUrls = {
+                "/air-quality-reports", "/air-quality-report/**",
+                "/air-quality-stations", "/air-quality-station/**",
+                "/cities", "/city/**",
+                "/departments", "/department/**",
+                "/forecast-types", "/forecast-type/**",
+                "/populations", "/population/**",
+                "/regions", "/region/**",
+                "/report-dates", "/report-date/**",
+                "/weather-reports", "/weather-report/**",
+                "/weather-stations", "/weather-stations/**"
+        };
+        final String[] adminUrls = {
+                "/user-status", "/user-status/**", "/user-statuses"
+        };
+
+        for(String url: postUrls){
+            registry
+                    .addMapping(url)
+                    .allowedMethods("POST");
+        }
+
+        for(String url: anyUrls){
+            registry
+                    .addMapping(url)
+                    .allowedMethods("POST", "GET", "PUT", "DELETE");
+        }
+
+        for(String url: getUrls){
+            registry
+                    .addMapping(url)
+                    .allowedMethods("GET");
+        }
+
+        for(String url: adminUrls){
+            registry
+                    .addMapping(url)
+                    .allowedMethods("POST", "GET", "PUT", "DELETE");
+        }
     }
 }
