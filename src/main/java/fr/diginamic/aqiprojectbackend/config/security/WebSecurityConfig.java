@@ -18,6 +18,7 @@ import java.util.Map;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+/** Web security Configuration */
 @Configuration
 // Annotation to secure method access
 @EnableMethodSecurity(securedEnabled = true)
@@ -42,7 +43,9 @@ public class WebSecurityConfig {
      *  @throws Exception Any Exception
      */
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, JWTAuthorizationFilter jwtFilter, JWTConfig jwtConfig) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http,
+                                           JWTAuthorizationFilter jwtFilter,
+                                           JWTConfig jwtConfig) throws Exception {
         http.authorizeHttpRequests(
                 auth -> auth
                         // The following URLs should be available to all (no authentication required)
@@ -54,33 +57,39 @@ public class WebSecurityConfig {
 
                         // URLs related to user accounts creation/management
                         .requestMatchers(
-                                "/address", "address/**", "/addresses",
-                                "/user-account", "/user-account/**",
-                                "/bookmark", "/bookmark/**", "/bookmarks"
+                                "/address", "address/*", "/addresses",
+                                "/user-account", "/user-account/*",
+                                "/bookmark", "/bookmark/*", "/bookmarks"
                         ).permitAll()
 
                         // URL related to the map section
                         .requestMatchers(
                                 HttpMethod.GET,
-                                "/air-quality-reports", "/air-quality-report/**",
-                                "/air-quality-stations", "/air-quality-station/**",
-                                "/cities", "/city/**",
-                                "/departments", "/department/**",
-                                "/forecast-types", "/forecast-type/**",
-                                "/populations", "/population/**",
-                                "/regions", "/region/**",
-                                "/report-dates", "/report-date/**",
-                                "/weather-reports", "/weather-report/**",
-                                "/weather-stations", "/weather-stations/**"
+                                "/air-quality-reports", "/air-quality-report/*",
+                                "/air-quality-stations", "/air-quality-station/*",
+                                "/cities", "/city/*",
+                                "/departments", "/department/*",
+                                "/forecast-types", "/forecast-type/*",
+                                "/populations", "/population/*",
+                                "/regions", "/region/*",
+                                "/report-dates", "/report-date/*",
+                                "/weather-reports", "/weather-report/*",
+                                "/weather-stations", "/weather-station/*"
                         ).permitAll()
 
                         // URLs related to the forum section
                         // TO BE COMPLETED in next version
-
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/messages", "/message/*",
+                                "/reactions", "/reaction/*",
+                                "/threads", "/thread/*",
+                                "/topics", "/topic/*"
+                        ).permitAll()
 
                         //URLs to be restricted to ADMIN only
                         .requestMatchers(
-                                "/user-status", "/user-status/**", "/user-statuses"
+                                "/user-status", "/user-status/*", "/user-statuses"
                         ).hasRole("ADMIN")
 
                         //Every other requests require authentication
