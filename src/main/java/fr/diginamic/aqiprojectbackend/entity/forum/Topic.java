@@ -9,9 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import lombok.Data;
 /** Topic */
-@Data
 @Entity
 public class Topic {
     /** Identifier */
