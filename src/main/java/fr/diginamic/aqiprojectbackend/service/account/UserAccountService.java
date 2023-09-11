@@ -2,9 +2,11 @@ package fr.diginamic.aqiprojectbackend.service.account;
 
 import fr.diginamic.aqiprojectbackend.dto.HttpStatusDtoOut;
 import fr.diginamic.aqiprojectbackend.dto.account.in.UserAccountDtoIn;
+
 import fr.diginamic.aqiprojectbackend.dto.account.in.UserUpdPwdDtoIn;
 import fr.diginamic.aqiprojectbackend.dto.account.in.UserRegistrationFormDtoIn;
 import fr.diginamic.aqiprojectbackend.dto.account.in.UserUpdateProfileFormDtoIn;
+
 import fr.diginamic.aqiprojectbackend.dto.account.out.ConnectedUser;
 import fr.diginamic.aqiprojectbackend.dto.account.out.UserAccountDtoOut;
 import fr.diginamic.aqiprojectbackend.entity.account.Address;
@@ -175,7 +177,22 @@ public class UserAccountService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(userAccountDtoOut);
     }
-
+    /**
+     * Get Connected user info
+     * @return http response (user account)
+     */
+    public ResponseEntity<ConnectedUser> connectedUser(int id) {
+        final UserAccount userAccount =
+                userAccountRepository
+                        .findById(id)
+                        .orElseThrow(EntityNotFoundException::new);
+        final ConnectedUser connectedUser =
+                buildConnectedUserFrom(userAccount);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(connectedUser);
+    }
     /**
      * Update user account
      *
@@ -299,6 +316,7 @@ public class UserAccountService {
                 .body(userAccountDtoOutList);
     }
 
+
     /**
      * Build user account from HTTP request body (user account)
      *
@@ -386,6 +404,23 @@ public class UserAccountService {
                 reactions);
     }
 
+    /**
+     * Build connected user from HTTP request body (user account)
+     * @param userAccount User account
+     * @return connected user
+     */
+    private ConnectedUser buildConnectedUserFrom(UserAccount userAccount) {
+       return new ConnectedUser(userAccount.getId(),
+               userAccount.getFirstName(),
+               userAccount.getLastName(),
+               userAccount.getEmail(),
+               userAccount.getAddress().getCity().getName(),
+               userAccount.getAddress().getCity().getLatitude(),
+               userAccount.getAddress().getCity().getLongitude(),
+               userAccount.getAddress().getAddressLine1(),
+               userAccount.getAddress().getAddressLine2()
+               );
+    }
 
     /**
      * Build user account as HTTP response from user account
@@ -440,30 +475,4 @@ public class UserAccountService {
                 reactionIds);
     }
 
-    // MS added 20230910-copy modif Nicoled -Delete when pushing
-    public ResponseEntity<ConnectedUser> connectedUser(int id) {
-        final UserAccount userAccount =
-                userAccountRepository
-                        .findById(id)
-                        .orElseThrow(EntityNotFoundException::new);
-        final ConnectedUser connectedUser =
-                buildConnectedUserFrom(userAccount);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(connectedUser);
-    }
-
-    private ConnectedUser buildConnectedUserFrom(UserAccount userAccount) {
-        return new ConnectedUser(userAccount.getId(),
-                userAccount.getFirstName(),
-                userAccount.getLastName(),
-                userAccount.getEmail(),
-                userAccount.getAddress().getCity().getName(),
-                userAccount.getAddress().getCity().getLatitude(),
-                userAccount.getAddress().getCity().getLongitude(),
-                userAccount.getAddress().getAddressLine1(),
-                userAccount.getAddress().getAddressLine2()
-        );
-    }
 }

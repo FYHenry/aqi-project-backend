@@ -1,4 +1,5 @@
 package fr.diginamic.aqiprojectbackend.dto.account.out;
+
 public record ConnectedUser(int id,
                                 String firstName,
                                 String lastName,
@@ -9,4 +10,5 @@ public record ConnectedUser(int id,
                                 String address1,
                                 String address2
                                 ) {
+
 }

@@ -17,7 +17,6 @@ public class UserAccount {
     /** Identifier */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_account_id")
     private int id;
     /* Prénom */
     /** First name */
