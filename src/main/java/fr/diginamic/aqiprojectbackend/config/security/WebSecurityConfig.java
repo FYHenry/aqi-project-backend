@@ -55,12 +55,15 @@ public class WebSecurityConfig {
                                 "/sessions"
                         ).permitAll()
 
+
                         // URLs related to user accounts creation/management
                         .requestMatchers(
                                 "/address", "address/*", "/addresses",
                                 "/user-account", "/user-account/*",
-                                "/bookmark", "/bookmark/*", "/bookmarks"
+                                "/bookmark", "/bookmark/*", "/bookmarks",
+                                "/connectedUser/*"
                         ).permitAll()
+
 
                         // URL related to the map section
                         .requestMatchers(

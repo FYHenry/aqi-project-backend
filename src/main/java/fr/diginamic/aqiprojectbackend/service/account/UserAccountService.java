@@ -2,6 +2,7 @@ package fr.diginamic.aqiprojectbackend.service.account;
 
 import fr.diginamic.aqiprojectbackend.dto.HttpStatusDtoOut;
 import fr.diginamic.aqiprojectbackend.dto.account.in.UserAccountDtoIn;
+import fr.diginamic.aqiprojectbackend.dto.account.out.ConnectedUser;
 import fr.diginamic.aqiprojectbackend.dto.account.out.UserAccountDtoOut;
 import fr.diginamic.aqiprojectbackend.entity.account.Address;
 import fr.diginamic.aqiprojectbackend.entity.account.Role;
@@ -126,7 +127,22 @@ public class UserAccountService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(userAccountDtoOut);
     }
-
+    /**
+     * Get Connected user info
+     * @return http response (user account)
+     */
+    public ResponseEntity<ConnectedUser> connectedUser(int id) {
+        final UserAccount userAccount =
+                userAccountRepository
+                        .findById(id)
+                        .orElseThrow(EntityNotFoundException::new);
+        final ConnectedUser connectedUser =
+                buildConnectedUserFrom(userAccount);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(connectedUser);
+    }
     /**
      * Update user account
      * @param id User account identifier
@@ -208,6 +224,7 @@ public class UserAccountService {
                 .body(userAccountDtoOutList);
     }
 
+
     /**
      * Build user account from HTTP request body (user account)
      * @param body HTTP request body (user account)
@@ -254,7 +271,23 @@ public class UserAccountService {
                 messages,
                 reactions);
     }
-
+    /**
+     * Build connected user from HTTP request body (user account)
+     * @param userAccount User account
+     * @return connected user
+     */
+    private ConnectedUser buildConnectedUserFrom(UserAccount userAccount) {
+       return new ConnectedUser(userAccount.getId(),
+               userAccount.getFirstName(),
+               userAccount.getLastName(),
+               userAccount.getEmail(),
+               userAccount.getAddress().getCity().getName(),
+               userAccount.getAddress().getCity().getLatitude(),
+               userAccount.getAddress().getCity().getLongitude(),
+               userAccount.getAddress().getAddressLine1(),
+               userAccount.getAddress().getAddressLine2()
+               );
+    }
     /**
      * Build user account as HTTP response from user account
      * @param userAccount User account
@@ -306,4 +339,5 @@ public class UserAccountService {
                 messageIds,
                 reactionIds);
     }
+
 }

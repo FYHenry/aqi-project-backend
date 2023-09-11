@@ -2,6 +2,7 @@ package fr.diginamic.aqiprojectbackend.controller.account;
 
 import fr.diginamic.aqiprojectbackend.dto.HttpStatusDtoOut;
 import fr.diginamic.aqiprojectbackend.dto.account.in.UserAccountDtoIn;
+import fr.diginamic.aqiprojectbackend.dto.account.out.ConnectedUser;
 import fr.diginamic.aqiprojectbackend.dto.account.out.UserAccountDtoOut;
 import fr.diginamic.aqiprojectbackend.service.account.UserAccountService;
 import org.springframework.http.ResponseEntity;
@@ -100,5 +101,14 @@ public class UserAccountController {
                 GET lister called by : http://127.0.0.1:8080/user-accounts.
                 """);
         return this.userAccountService.listUserAccounts();
+    }
+
+    /** GET connected user */
+    @GetMapping(path = "/connectedUser/{id}")
+    public ResponseEntity<ConnectedUser> connectedUser(@PathVariable int id) {
+        logger.info("""
+                GET connected user called by : http://127.0.0.1:8080/connectedUser/{}
+                """);
+        return this.userAccountService.connectedUser(id);
     }
 }
