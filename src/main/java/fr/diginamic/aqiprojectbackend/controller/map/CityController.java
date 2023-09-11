@@ -1,6 +1,7 @@
 package fr.diginamic.aqiprojectbackend.controller.map;
 
 import fr.diginamic.aqiprojectbackend.dto.HttpStatusDtoOut;
+import fr.diginamic.aqiprojectbackend.dto.account.out.CityForm;
 import fr.diginamic.aqiprojectbackend.dto.map.in.CityDtoIn;
 import fr.diginamic.aqiprojectbackend.dto.map.out.CityDtoOut;
 import fr.diginamic.aqiprojectbackend.service.map.CityService;
@@ -58,32 +59,32 @@ public class CityController {
       /* Actualiseur PUT */
     /** PUT updater */
     @Secured("ADMIN")
-    @PutMapping(path = "/city/{id}")
+    @PutMapping(path = "/city/{insee}")
     public ResponseEntity<HttpStatusDtoOut>
-    updateCity(@PathVariable int id, @RequestBody CityDtoIn body) {
+    updateCity(@PathVariable String insee, @RequestBody CityDtoIn body) {
         logger.info("""
                 Put updater called by : http://127.0.0.1:8080/city/{}.
                 Body :
                  {}
                 """,
-                id,
+                insee,
                 body);
-        return this.cityService.updateCity(id,
+        return this.cityService.updateCity(insee,
                 body,
-                String.format("/city/%d", id));
+                String.format("/city/%d", insee));
     }
 
     /* Suppresseur DELETE */
     /** DELETE deleter */
     @Secured("ADMIN")
-    @DeleteMapping(path = "/city/{id}")
-    public ResponseEntity<HttpStatusDtoOut> deleteCity(@PathVariable int id) {
+    @DeleteMapping(path = "/city/{insee}")
+    public ResponseEntity<HttpStatusDtoOut> deleteCity(@PathVariable String insee) {
         logger.info("""
                 DELETE deleter called by : http://127.0.0.1:8080/city/{}.
                 """,
-                id);
-        return this.cityService.deleteCity(id,
-                String.format("/city/%d", id));
+                insee);
+        return this.cityService.deleteCity(insee,
+                String.format("/city/%d", insee));
     }
 
     /* Listeur GET */
@@ -94,5 +95,15 @@ public class CityController {
                 GET lister called by : http://127.0.0.1:8080/cities.
                 """);
         return this.cityService.listCities();
+    }
+
+    /* Listeur cityForm GET */
+    /** GET lister cityForm */
+    @GetMapping(path = "/cityForm/{name}")
+    public ResponseEntity<List<CityForm>> listCitiesForm(@PathVariable String name){
+        logger.info("""
+                GET lister called by : http://127.0.0.1:8080/cityForm/{}.
+                """);
+        return this.cityService.cityForm(name);
     }
 }

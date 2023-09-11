@@ -48,6 +48,7 @@ public class WebSecurityConfig {
                                            JWTConfig jwtConfig) throws Exception {
         http.authorizeHttpRequests(
                 auth -> auth
+
                         // The following URLs should be available to all (no authentication required)
                         // URL used for login
                         .requestMatchers(
@@ -70,7 +71,7 @@ public class WebSecurityConfig {
                                 HttpMethod.GET,
                                 "/air-quality-reports", "/air-quality-report/*",
                                 "/air-quality-stations", "/air-quality-station/*",
-                                "/cities", "/city/*",
+                                "/cities", "/city/*", "/cityForm/*"
                                 "/departments", "/department/*",
                                 "/forecast-types", "/forecast-type/*",
                                 "/populations", "/population/*",
