@@ -53,6 +53,7 @@ public class WebSecurityConfig {
                     .requestMatchers("/addresses").permitAll()
                     .requestMatchers("/user-account").permitAll()
                     .requestMatchers("/user-account/**").permitAll()
+                    .requestMatchers("/connectedUser/**").permitAll()
                     .requestMatchers("/bookmark").permitAll()
                     .requestMatchers("/bookmark/**").permitAll()
                     .requestMatchers("/bookmarks").permitAll()
