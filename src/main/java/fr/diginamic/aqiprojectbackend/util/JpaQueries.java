@@ -26,7 +26,7 @@ final public class JpaQueries {
     private static final String password;
     static{
         final ResourceBundle resourceBundle = ResourceBundle
-                .getBundle("application.properties");
+                .getBundle("application");
         url = resourceBundle.getString("spring.datasource.url");
         user = resourceBundle.getString("spring.datasource.username");
         password = resourceBundle.getString("spring.datasource.password");

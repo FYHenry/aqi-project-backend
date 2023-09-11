@@ -19,13 +19,13 @@ public class CorsConfiguration implements WebMvcConfigurer {
         };
         final String[] anyUrls = {
                 "/address", "address/**", "/addresses",
-                "/user-account", "/user-account/**",
+                "/user-account", "/user-account/**", "/connectedUser/**", "/connectedUser",
                 "/bookmark", "/bookmark/**", "/bookmarks"
         };
         final String[] getUrls = {
                 "/air-quality-reports", "/air-quality-report/**",
                 "/air-quality-stations", "/air-quality-station/**",
-                "/cities", "/city/**",
+                "/cities", "/city/**", "/cityForm/**", "/cityForm",
                 "/departments", "/department/**",
                 "/forecast-types", "/forecast-type/**",
                 "/populations", "/population/**",

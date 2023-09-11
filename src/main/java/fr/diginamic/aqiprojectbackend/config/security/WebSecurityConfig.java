@@ -62,7 +62,7 @@ public class WebSecurityConfig {
                                 "/address", "address/*", "/addresses",
                                 "/user-account", "/user-account/*",
                                 "/bookmark", "/bookmark/*", "/bookmarks",
-                                "/connectedUser/*"
+                                "/connectedUser/*", "/connectedUser"
                         ).permitAll()
 
 
@@ -71,7 +71,7 @@ public class WebSecurityConfig {
                                 HttpMethod.GET,
                                 "/air-quality-reports", "/air-quality-report/*",
                                 "/air-quality-stations", "/air-quality-station/*",
-                                "/cities", "/city/*", "/cityForm/*"
+                                "/cities", "/city/*", "/cityForm/*", "/cityForm",
                                 "/departments", "/department/*",
                                 "/forecast-types", "/forecast-type/*",
                                 "/populations", "/population/*",
