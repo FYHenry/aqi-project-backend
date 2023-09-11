@@ -2,6 +2,10 @@ package fr.diginamic.aqiprojectbackend.service.account;
 
 import fr.diginamic.aqiprojectbackend.dto.HttpStatusDtoOut;
 import fr.diginamic.aqiprojectbackend.dto.account.in.UserAccountDtoIn;
+import fr.diginamic.aqiprojectbackend.dto.account.in.UserUpdPwdDtoIn;
+import fr.diginamic.aqiprojectbackend.dto.account.in.UserRegistrationFormDtoIn;
+import fr.diginamic.aqiprojectbackend.dto.account.in.UserUpdateProfileFormDtoIn;
+import fr.diginamic.aqiprojectbackend.dto.account.out.ConnectedUser;
 import fr.diginamic.aqiprojectbackend.dto.account.out.UserAccountDtoOut;
 import fr.diginamic.aqiprojectbackend.entity.account.Address;
 import fr.diginamic.aqiprojectbackend.entity.account.Role;
@@ -12,6 +16,7 @@ import fr.diginamic.aqiprojectbackend.entity.forum.Reaction;
 import fr.diginamic.aqiprojectbackend.entity.forum.Thread;
 import fr.diginamic.aqiprojectbackend.entity.forum.Topic;
 import fr.diginamic.aqiprojectbackend.entity.map.Bookmark;
+import fr.diginamic.aqiprojectbackend.entity.map.City;
 import fr.diginamic.aqiprojectbackend.exception.BadRequestException;
 import fr.diginamic.aqiprojectbackend.exception.EntityNotFoundException;
 import fr.diginamic.aqiprojectbackend.repository.account.AddressRepository;
@@ -22,6 +27,7 @@ import fr.diginamic.aqiprojectbackend.repository.forum.ReactionRepository;
 import fr.diginamic.aqiprojectbackend.repository.forum.ThreadRepository;
 import fr.diginamic.aqiprojectbackend.repository.forum.TopicRepository;
 import fr.diginamic.aqiprojectbackend.repository.map.BookmarkRepository;
+import fr.diginamic.aqiprojectbackend.repository.map.CityRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -37,53 +43,80 @@ import static fr.diginamic.aqiprojectbackend.util.Dtos.buildHttpStatusResponse;
 @Service
 @Validated
 public class UserAccountService {
-    /** PasswordEncoder to crypt password before saving it inside the database */
+    /**
+     * PasswordEncoder to crypt password before saving it inside the database
+     */
     private PasswordEncoder passwordEncoder;
 
-    /** User account repository */
+    /**
+     * User account repository
+     */
     private final UserAccountRepository userAccountRepository;
-    /** User status repository */
+    /**
+     * User status repository
+     */
     private final UserStatusRepository userStatusRepository;
 
-    /** Address repository */
+    /**
+     * Address repository
+     */
     private final AddressRepository addressRepository;
-    /** Bookmark repository */
+
+    /**
+     * City repository
+     */
+    private final CityRepository cityRepository;
+
+    /**
+     * Bookmark repository
+     */
     private final BookmarkRepository bookmarkRepository;
-    /** Topic repository */
+    /**
+     * Topic repository
+     */
     private final TopicRepository topicRepository;
-    /** Thread repository */
+    /**
+     * Thread repository
+     */
     private final ThreadRepository threadRepository;
-    /** Message repository */
+    /**
+     * Message repository
+     */
     private final MessageRepository messageRepository;
-    /** Reaction repository */
+    /**
+     * Reaction repository
+     */
     private final ReactionRepository reactionRepository;
 
 
     /**
      * Constructor with parameters.
-     * @param passwordEncoder PasswordEncoder used to encrypt password before saving it inside the database
+     *
+     * @param passwordEncoder       PasswordEncoder used to encrypt password before saving it inside the database
      * @param userAccountRepository User account repository
-     * @param userStatusRepository User status repository
-     * @param addressRepository Address repository
-     * @param bookmarkRepository Bookmark repository
-     * @param topicRepository Topic repository
-     * @param threadRepository Thread repository
-     * @param messageRepository Message repository
-     * @param reactionRepository Reaction repository
+     * @param userStatusRepository  User status repository
+     * @param addressRepository     Address repository
+     * @param bookmarkRepository    Bookmark repository
+     * @param topicRepository       Topic repository
+     * @param threadRepository      Thread repository
+     * @param messageRepository     Message repository
+     * @param reactionRepository    Reaction repository
      */
     public UserAccountService(PasswordEncoder passwordEncoder,
                               UserAccountRepository userAccountRepository,
                               UserStatusRepository userStatusRepository,
                               AddressRepository addressRepository,
+                              CityRepository cityRepository,
                               BookmarkRepository bookmarkRepository,
                               TopicRepository topicRepository,
                               ThreadRepository threadRepository,
                               MessageRepository messageRepository,
-                              ReactionRepository reactionRepository){
-        this.passwordEncoder= passwordEncoder;
+                              ReactionRepository reactionRepository) {
+        this.passwordEncoder = passwordEncoder;
         this.userAccountRepository = userAccountRepository;
         this.userStatusRepository = userStatusRepository;
         this.addressRepository = addressRepository;
+        this.cityRepository = cityRepository;
         this.bookmarkRepository = bookmarkRepository;
         this.topicRepository = topicRepository;
         this.threadRepository = threadRepository;
@@ -91,19 +124,34 @@ public class UserAccountService {
         this.reactionRepository = reactionRepository;
     }
 
+
     /**
      * Create user account
+     *
      * @param body HTTP request body (user account)
      * @param path HTTP request path
      * @return HTTP response (status)
      */
+
     public ResponseEntity<HttpStatusDtoOut>
-    createUserAccount(UserAccountDtoIn body, String path){
+    createUserAccount(UserAccountDtoIn body, String path) {
+        HttpStatus httpStatus;
+        try {
+            userAccountRepository.save(buildUserAccountFromOLD(body));
+            httpStatus = HttpStatus.OK;
+        } catch (EntityNotFoundException ex) {
+            httpStatus = HttpStatus.NOT_FOUND;
+        }
+        return buildHttpStatusResponse(httpStatus, path);
+    }
+
+    public ResponseEntity<HttpStatusDtoOut>
+    createUserAcc(UserRegistrationFormDtoIn body, String path) {
         HttpStatus httpStatus;
         try {
             userAccountRepository.save(buildUserAccountFrom(body));
             httpStatus = HttpStatus.OK;
-        } catch (EntityNotFoundException ex){
+        } catch (EntityNotFoundException ex) {
             httpStatus = HttpStatus.NOT_FOUND;
         }
         return buildHttpStatusResponse(httpStatus, path);
@@ -111,10 +159,11 @@ public class UserAccountService {
 
     /**
      * Read user account
+     *
      * @param id User account identifier
      * @return HTTP response (user account)
      */
-    public ResponseEntity<UserAccountDtoOut> readUserAccount(int id){
+    public ResponseEntity<UserAccountDtoOut> readUserAccount(int id) {
         final UserAccount userAccount =
                 userAccountRepository
                         .findById(id)
@@ -129,13 +178,14 @@ public class UserAccountService {
 
     /**
      * Update user account
-     * @param id User account identifier
+     *
+     * @param id   User account identifier
      * @param body HTTP request body (user account)
      * @param path HTTP request path
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut>
-    updateUserAccount(int id, UserAccountDtoIn body, String path){
+    updateUserAccount(int id, UserAccountDtoIn body, String path) {
         final UserAccount userAccount = userAccountRepository
                 .findById(id)
                 .orElseThrow(EntityNotFoundException::new);
@@ -153,9 +203,9 @@ public class UserAccountService {
         final List<Bookmark> bookmarks =
                 bookmarkRepository.findAllById(body.bookmarkIds());
         userAccount.setBookmarks(bookmarks);
-        if(body.role().contentEquals("ADMIN")){
+        if (body.role().contentEquals("ADMIN")) {
             userAccount.setRole(Role.ADMIN);
-        } else if(body.role().contentEquals("USER")){
+        } else if (body.role().contentEquals("USER")) {
             userAccount.setRole(Role.USER);
         } else {
             throw new BadRequestException();
@@ -175,15 +225,55 @@ public class UserAccountService {
         userAccountRepository.save(userAccount);
         return buildHttpStatusResponse(HttpStatus.OK, path);
     }
+    public ResponseEntity<HttpStatusDtoOut>
+    updateUserProfile(int id, UserUpdateProfileFormDtoIn body, String path) {
+        final UserAccount userAccount = userAccountRepository
+                .findById(id)
+                .orElseThrow(EntityNotFoundException::new);
+        userAccount.setFirstName(body.firstName());
+        userAccount.setLastName(body.lastName());
+        userAccount.setEmail(body.email());
+
+        final City city = cityRepository
+                .findCityByInsee(body.cityInsee())
+                .orElseThrow(EntityNotFoundException::new);
+        System.out.println("CItyInsee:" + body.cityInsee() + " / CIty:" + city.getName());
+
+        System.out.println("address L1&2: " + body.addressLine1() + " / " + body.addressLine2());
+        Address address = addressRepository
+                .findById(userAccount.getAddress().getId())
+                .orElseThrow(EntityNotFoundException::new);
+        System.out.println("user address id: " + userAccount.getAddress().getId());
+        address.setAddressLine1(body.addressLine1());
+        address.setAddressLine2(body.addressLine2());
+        address.setCity(city);
+        System.out.println("address: " + address.getAddressLine1() + " / " + address.getAddressLine2() + " / " + address.getCity());
+        addressRepository.save(address);
+
+        userAccount.setAddress(address);
+        userAccountRepository.save(userAccount);
+        return buildHttpStatusResponse(HttpStatus.OK, path);
+    }
+
+    public ResponseEntity<HttpStatusDtoOut>
+    updateUserPwd(int id, UserUpdPwdDtoIn body, String path) {
+        final UserAccount userAccount = userAccountRepository
+                .findById(id)
+                .orElseThrow(EntityNotFoundException::new);
+        userAccount.setPassword(passwordEncoder.encode(body.newPassword()));
+        userAccountRepository.save(userAccount);
+        return buildHttpStatusResponse(HttpStatus.OK, path);
+    }
 
     /**
      * Delete user account
-     * @param id User account identifier
+     *
+     * @param id   User account identifier
      * @param path HTTP request path
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut>
-    deleteUserAccount(int id, String path){
+    deleteUserAccount(int id, String path) {
         final UserAccount userAccount = userAccountRepository
                 .findById(id)
                 .orElseThrow(EntityNotFoundException::new);
@@ -193,9 +283,10 @@ public class UserAccountService {
 
     /**
      * List user accounts
+     *
      * @return HTTP response (user accounts)
      */
-    public ResponseEntity<List<UserAccountDtoOut>> listUserAccounts(){
+    public ResponseEntity<List<UserAccountDtoOut>> listUserAccounts() {
         final List<UserAccount> userAccounts =
                 userAccountRepository.findAll();
         final List<UserAccountDtoOut> userAccountDtoOutList = userAccounts
@@ -210,14 +301,52 @@ public class UserAccountService {
 
     /**
      * Build user account from HTTP request body (user account)
+     *
      * @param body HTTP request body (user account)
      * @return User account
      */
-    private UserAccount buildUserAccountFrom(UserAccountDtoIn body) {
+    private UserAccount buildUserAccountFrom(UserRegistrationFormDtoIn body) {
         String passwordEncoded = passwordEncoder.encode(body.password());
-        System.out.println("passwordEncoded"+passwordEncoded);
+        System.out.println("passwordEncoded" + passwordEncoded);
+        Role role = Role.USER;
+
+        /* NEW MELINA 20230908*/
+        final City city = cityRepository
+                .findCityByInsee(body.cityInsee())
+                .orElseThrow(EntityNotFoundException::new);
+
+        System.out.println("CItyInsee:" + body.cityInsee() + " / CIty:" + city.getName());
+        System.out.println("address L1&2: " + body.addressLine1() + " / " + body.addressLine2());
+
+        Address address = new Address(body.addressLine1(), body.addressLine2(), city);
+        System.out.println("address: " + address.getAddressLine1() + " / " + address.getAddressLine2() + " / " + address.getCity());
+        addressRepository.save(address);
+        /* EX SYNTAXE
+        final UserAccount userAccount = userAccountRepository
+                .findById(id)
+                .orElseThrow(EntityNotFoundException::new);
+        userAccountRepository.delete(userAccount);
+        userAccountRepository.save(userAccount);
+*/
+        return new UserAccount(body.firstName(),
+                body.lastName(),
+                body.email(),
+                passwordEncoded,
+                //        userStatusList,
+                role,
+                address);
+        /*        bookmarks,
+                topics,
+                threads,
+                messages,
+                reactions);*/
+    }
+
+    private UserAccount buildUserAccountFromOLD(UserAccountDtoIn body) {
+        String passwordEncoded = passwordEncoder.encode(body.password());
+        System.out.println("passwordEncoded" + passwordEncoded);
         Role role;
-        if(body.role().contentEquals("ADMIN")){
+        if (body.role().contentEquals("ADMIN")) {
             role = Role.ADMIN;
         } else if (body.role().contentEquals("USER")) {
             role = Role.USER;
@@ -226,10 +355,12 @@ public class UserAccountService {
         }
         final List<UserStatus> userStatusList =
                 userStatusRepository.findAllById(body.userStatusIds());
+
         final Address address =
                 addressRepository
                         .findById(body.addressId())
                         .orElseThrow(EntityNotFoundException::new);
+
         final List<Bookmark> bookmarks =
                 bookmarkRepository.findAllById(body.bookmarkIds());
         final List<Topic> topics =
@@ -240,10 +371,10 @@ public class UserAccountService {
                 messageRepository.findAllById(body.messageIds());
         final List<Reaction> reactions =
                 reactionRepository.findAllById(body.reactionIds());
+
         return new UserAccount(body.firstName(),
                 body.lastName(),
                 body.email(),
-                //MS 21.08
                 passwordEncoded,
                 userStatusList,
                 role,
@@ -255,13 +386,15 @@ public class UserAccountService {
                 reactions);
     }
 
+
     /**
      * Build user account as HTTP response from user account
+     *
      * @param userAccount User account
      * @return HTTP response (user account)
      */
     private UserAccountDtoOut
-    buildUserAccountDtoOutFrom(UserAccount userAccount){
+    buildUserAccountDtoOutFrom(UserAccount userAccount) {
         final List<Integer> userStatusIds = userAccount
                 .getUserStatusList()
                 .stream()
@@ -305,5 +438,32 @@ public class UserAccountService {
                 threadIds,
                 messageIds,
                 reactionIds);
+    }
+
+    // MS added 20230910-copy modif Nicoled -Delete when pushing
+    public ResponseEntity<ConnectedUser> connectedUser(int id) {
+        final UserAccount userAccount =
+                userAccountRepository
+                        .findById(id)
+                        .orElseThrow(EntityNotFoundException::new);
+        final ConnectedUser connectedUser =
+                buildConnectedUserFrom(userAccount);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(connectedUser);
+    }
+
+    private ConnectedUser buildConnectedUserFrom(UserAccount userAccount) {
+        return new ConnectedUser(userAccount.getId(),
+                userAccount.getFirstName(),
+                userAccount.getLastName(),
+                userAccount.getEmail(),
+                userAccount.getAddress().getCity().getName(),
+                userAccount.getAddress().getCity().getLatitude(),
+                userAccount.getAddress().getCity().getLongitude(),
+                userAccount.getAddress().getAddressLine1(),
+                userAccount.getAddress().getAddressLine2()
+        );
     }
 }

@@ -56,6 +56,9 @@ public class WebSecurityConfig {
                     .requestMatchers("/bookmark").permitAll()
                     .requestMatchers("/bookmark/**").permitAll()
                     .requestMatchers("/bookmarks").permitAll()
+                    //MS20230910
+                    .requestMatchers("/connectedUser/").permitAll()
+                    .requestMatchers("/connectedUser/**").permitAll()
 
                     // URL related to the map section
                     .requestMatchers(HttpMethod.GET, "/air-quality-reports").permitAll()
@@ -64,6 +67,7 @@ public class WebSecurityConfig {
                     .requestMatchers(HttpMethod.GET, "/air-quality-station/**").permitAll()
                     .requestMatchers(HttpMethod.GET, "/cities").permitAll()
                     .requestMatchers(HttpMethod.GET, "/city/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/cityForm/**").permitAll()
                     .requestMatchers(HttpMethod.GET, "/departments").permitAll()
                     .requestMatchers(HttpMethod.GET, "/department/**").permitAll()
                     .requestMatchers(HttpMethod.GET, "/forecast-types").permitAll()

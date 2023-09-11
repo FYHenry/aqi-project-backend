@@ -88,7 +88,7 @@ public class AddressService {
         address.setAddressLine1(body.addressLine1());
         address.setAddressLine2(body.addressLine2());
         final City city = cityRepository
-                .findById(body.cityId())
+                .findCityByInsee(body.cityInsee())
                 .orElseThrow(EntityNotFoundException::new);
         address.setCity(city);
         return buildHttpStatusResponse(HttpStatus.OK, path);
@@ -132,7 +132,7 @@ public class AddressService {
      */
     private Address buildAddressFrom(AddressDtoIn body){
         City city = cityRepository
-                .findById(body.cityId())
+                .findCityByInsee(body.cityInsee())
                 .orElseThrow(EntityNotFoundException::new);
         return new Address(body.addressLine1(),
                 body.addressLine2(),

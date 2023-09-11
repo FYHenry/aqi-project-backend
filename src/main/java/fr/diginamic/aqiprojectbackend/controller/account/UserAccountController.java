@@ -2,6 +2,10 @@ package fr.diginamic.aqiprojectbackend.controller.account;
 
 import fr.diginamic.aqiprojectbackend.dto.HttpStatusDtoOut;
 import fr.diginamic.aqiprojectbackend.dto.account.in.UserAccountDtoIn;
+import fr.diginamic.aqiprojectbackend.dto.account.in.UserUpdPwdDtoIn;
+import fr.diginamic.aqiprojectbackend.dto.account.in.UserRegistrationFormDtoIn;
+import fr.diginamic.aqiprojectbackend.dto.account.in.UserUpdateProfileFormDtoIn;
+import fr.diginamic.aqiprojectbackend.dto.account.out.ConnectedUser;
 import fr.diginamic.aqiprojectbackend.dto.account.out.UserAccountDtoOut;
 import fr.diginamic.aqiprojectbackend.service.account.UserAccountService;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +41,7 @@ public class UserAccountController {
     }
 
     /** POST creator */
-    @PostMapping(path = "/user-account")
+    /* @PostMapping(path = "/user-account")
     public ResponseEntity<HttpStatusDtoOut>
     createUserAccount(@RequestBody UserAccountDtoIn body) {
         logger.info("""
@@ -47,6 +51,20 @@ public class UserAccountController {
                 """,
                 body);
         return this.userAccountService.createUserAccount(body, "/user-account");
+    }
+*/
+    /** POST creator */
+    @PostMapping(path = "/user-account")
+    public ResponseEntity<HttpStatusDtoOut>
+    createUserAcc(@RequestBody UserRegistrationFormDtoIn body) {
+        System.out.println("UserAccountController - createUserAcc");
+        logger.info("""
+                POST creator called by : http://127.0.0.1:8080/user-account.
+                Body :
+                 {}
+                """,
+                body);
+        return this.userAccountService.createUserAcc(body, "/user-account");
     }
 
     /** GET reader */
@@ -78,6 +96,40 @@ public class UserAccountController {
                 String.format("/user-account/%d", id));
     }
 
+    /* Actualiseur PUT */
+    /** PUT updater */
+    @PutMapping(path = "/user-account/profile/{id}")
+    public ResponseEntity<HttpStatusDtoOut>
+    updateUserProfile(@PathVariable int id,
+                     @RequestBody UserUpdateProfileFormDtoIn body) {
+        logger.info("""
+                Put updater called by : http://127.0.0.1:8080/user-account/profile/{}.
+                Body :
+                 {}
+                """,
+                id,
+                body);
+        return this.userAccountService.updateUserProfile(id,
+                body,
+                String.format("/user-account/profile/%d", id));
+    }
+
+    @PutMapping(path = "/user-account/pwd/{id}")
+    public ResponseEntity<HttpStatusDtoOut>
+    updateUserPwd(@PathVariable int id,
+                  @RequestBody UserUpdPwdDtoIn body) {
+        logger.info("""
+                Put updater called by : http://127.0.0.1:8080/user-account/pwd/{}.
+                Body :
+                 {}
+                """,
+                id,
+                body);
+        return this.userAccountService.updateUserPwd(id,
+                body,
+                String.format("/user-account/pwd/%d", id));
+    }
+
     /* Suppresseur DELETE */
     /** DELETE deleter */
     @DeleteMapping(path = "/user-account/{id}")
@@ -100,5 +152,14 @@ public class UserAccountController {
                 GET lister called by : http://127.0.0.1:8080/user-accounts.
                 """);
         return this.userAccountService.listUserAccounts();
+    }
+
+    /** GET connected user */
+    @GetMapping(path = "/connectedUser/{id}")
+    public ResponseEntity<ConnectedUser> connectedUser(@PathVariable int id) {
+        logger.info("""
+                GET connected user called by : http://127.0.0.1:8080/connectedUser/{}
+                """);
+        return this.userAccountService.connectedUser(id);
     }
 }

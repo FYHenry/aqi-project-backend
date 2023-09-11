@@ -17,6 +17,8 @@ import java.util.List;
  * @param messageIds Message identifiers
  * @param reactionIds Reaction identifiers
  */
+
+
 public record UserAccountDtoIn(String firstName,
                                String lastName,
                                String email,
@@ -30,3 +32,4 @@ public record UserAccountDtoIn(String firstName,
                                List<Integer> messageIds,
                                List<Integer> reactionIds) {
 }
+
