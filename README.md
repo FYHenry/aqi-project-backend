@@ -4,10 +4,20 @@
 
 * INSEE : Institut National de la Statistique et des Études Économiques ;
 * Code INSEE communal (`insee`) : code à 5 chiffres décimaux dont les deux
-premiers correspondent au code INSEE de la région circonscrite.
+  premiers correspondent au code INSEE de la région circonscrite.
 * Code INSEE départemental : code à 3 chiffres hexadécimaux.
 
 NB: Le code INSEE communal n’est pas le code postal !
+
+## Initialisation de la base MariaDB
+
+Commande à lancer avec les privilèges d’administrateur : `mariadb`.
+
+```sql
+CREATE USER IF NOT EXISTS 'dev'@'127.0.0.1' IDENTIFIED BY 'dev';
+GRANT ALL PRIVILEGES ON aqi_project.* TO 'dev'@'127.0.0.1';
+QUIT;
+```
 
 ## Architecture
 
@@ -158,32 +168,32 @@ Donner la main à `ExceptionController` pour les différentes exceptions.
 Gérer les suppressions de données dépendantes : nouvelle exception ou
 suppressions en cascade.
 
-Implémenter la couche de sécurité via Spring Security.
+~~Implémenter la couche de sécurité via Spring Security.~~
 
 ## Liste des entités à implémenter
 
 - [x] `entities` :
   - [x]  `account` :
-    - [x]   `Address`,
-    - [x]   `UserAccount`,
-    - [x]   `UserStatus` ;
+  - [x]   `Address`,
+  - [x]   `UserAccount`,
+  - [x]   `UserStatus` ;
   - [x]  `forum` :
-    - [x]   `Message`,
-    - [x]   `Reaction`,
-    - [x]   `Thread`,
-    - [x]   `Topic` ;
+  - [x]   `Message`,
+  - [x]   `Reaction`,
+  - [x]   `Thread`,
+  - [x]   `Topic` ;
   - [x]  `map` :
-    - [x]   `AirQualityReport`,
-    - [x]   `AirQualityStation`,
-    - [x]   `Bookmark`,
-    - [x]   `City`,
-    - [x]   `Department`,
-    - [x]   `ForecastType`,
-    - [x]   `Population`,
-    - [x]   `Region`,
-    - [x]   `ReportDate`,
-    - [x]   `WeatherReport`,
-    - [x]   `WeatherStation`.
+  - [x]   `AirQualityReport`,
+  - [x]   `AirQualityStation`,
+  - [x]   `Bookmark`,
+  - [x]   `City`,
+  - [x]   `Department`,
+  - [x]   `ForecastType`,
+  - [x]   `Population`,
+  - [x]   `Region`,
+  - [x]   `ReportDate`,
+  - [x]   `WeatherReport`,
+  - [x]   `WeatherStation`.
 
 ## Outil de rédaction automatique
 
@@ -202,3 +212,75 @@ Classes à écrire :
 - [x] `directory` ;
 - [ ] `controler` (`test`) ;
 - [ ] `service` (`test`)
+
+## Table des Rôles
+
+*Attention: si deja connecté, forcer la déconnection avant.
+
+**Seulement lors de la création d’un compte.
+
+***Seulement sur son propre compte.
+
+### Subpackage `account`
+
+* `Address`
+
+| Request       | Guest     | User    | Admin |
+|---------------|-----------|---------|-------|
+| Create POST   | No        | Yes\*\* | Yes   |
+| Read GET      | Yes\*\*\* | Yes\*\* | Yes   |
+| Update PUT    | No        | Yes\*\* | Yes   |
+| Delete DELETE | No        | Yes\*\* | Yes   |
+| List GET      | No        | Yes\*\* | Yes   |
+
+
+* `UserAccount`
+
+| Request       | Guest | User    | Admin |
+|---------------|-------|---------|-------|
+| Create POST   | Yes   | No      | Yes   |
+| Read GET      | No    | Yes\*\* | Yes   |
+| Update PUT    | No    | Yes\*\* | Yes   |
+| Delete DELETE | No    | Yes\*\* | Yes   |
+| List GET      | No    | Yes     | Yes   |
+
+
+* `UserStatus`
+
+| Request       | Guest | User  | Admin |
+|---------------|-------|-------|-------|
+| Create POST   | No    | No    | Yes   |
+| Read GET      | No    | No    | Yes   |
+| Update PUT    | No    | No    | Yes   |
+| Delete DELETE | No    | No    | Yes   |
+| List GET      | No    | No    | Yes   |
+
+### Subpackage `map`
+* `AirQualityReport`
+* `AirQualityStation`
+* `City`
+* `Department`
+* `ForecastType`
+* `Population`
+* `Region`
+* `ReportDate`
+* `WeatherReport`
+* `WeatherStation`
+
+| Request       | Guest | User  | Admin |
+|---------------|-------|-------|-------|
+| Create POST   | No    | No    | Yes   |
+| Read GET      | Yes   | Yes   | Yes   |
+| Update PUT    | No    | No    | Yes   |
+| Delete DELETE | No    | No    | Yes   |
+| List GET      | Yes   | Yes   | Yes   |
+
+* `Bookmark`
+
+| Request       | Guest | User    | Admin |
+|---------------|-------|---------|-------|
+| Create POST   | No    | Yes\*\* | Yes   |
+| Read GET      | Yes   | Yes\*\* | Yes   |
+| Update PUT    | No    | Yes\*\* | Yes   |
+| Delete DELETE | No    | Yes\*\* | Yes   |
+| List GET      | Yes   | Yes\*\* | Yes   |
