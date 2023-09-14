@@ -17,7 +17,6 @@ public class UserAccount {
     /** Identifier */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_account_id")
     private int id;
     /* Prénom */
     /** First name */
@@ -138,6 +137,20 @@ public class UserAccount {
         this.threads = threads;
         this.messages = messages;
         this.reactions = reactions;
+    }
+
+    public UserAccount(String firstName,
+                       String lastName,
+                       String email,
+                       String password,
+                       Role role,
+                       Address address){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.address = address;
     }
     /** Identifier getter */
     public Integer getId() {

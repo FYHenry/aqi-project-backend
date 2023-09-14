@@ -1,6 +1,7 @@
 package fr.diginamic.aqiprojectbackend.service.map;
 
 import fr.diginamic.aqiprojectbackend.dto.HttpStatusDtoOut;
+import fr.diginamic.aqiprojectbackend.dto.account.out.CityForm;
 import fr.diginamic.aqiprojectbackend.dto.map.in.CityDtoIn;
 import fr.diginamic.aqiprojectbackend.dto.map.out.CityDtoOut;
 import fr.diginamic.aqiprojectbackend.entity.map.City;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static fr.diginamic.aqiprojectbackend.util.Dtos.buildHttpStatusResponse;
@@ -74,15 +76,15 @@ public class CityService {
 
     /**
      * Update city
-     * @param id City identifier
+     * @param insee City identifier
      * @param body HTTP request body (city)
      * @param path HTTP request path
      * @return HTTP response (status)
      */
     public ResponseEntity<HttpStatusDtoOut>
-    updateCity(int id, CityDtoIn body, String path){
+    updateCity(String insee, CityDtoIn body, String path){
         final City city = cityRepository
-                .findById(id)
+                .findCityByInsee(insee)
                 .orElseThrow(EntityNotFoundException::new);
         city.setName(body.name());
         city.setPostcodes(body.postcodes());
@@ -98,13 +100,13 @@ public class CityService {
 
     /**
      * Delete city
-     * @param id City identifier
+     * @param insee City identifier
      * @param path HTTP request path
      * @return HTTP response (status)
      */
-    public ResponseEntity<HttpStatusDtoOut> deleteCity(int id, String path){
+    public ResponseEntity<HttpStatusDtoOut> deleteCity(String insee, String path){
         final City city = cityRepository
-                .findById(id)
+                .findCityByInsee(insee)
                 .orElseThrow(EntityNotFoundException::new);
         cityRepository.delete(city);
         return buildHttpStatusResponse(HttpStatus.OK, path);
@@ -126,6 +128,29 @@ public class CityService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(cityDtoOutList);
     }
+    public ResponseEntity<List<CityForm>> cityForm(String name) {
+        final List<City> cities =
+                cityRepository
+                        .findByNameContaining(name)
+                        .orElseThrow(EntityNotFoundException::new);
+        final List<CityForm> citiesForm =
+                buildCityFormFrom(cities);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(citiesForm);
+    }
+
+    private List<CityForm> buildCityFormFrom(List<City> cities) {
+        List<CityForm> citiesForm = new ArrayList<>();
+        for (City city : cities) {
+            for (int postcode : city.getPostcodes()){
+                citiesForm.add(new CityForm(city.getInsee(), city.getName(), postcode));
+            }
+        }
+        return citiesForm;
+    }
+
     /**
      * Build city from HTTP request body (city)
      * @param body HTTP request body (city)

@@ -9,19 +9,19 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.util.Base64;
 
-
+/** JWT Configuration */
 @Configuration
 public class JWTConfig {
-
+    /** Expires in */
     @Value("${jwt.expires_in}")
     private long expireIn;
-
+    /** Cookie */
     @Value("${jwt.cookie}")
     private String cookie;
-
+    /** Secret */
     @Value("${jwt.secret}")
     private String secret;
-
+    /** Secret key */
     private Key secretKey;
 
     /**
