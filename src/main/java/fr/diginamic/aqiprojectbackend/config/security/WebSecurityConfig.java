@@ -91,6 +91,12 @@ public class WebSecurityConfig {
                                 "/topics", "/topic/*"
                         ).permitAll()
 
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/v3/api-docs", "/v3/api-docs/*",
+                                "/swagger-ui", "/swagger-ui/*"
+                        ).permitAll()
+
                         //URLs to be restricted to ADMIN only
                         .requestMatchers(
                                 "/user-status", "/user-status/*", "/user-statuses"

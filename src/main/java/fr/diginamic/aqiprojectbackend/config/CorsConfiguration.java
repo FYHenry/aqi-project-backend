@@ -37,7 +37,10 @@ public class CorsConfiguration implements WebMvcConfigurer {
                 "/messages", "/message/*",
                 "/reactions", "/reaction/*",
                 "/threads", "/thread/*",
-                "/topics", "/topic/*"
+                "/topics", "/topic/*",
+                //Swagger
+                "/v3/api-docs", "/v3/api-docs/*",
+                "/swagger-ui", "/swagger-ui/*"
         };
         final String[] adminUrls = {
                 "/user-status", "/user-status/**", "/user-statuses"

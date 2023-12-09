@@ -7,7 +7,7 @@
   premiers correspondent au code INSEE de la région circonscrite.
 * Code INSEE départemental : code à 3 chiffres hexadécimaux.
 
-NB: Le code INSEE communal n’est pas le code postal !
+NB : Le code INSEE communal n’est pas le code postal !
 
 ## Initialisation de la base MariaDB
 
@@ -42,7 +42,7 @@ QUIT;
 
 Une fois activé dans `src/resources/application.properties`, le profil `init`
 modifie le comportement du serveur.
-La base de donné est alors purgée au démarrage et à l’arrêt du serveur.
+La base de donnée est alors purgée au démarrage et à l’arrêt du serveur.
 
 ## À propos des requêtes CRUD en HTTP
 
@@ -145,7 +145,7 @@ Trouver comment créer :
 * Une classe entité générique ;
 * Une classe répertoire générique ;
 * Une classe service générique ;
-* Une classe controleur générique.
+* Une classe contrôleur générique.
 
 « Dois-je vraiment répliquer tout pour chaque entité ? »
 
@@ -201,7 +201,7 @@ Faute de mieux le script en Perl `entity2code.pl` doit permettre la
 rédaction rapide des classes répertoire, contrôleur, service et dto
 pour une classe entité donnée.
 
-Il peut être utile d’inclure aussi leur classes d’essai unitaire.
+Il peut être utile d’inclure aussi leurs classes d’essai unitaire.
 
 /!\ Encore expérimental.
 
@@ -215,7 +215,7 @@ Classes à écrire :
 
 ## Table des Rôles
 
-*Attention: si deja connecté, forcer la déconnection avant.
+*Attention : si deja connecté, forcer la déconnection avant.
 
 **Seulement lors de la création d’un compte.
 

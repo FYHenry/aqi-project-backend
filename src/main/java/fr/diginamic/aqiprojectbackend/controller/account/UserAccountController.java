@@ -42,7 +42,7 @@ public class UserAccountController {
         this.userAccountService = userAccountService;
     }
 
-    /** POST creator */
+    /* POST creator */
     /* @PostMapping(path = "/user-account")
     public ResponseEntity<HttpStatusDtoOut>
     createUserAccount(@RequestBody UserAccountDtoIn body) {
@@ -161,7 +161,7 @@ public class UserAccountController {
     public ResponseEntity<ConnectedUser> connectedUser(@PathVariable int id) {
         logger.info("""
                 GET connected user called by : http://127.0.0.1:8080/connectedUser/{}
-                """);
+                """, id);
         return this.userAccountService.connectedUser(id);
     }
 }
