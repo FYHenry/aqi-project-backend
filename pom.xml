@@ -16,11 +16,12 @@
 		<!-- jjwt library for JWT token -->
 		<jjwt.version>0.11.5</jjwt.version>
 		<springdoc.version>1.4</springdoc.version>
+		<properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
+		<app.properties>${project.basedir}/src/main/resources/application.properties</app.properties>
 	</properties>
 
 	<groupId>fr.diginamic</groupId>
 	<artifactId>aqi-project-backend</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	<name>aqi-project-backend</name>
 	<description>REST API server and backend part of the AQI Project</description>
 	<organization>
@@ -168,6 +169,13 @@
 			<artifactId>springdoc-openapi-maven-plugin</artifactId>
 			<version>${springdoc.version}</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.codehaus.mojo/properties-maven-plugin -->
+		<dependency>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>properties-maven-plugin</artifactId>
+			<version>${properties-maven-plugin.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -195,6 +203,24 @@
 						<goals>
 							<goal>generate</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>${properties-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+						<configuration>
+							<files>
+								<file>${app.properties}</file>
+							</files>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
