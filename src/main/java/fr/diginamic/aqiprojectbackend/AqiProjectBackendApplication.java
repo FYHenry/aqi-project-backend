@@ -29,5 +29,7 @@ public class AqiProjectBackendApplication {
     public static void main(String[] args) {
         SpringApplication.run(AqiProjectBackendApplication.class, args);
         logger.info("AQI backend version : {}", aqiVersion);
+        logger.info("Swagger UI : http://127.0.0.1:8081/swagger-ui/index.html");
+        logger.info("Swagger API : http://127.0.0.1:8081/v3/api-docs");
     }
 }
